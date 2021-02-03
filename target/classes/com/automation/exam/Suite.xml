@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Travelocity">
+<!-- 
+	<listeners>
+		<listener class-name="com.automation.exam.MyListener" />
+	</listeners>
+ -->
+	<parameter name="browser" value="opera" />
+	<test name="test 1">
+		<classes>
+			<class name="com.automation.exam.tests.TravelocityTests" />
+		</classes>
+	</test>
+</suite>

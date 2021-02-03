@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite parallel="none" name="Failed suite [Test-Suite]">
+  <parameter name="browser" value="opera"/>
+  <test parallel="none" name="test 1(failed)">
+    <classes>
+      <class name="com.automation.exam.tests.TravelocityTests">
+        <methods>
+          <include name="testFlightBooking"/>
+          <include name="afterSuite"/>
+          <include name="beforeSuite"/>
+        </methods>
+      </class> <!-- com.automation.exam.tests.TravelocityTests -->
+    </classes>
+  </test> <!-- test 1(failed) -->
+</suite> <!-- Failed suite [Test-Suite] -->

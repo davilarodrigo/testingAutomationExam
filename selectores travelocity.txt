@@ -1,0 +1,18 @@
+input leaving from
+//button[@data-stid="location-field-leg1-origin-dialog-trigger"]
+//*[@id="location-field-leg1-origin-menu"]/div[1]/button
+
+input going to
+//button[@data-stid="location-field-leg1-destination-dialog-trigger"]
+//*[@id="location-field-leg1-destination-menu"]/div[1]/button
+
+elemento n de la lista de resultados (boton)
+//ul[@class="uitk-typeahead-results no-bullet"]/li[n]/button
+
+fecha alguna
+//button[@aria-label="Mar 4, 2021." and @class="uitk-date-picker-day uitk-new-date-picker-day"]
+
+----------------------------------------------------------------------------------
+
+notas: 
+- si la pantalla es angosta, los input de leavingFrom y goingTo cambian, (el data stid cambia donde dice menu y pasa a ser dialog). esto es porque, si la pantalla es angosta, se llama a un modal, y si no es angosta, se abre un menu desplegable
