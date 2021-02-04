@@ -55,16 +55,15 @@ public class TravelocityHome extends BasePage {
 	@FindBy(xpath = "//button[@aria-label=\"Feb 21, 2021.\" and @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]")
 	private WebElement fechaDePrueba3;
 
-	private WebElement findDayButton(Integer day, int month, Integer year) {
+	private String findDayButton(Integer day, int month, Integer year) {
 
 		month--;
-		String[] months = new String[] { "Jan", "Feb", "Mar" };// completar todos los meses
+		String[] months = new String[] { "Jan", "Feb", "Mar", "Apr", "May","Jun","Jul" ,"Aug","Sep","Oct","Nov","Dec" };// completar todos los meses
 		String date = months[month];
 		date += " " + day.toString();
 		date += ", " + year + ".";
 
-		return driver.findElement(By.xpath(
-				"//button[@aria-label=\"" + date + "\" and @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]"));
+		return date;
 	}
 	
 	private boolean elementIsPresent(String xpath) {
@@ -85,31 +84,28 @@ public class TravelocityHome extends BasePage {
 		return true;
 	}
 
-	private void pickDate(WebElement dateTimePicker, int day, Integer month, Integer year) {
+	private void pickDate(WebElement dateTimePicker, Integer day, int month, Integer year) {
 
-		// WebElement dayButton = findDayButton(day, month, year); //habilitar esta
-		// linea al descartar otros errores
-		WebElement dayButton = fechaDePrueba1;
-		 
-
+		String date = findDayButton(day, month, year); //habilitar esta
+		
+		String dayButtonXpath="//button[@aria-label=\""+date+"\" and @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]" ;				
+		//String dayButtonXpath="//button[@aria-label=\"Dec 14, 2021.\" and @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]" ;
+		
 		getWait().until(ExpectedConditions.visibilityOf(dateTimePicker));
 
 		dateTimePicker.click();
 
 		for (int i = 0; i < 20; i++) {
-			if (elementIsPresent(dayButton)) {
+			if (elementIsPresent(dayButtonXpath)) {
+				WebElement dayButton= driver.findElement(By.xpath(dayButtonXpath));
+				dayButton.click();
 				break;
 			}			
 			getWait().until(ExpectedConditions.visibilityOf(buttonNextPage));
 			buttonNextPage.click();
 		}
-	
-		//linea de prueba: encontrar element por xpath
-		dayButton= driver.findElement(By.xpath("//button[@aria-label=\"Dec 14, 2021.\" and @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]"));
-		
-		dayButton.click();
+				
 		buttonDoneDataPicker.click();
-
 	}
 
 	public String bookFlight(String leavingFrom, String goingTo, String departingDate, String returningDate) {
@@ -118,7 +114,7 @@ public class TravelocityHome extends BasePage {
 		buttonFlight.click();
 
 		// select departing date
-		pickDate(datePickerDeparting, 7, 2, 2021);
+		pickDate(datePickerDeparting, 5, 10, 2021);
 		// buttonDoneDataPicker.click();
 
 		// select returning date
