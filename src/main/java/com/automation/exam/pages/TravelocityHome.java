@@ -32,20 +32,42 @@ public class TravelocityHome extends BasePage {
 	private WebElement datePickerReturning;
 	
 	//@FindBy(xpath="//*[@id=\"date-picker\"]/div[2]/div/div/div[2]/div/div[2]/table/tbody/tr[3]/td[7]/button")
-	@FindBy(xpath="//button[@aria-label=\"Feb 10, 2021.\" and @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]")
+	@FindBy(xpath="//button[@aria-label=\"Feb 6, 2021.\" and @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]")
 	private WebElement fechaDePrueba1;
 	
-	@FindBy(xpath="//button[@aria-label=\"Feb 12, 2021.\" and @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]")
+	@FindBy(xpath="//button[@aria-label=\"Feb 11, 2021.\" and @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]")
 	private WebElement fechaDePrueba2;
 	
 	@FindBy(xpath="//button[@data-stid=\"apply-date-picker\"]")
 	private WebElement buttonDoneDataPicker;
 
-	public String bookFlight(String leavingFrom, String goingTo, String departing, String returning) {
+	public void pickDate(WebElement dateTimePicker, String date) {
+		getWait().until(ExpectedConditions.visibilityOf(dateTimePicker));
+		dateTimePicker.click();		
+		getWait().until(ExpectedConditions.visibilityOf(fechaDePrueba1));
+		fechaDePrueba1.click();		
+
+	}
+	
+	public String bookFlight(String leavingFrom, String goingTo, String departingDate, String returningDate) {
 			
 		//go to flights tab
 		buttonFlight.click();
 		
+		//select departing date
+		pickDate(datePickerDeparting, departingDate);
+		buttonDoneDataPicker.click();
+		
+		//select returning date		
+		//pickDate(datePickerReturning, returningDate); //remplazar las 4 siguientes lineas por esta 
+		getWait().until(ExpectedConditions.visibilityOf(datePickerReturning));
+		datePickerReturning.click();	
+		getWait().until(ExpectedConditions.visibilityOf(fechaDePrueba2));
+		fechaDePrueba2.click();
+		
+		//click done button in data picker
+		buttonDoneDataPicker.click();
+					
 		//select origin city
     	getWait().until(ExpectedConditions.visibilityOf(inputLeavingFrom));
 		inputLeavingFrom.click();
@@ -60,22 +82,7 @@ public class TravelocityHome extends BasePage {
 		getWait().until(ExpectedConditions.visibilityOf(listItem));
 		listItem.click();		
 				
-		//select departing date
-		getWait().until(ExpectedConditions.visibilityOf(datePickerDeparting));
-		datePickerDeparting.click();		
-		getWait().until(ExpectedConditions.visibilityOf(fechaDePrueba1));
-		fechaDePrueba1.click();		
-		buttonDoneDataPicker.click();
-		
-		//select returning date		
-		getWait().until(ExpectedConditions.visibilityOf(datePickerReturning));
-		datePickerReturning.click();	
-		getWait().until(ExpectedConditions.visibilityOf(fechaDePrueba2));
-		fechaDePrueba2.click();
-		
-		//click done button in data picker
-		buttonDoneDataPicker.click();
-		
+
 		return "hola";
 	}
 
