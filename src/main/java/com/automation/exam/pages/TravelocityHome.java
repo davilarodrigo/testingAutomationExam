@@ -66,6 +66,15 @@ public class TravelocityHome extends BasePage {
 		return driver.findElement(By.xpath(
 				"//button[@aria-label=\"" + date + "\" and @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]"));
 	}
+	
+	private boolean elementIsPresent(String xpath) {
+		try {
+			driver.findElement(By.xpath(xpath));			
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
 
 	private boolean elementIsPresent(WebElement element) {
 		try {
@@ -81,9 +90,7 @@ public class TravelocityHome extends BasePage {
 		// WebElement dayButton = findDayButton(day, month, year); //habilitar esta
 		// linea al descartar otros errores
 		WebElement dayButton = fechaDePrueba1;
-		// WebElement dayButton =
-		// driver.findElement(By.xpath("//button[@aria-label=\"Feb 7,2021.\" and
-		// @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]"));
+		 
 
 		getWait().until(ExpectedConditions.visibilityOf(dateTimePicker));
 
@@ -97,6 +104,9 @@ public class TravelocityHome extends BasePage {
 			buttonNextPage.click();
 		}
 	
+		//linea de prueba: encontrar element por xpath
+		dayButton= driver.findElement(By.xpath("//button[@aria-label=\"Dec 14, 2021.\" and @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]"));
+		
 		dayButton.click();
 		buttonDoneDataPicker.click();
 
