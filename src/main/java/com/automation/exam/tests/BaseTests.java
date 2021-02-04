@@ -1,7 +1,9 @@
 package com.automation.exam.tests;
 
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
 import com.automation.exam.MyDriver;
