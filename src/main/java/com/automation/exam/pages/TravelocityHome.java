@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
+
 public class TravelocityHome extends BasePage {
 
 	public TravelocityHome(WebDriver driver) {
@@ -30,14 +31,14 @@ public class TravelocityHome extends BasePage {
 	@FindBy(id = "location-field-leg1-destination")
 	private WebElement inputGoingTo;
 
-	@FindBy(xpath = "//*[@id=\"uitk-tabs-button-container\"]/li[2]/a") // @FindBy(xpath ="(//a[@class='uitk-tab-anchor'])[2] ")
+	@FindBy(xpath = "(//*[@id=\"uitk-tabs-button-container\"]/li[2]/a) | ((//ul[@class=\"uitk-flex lobNavigation no-bullet uitk-scroll-horizontal\"]/li)[2])") // @FindBy(xpath ="(//a[@class='uitk-tab-anchor'])[2] ")
 	private WebElement buttonFlight;
 	
 	//*[@id="location-field-leg1-origin-menu"]/div[2]/ul
 	//uitk-button uitk-button-small uitk-button-fullWidth uitk-button-typeahead uitk-type-left 
 	@FindBy(xpath = "//ul[@class=\"uitk-typeahead-results no-bullet\"]/li[1]/button")
 	private WebElement listItem;
-	// data pickers
+	
 	@FindBy(id = "d1-btn")
 	private WebElement datePickerDeparting;
 	@FindBy(id = "d2-btn")
@@ -47,6 +48,9 @@ public class TravelocityHome extends BasePage {
 	@FindBy(xpath = "(//button[@data-stid=\"date-picker-paging\"])[2]")
 	private WebElement buttonNextPage;
 
+	@FindBy(xpath="//button[@data-testid=\"submit-button\"]")
+	private WebElement buttonSearch;
+	
 	private String findDayButton(Integer day, int month, Integer year) {
 
 		month--;
@@ -55,24 +59,6 @@ public class TravelocityHome extends BasePage {
 		date += " " + day.toString();
 		date += ", " + year + ".";
 		return date;
-	}
-	
-	private boolean elementIsPresent(String xpath) {
-		try {
-			driver.findElement(By.xpath(xpath));			
-		} catch (Exception e) {
-			return false;
-		}
-		return true;
-	}
-
-	private boolean elementIsPresent(WebElement element) {
-		try {
-			element.isDisplayed();
-		} catch (Exception e) {
-			return false;
-		}
-		return true;
 	}
 
 	private void pickDate(WebElement dateTimePicker, Integer day, int month, Integer year) {
@@ -123,5 +109,10 @@ public class TravelocityHome extends BasePage {
 
 	public void goToFlightsTab() {
 		buttonFlight.click();
+	}
+	
+	public TravelocityResults searchFlight() {
+		buttonSearch.click();
+		return new TravelocityResults(getDriver());
 	}
 }
