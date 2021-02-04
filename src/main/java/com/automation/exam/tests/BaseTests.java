@@ -9,15 +9,21 @@ import com.automation.exam.pages.TravelocityHome;
 
 public class BaseTests {
 
-	MyDriver myDriver;
+	protected MyDriver myDriver;
 	private TravelocityHome travelocityHome;
 
 	@BeforeSuite(alwaysRun = true)
 	@Parameters({ "browser" })
 	public void beforeSuite(String browser) {
 		myDriver = new MyDriver(browser);
+		myDriver.getDriver().manage().window().maximize();
 		travelocityHome = new TravelocityHome(myDriver.getDriver());
 	}
+	
+	@BeforeMethod
+	public void beforeTest() {
+	}
+	
 	
 	@AfterSuite(alwaysRun = true)
 	public void afterSuite() {
