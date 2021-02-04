@@ -40,6 +40,14 @@ public class TravelocityHome extends BasePage {
 	
 	@FindBy(xpath="//button[@data-stid=\"apply-date-picker\"]")
 	private WebElement buttonDoneDataPicker;
+	private boolean elementIsPresent(WebElement element) {
+		try {
+			element.isDisplayed();
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
 
 	public void pickDate(WebElement dateTimePicker, String date) {
 		getWait().until(ExpectedConditions.visibilityOf(dateTimePicker));
