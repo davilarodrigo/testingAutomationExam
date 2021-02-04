@@ -1,7 +1,9 @@
 package com.automation.exam.pages;
 
+import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,32 +16,57 @@ public class TravelocityHome extends BasePage {
 		super(driver);
 		driver.get("https://www.travelocity.com/");
 	}
-	
+
+	// origin and destination buttons
 	@FindBy(xpath = "(//button[@data-stid=\"location-field-leg1-origin-dialog-trigger\"]) | (//button[@data-stid=\"location-field-leg1-origin-menu-trigger\"])")
-	private WebElement inputLeavingFrom;
+	private WebElement buttonLeavingFrom;
 	@FindBy(xpath = "(//button[@data-stid=\"location-field-leg1-destination-dialog-trigger\"]) | (//button[@data-stid=\"location-field-leg1-destination-menu-trigger\"])")
+	private WebElement buttonGoingTo;
+
+	// origin and destination inputs (mejorar estos 2 xpaths para que funcionen en
+	// cualquier tamaño de pantalla)
+	@FindBy(id = "location-field-leg1-origin")
+	private WebElement inputLeavingFrom;
+	@FindBy(id = "location-field-leg1-destination")
 	private WebElement inputGoingTo;
 
-	@FindBy(xpath = "//*[@id=\"uitk-tabs-button-container\"]/li[2]/a") //@FindBy(xpath = "(//a[@class='uitk-tab-anchor'])[2] ")
+	@FindBy(xpath = "//*[@id=\"uitk-tabs-button-container\"]/li[2]/a") // @FindBy(xpath =
+																		// "(//a[@class='uitk-tab-anchor'])[2] ")
 	private WebElement buttonFlight;
-	
-	@FindBy(xpath="//ul[@class=\"uitk-typeahead-results no-bullet\"]/li[1]/button")
+	@FindBy(xpath = "//ul[@class=\"uitk-typeahead-results no-bullet\"]/li[1]")
+
 	private WebElement listItem;
-	
-	@FindBy(id="d1-btn")
+
+	// data pickers
+	@FindBy(id = "d1-btn")
 	private WebElement datePickerDeparting;
-	@FindBy(id="d2-btn")
+	@FindBy(id = "d2-btn")
 	private WebElement datePickerReturning;
-	
-	//@FindBy(xpath="//*[@id=\"date-picker\"]/div[2]/div/div/div[2]/div/div[2]/table/tbody/tr[3]/td[7]/button")
-	@FindBy(xpath="//button[@aria-label=\"Feb 6, 2021.\" and @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]")
-	private WebElement fechaDePrueba1;
-	
-	@FindBy(xpath="//button[@aria-label=\"Feb 11, 2021.\" and @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]")
-	private WebElement fechaDePrueba2;
-	
-	@FindBy(xpath="//button[@data-stid=\"apply-date-picker\"]")
+	@FindBy(xpath = "//button[@data-stid=\"apply-date-picker\"]")
 	private WebElement buttonDoneDataPicker;
+	@FindBy(xpath = "(//button[@data-stid=\"date-picker-paging\"])[2]")
+	private WebElement buttonNextPage;
+
+	// fechas
+	@FindBy(xpath = "//button[@aria-label=\"Dec 14, 2021.\" and @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]")
+	private WebElement fechaDePrueba1;
+	@FindBy(xpath = "//button[@aria-label=\"Dec 28, 2021.\" and @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]")
+	private WebElement fechaDePrueba2;
+	@FindBy(xpath = "//button[@aria-label=\"Feb 21, 2021.\" and @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]")
+	private WebElement fechaDePrueba3;
+
+	private WebElement findDayButton(Integer day, int month, Integer year) {
+
+		month--;
+		String[] months = new String[] { "Jan", "Feb", "Mar" };// completar todos los meses
+		String date = months[month];
+		date += " " + day.toString();
+		date += ", " + year + ".";
+
+		return driver.findElement(By.xpath(
+				"//button[@aria-label=\"" + date + "\" and @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]"));
+	}
+
 	private boolean elementIsPresent(WebElement element) {
 		try {
 			element.isDisplayed();
@@ -49,48 +76,68 @@ public class TravelocityHome extends BasePage {
 		return true;
 	}
 
-	public void pickDate(WebElement dateTimePicker, String date) {
-		getWait().until(ExpectedConditions.visibilityOf(dateTimePicker));
-		dateTimePicker.click();		
-		getWait().until(ExpectedConditions.visibilityOf(fechaDePrueba1));
-		fechaDePrueba1.click();		
+	private void pickDate(WebElement dateTimePicker, int day, Integer month, Integer year) {
 
+		// WebElement dayButton = findDayButton(day, month, year); //habilitar esta
+		// linea al descartar otros errores
+		WebElement dayButton = fechaDePrueba1;
+		// WebElement dayButton =
+		// driver.findElement(By.xpath("//button[@aria-label=\"Feb 7,2021.\" and
+		// @class=\"uitk-date-picker-day uitk-new-date-picker-day\"]"));
+
+		getWait().until(ExpectedConditions.visibilityOf(dateTimePicker));
+
+		dateTimePicker.click();
+
+		for (int i = 0; i < 20; i++) {
+			if (elementIsPresent(dayButton)) {
+				break;
+			}			
+			getWait().until(ExpectedConditions.visibilityOf(buttonNextPage));
+			buttonNextPage.click();
+		}
+	
+		dayButton.click();
+		buttonDoneDataPicker.click();
 
 	}
-	
+
 	public String bookFlight(String leavingFrom, String goingTo, String departingDate, String returningDate) {
-			
-		//go to flights tab
+
+		// go to flights tab
 		buttonFlight.click();
-		
-		//select departing date
-		pickDate(datePickerDeparting, departingDate);
-		buttonDoneDataPicker.click();
-		
-		//select returning date		
-		//pickDate(datePickerReturning, returningDate); //remplazar las 4 siguientes lineas por esta 
+
+		// select departing date
+		pickDate(datePickerDeparting, 7, 2, 2021);
+		// buttonDoneDataPicker.click();
+
+		// select returning date
+		// pickDate(datePickerReturning, returningDate); //remplazar las 4 siguientes
+		// lineas por esta
 		getWait().until(ExpectedConditions.visibilityOf(datePickerReturning));
-		datePickerReturning.click();	
+		datePickerReturning.click();
 		getWait().until(ExpectedConditions.visibilityOf(fechaDePrueba2));
 		fechaDePrueba2.click();
-		
-		//click done button in data picker
+
+		// click done button in data picker
 		buttonDoneDataPicker.click();
-					
-		//select origin city
-    	getWait().until(ExpectedConditions.visibilityOf(inputLeavingFrom));
-		inputLeavingFrom.click();
+
+		// select origin city
+		getWait().until(ExpectedConditions.visibilityOf(buttonLeavingFrom));
+		buttonLeavingFrom.click();
+		getWait().until(ExpectedConditions.visibilityOf(inputLeavingFrom));
 		inputLeavingFrom.sendKeys(leavingFrom);
 		getWait().until(ExpectedConditions.visibilityOf(listItem));
 		listItem.click();
-		
-		//select destiny city
-		getWait().until(ExpectedConditions.visibilityOf(inputGoingTo));		
-		inputGoingTo.click();
+
+		// select destiny city
+		getWait().until(ExpectedConditions.visibilityOf(buttonGoingTo));
+		buttonGoingTo.click();
+		getWait().until(ExpectedConditions.visibilityOf(inputGoingTo));
 		inputGoingTo.sendKeys(goingTo);
 		getWait().until(ExpectedConditions.visibilityOf(listItem));
-		listItem.click();		
-				
+		listItem.click();
+
 		return "hola";
 	}
 
