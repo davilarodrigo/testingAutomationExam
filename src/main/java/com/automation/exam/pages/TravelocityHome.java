@@ -15,9 +15,9 @@ public class TravelocityHome extends BasePage {
 		driver.get("https://www.travelocity.com/");
 	}
 	
-	@FindBy(xpath = "//button[@data-stid=\"location-field-leg1-origin-dialog-trigger\"]")
+	@FindBy(xpath = "(//button[@data-stid=\"location-field-leg1-origin-dialog-trigger\"]) | (//button[@data-stid=\"location-field-leg1-origin-menu-trigger\"])")
 	private WebElement inputLeavingFrom;
-	@FindBy(xpath = "//button[@data-stid=\"location-field-leg1-destination-dialog-trigger\"]")
+	@FindBy(xpath = "(//button[@data-stid=\"location-field-leg1-destination-dialog-trigger\"]) | (//button[@data-stid=\"location-field-leg1-destination-menu-trigger\"])")
 	private WebElement inputGoingTo;
 
 	@FindBy(xpath = "//*[@id=\"uitk-tabs-button-container\"]/li[2]/a") //@FindBy(xpath = "(//a[@class='uitk-tab-anchor'])[2] ")
@@ -46,6 +46,7 @@ public class TravelocityHome extends BasePage {
 		dateTimePicker.click();		
 		getWait().until(ExpectedConditions.visibilityOf(fechaDePrueba1));
 		fechaDePrueba1.click();		
+
 
 	}
 	
@@ -82,7 +83,6 @@ public class TravelocityHome extends BasePage {
 		getWait().until(ExpectedConditions.visibilityOf(listItem));
 		listItem.click();		
 				
-
 		return "hola";
 	}
 
