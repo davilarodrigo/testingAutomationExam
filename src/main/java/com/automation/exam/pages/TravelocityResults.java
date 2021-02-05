@@ -59,7 +59,7 @@ public class TravelocityResults extends BasePage {
 				return null;
 
 			int numberOfResults = listOfResults.size();
-			
+
 			SearchResultItemsList = new ArrayList<>();
 
 			for (int i = 1; i <= numberOfResults; i++) {
@@ -67,7 +67,7 @@ public class TravelocityResults extends BasePage {
 				SearchResultItemsList.add(resultItem);
 			}
 
-			printDetail(SearchResultItemsList.size()+"flights found");
+			printDetail(SearchResultItemsList.size() + " flights found");
 		}
 		return SearchResultItemsList;
 	}
@@ -107,22 +107,42 @@ public class TravelocityResults extends BasePage {
 
 			if (!item.hasDetailsAndFees()) {
 				printDetail("details and fees missing in result number " + item.getIndex());
-				
-				/*getWait().until(ExpectedConditions.elementToBeClickable(item.detailsAndFees));
-				item.detailsAndFees.click();*/
-				
+
+				/*
+				 * getWait().until(ExpectedConditions.elementToBeClickable(item.detailsAndFees))
+				 * ; item.detailsAndFees.click();
+				 */
+
 				return false;
 			}
-			
+
 			item.clickDetailsAndFees();
 		}
 		printDetail("all details and fees present in every result");
 		return true;
 	}
-	
-	public boolean verifySortingBox() {
+
+	public void clickSortBoxOption(String valueA, String valueB) {
+		getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));		
+		sortDropdown.click();
+		
+		WebElement option = driver.findElement(By.xpath("//option[@data-opt-id=\""+valueA+"\"]"));
+		if(!elementIsPresent(option)) {
+			option = driver.findElement(By.xpath("//option[@data-opt-id=\""+valueB+"\"]"));	
+		}
+		
+		getWait().until(ExpectedConditions.elementToBeClickable(option));
+		option.click();
+	}
+
+	public void sortByShorterDuration() {
+		clickSortBoxOption("DURATION_DECREASING","sort-DURATION_DECREASING");
+	}
+
+	public boolean verifySortingBoxClickable() {
 		// getWait().until(ExpectedConditions.visibilityOf(sortDropdown));
 		getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
+		sortDropdown.click();
 		sortDropdown.click();
 		return elementIsPresent(sortDropdown);
 	}
