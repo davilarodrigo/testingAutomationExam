@@ -49,7 +49,7 @@ public class TravelocityResults extends BasePage {
 	private WebElement firstResult;
 
 	// esta funcion deberia ser privada
-	public List<SearchResultItem> getResultsList() {
+	private List<SearchResultItem> getSearchResultItems() {
 
 		if (SearchResultItemsList == null) {
 
@@ -78,18 +78,32 @@ public class TravelocityResults extends BasePage {
 				return null;
 
 			int numberOfResults = listOfResults.size();
-			System.out.println(numberOfResults + " results found");
+			// System.out.println(numberOfResults + " results found");
 
 			SearchResultItemsList = new ArrayList<>();
 
 			for (int i = 1; i <= numberOfResults; i++) {
-				SearchResultItem resultItem = new SearchResultItem(xpath + "[" + i + "]", driver);
+				SearchResultItem resultItem = new SearchResultItem(xpath, i, driver);
 				SearchResultItemsList.add(resultItem);
 			}
 
-			System.out.println(SearchResultItemsList.size());
+			// System.out.println(SearchResultItemsList.size());
 		}
 		return SearchResultItemsList;
+	}
+
+	public boolean verifySelectButtons() {
+		List<SearchResultItem> SearchResultItemsList = getSearchResultItems();
+
+		for (SearchResultItem item : SearchResultItemsList) {
+			String button = item.getSelectButtonXpath();
+			if (!elementIsPresent(button)) {
+				printDetail("missing select button in result number "+item.getIndex());
+				return false;
+			}
+		}
+		printDetail("all select buttons present");
+		return true;
 	}
 
 	public boolean verifyResults() {
@@ -106,7 +120,9 @@ public class TravelocityResults extends BasePage {
 		boolean flightDurationAlwaysPresent = true;
 
 		for (int i = 1; i <= numberOfResults; i++) {
-			SearchResultItem resultItem = new SearchResultItem(xpath + "[" + i + "]", driver);
+			SearchResultItem resultItem = new SearchResultItem(xpath, i, driver);
+			// SearchResultItem resultItem = new SearchResultItem(xpath + "[" + i + "]",
+			// driver);
 
 			if (elementIsPresent(resultItem.selectButton)) {
 				printDetail("select button is present in result N° " + i);
