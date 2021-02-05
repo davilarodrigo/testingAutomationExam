@@ -41,21 +41,43 @@ public class TravelocityResults extends BasePage  {
 
 	//List<WebElement> listOfResults = driver.findElements(By.xpath("//button[@class=\"uitk-card-link\"]"));
 	List<WebElement> listOfResults; 
-	
-		
+			
 	@FindBy(xpath= "(//select[@id=\"listings-sort\"]) |(//select[@id=\"sortDropdown\"])")
 	private WebElement sortDropdown;
+
+	@FindBy(xpath="(//div[@class=\"grid-container standard-padding \"])[1]")
+	private WebElement firstResult;
+	
 	
 	public boolean verifyResults() {
 		
-		listOfResults= driver.findElements(By.xpath("//div[@class=\"grid-container standard-padding \"]"));
+		getWait().until(ExpectedConditions.visibilityOf(firstResult));
+		String xpath="(//div[@class=\"grid-container standard-padding \"])";
+		listOfResults= driver.findElements(By.xpath(xpath));
+				
+		int numberOfResults=listOfResults.size();						
+		System.out.println(numberOfResults+" results found");
 		
-		System.out.println(listOfResults);
+		boolean selectButtonAlwaysPresent=true;
+		boolean flightDurationAlwaysPresent=true;
 		
+		for (int i = 1; i <= numberOfResults; i++) {
+			SearchResultItem resultItem = new SearchResultItem(xpath+"["+i+"]",driver);
+			
+			
+			if (elementIsPresent(resultItem.selectButton)) {
+				printDetail("select button is present in result N° "+i);					
+			}else {
+				printDetail("select button is missing in result N° "+i);
+				selectButtonAlwaysPresent=false;
+			}
+			
+		}
 		
-		int numberOfResults=listOfResults.size();
-		System.out.println(numberOfResults);
-		return false;
+		if (flightDurationAlwaysPresent) System.out.println("flight duration is shown in every result");
+		if (selectButtonAlwaysPresent) System.out.println("select button is present in every result");
+				
+		return (selectButtonAlwaysPresent && flightDurationAlwaysPresent);
 	}
 	
 	public boolean verifySortingBox() {

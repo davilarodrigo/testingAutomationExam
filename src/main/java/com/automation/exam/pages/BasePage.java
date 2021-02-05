@@ -9,6 +9,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class BasePage {
 	public WebDriver driver;
 	private WebDriverWait wait;
+	public boolean printDetails=false;
+	
+	protected void printDetail(String string) {
+		if (printDetails) {
+			System.out.println(string);
+		}
+	}
 
 	public BasePage(WebDriver pDriver) {
 		wait = new WebDriverWait(pDriver, 15);
