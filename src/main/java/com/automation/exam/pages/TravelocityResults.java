@@ -41,9 +41,10 @@ public class TravelocityResults extends BasePage  {
 	private WebElement sortDropdown;
 	
 	public boolean verifySortingBox() {
-		getWait().until(ExpectedConditions.visibilityOf(sortDropdown));
+		//getWait().until(ExpectedConditions.visibilityOf(sortDropdown));
+		getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
 		sortDropdown.click();
-		return elementIsPresent("//select[@id=\"listings-sort\"]");
+		return elementIsPresent(sortDropdown);
 	}	
 
 }
