@@ -1,16 +1,36 @@
-input leaving from
-//button[@data-stid="location-field-leg1-origin-dialog-trigger"]
+Home
+
+button leaving from
+(//button[@data-stid="location-field-leg1-origin-dialog-trigger"]) | (//button[@data-stid="location-field-leg1-origin-menu-trigger"])
 //*[@id="location-field-leg1-origin-menu"]/div[1]/button
 
-input going to
+button going to
 //button[@data-stid="location-field-leg1-destination-dialog-trigger"]
 //*[@id="location-field-leg1-destination-menu"]/div[1]/button
 
-elemento n de la lista de resultados (boton)
-//ul[@class="uitk-typeahead-results no-bullet"]/li[n]/button
+elemento 1 de la lista de resultados (boton)
+//ul[@class="uitk-typeahead-results no-bullet"]/li[1]/button
 
 fecha alguna
 //button[@aria-label="Mar 4, 2021." and @class="uitk-date-picker-day uitk-new-date-picker-day"]
+
+input leaving from
+#location-field-leg1-origin
+data-stid="location-field-leg1-origin-dialog-input" (en pantalla angosta)
+
+input going to
+id="location-field-leg1-destination"
+data-stid="location-field-leg1-destination-dialog-input" (en pantalla angosta)
+----------------------------------------------------------------------------------
+
+
+Results
+
+item de resultado
+//button[@class="uitk-card-link"]
+
+item de resultado (no el de chrome)
+(//div[@class="grid-container standard-padding "])[1]
 
 ----------------------------------------------------------------------------------
 

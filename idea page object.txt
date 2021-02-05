@@ -1,0 +1,24 @@
+funciones:
+
+- pick departing date (se le pasa en forma de int el año mes y dia): compone el boton de ese dia, abre el data picker, recorre las paginas hasta encontrar el dia
+- pick returning date (se le pasa en forma de int el año mes y dia)
+
+- pick origin city (se le pasa la string): clickea el input de ciudad origen y escribe la ciudad
+- pick destination city (se le pasa la string): clickea el input de ciudad destino y escribe la ciudad
+
+- submit search: hace click en el boton de buscar, y usa los datos que se hayan cargado anteriormente
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
