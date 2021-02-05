@@ -9,7 +9,8 @@ public class SearchResultItem extends WebComponent {
 	public WebElement item;
 	public WebElement selectButton;
 	public WebElement flightDuration;
-		
+	public WebElement detailsAndFees;
+	
 	private String xpath;
 	private int index;
 
@@ -45,20 +46,30 @@ public class SearchResultItem extends WebComponent {
 		return selectButton;
 	}
 	
-	public boolean hasPrice() {
-		String xpath1="//div[@data-test-price-per-traveler=\"$54\"]";
-		String xpath2="//span[@class=\"uitk-lockup-price\"]";
+	public boolean hasDetailsAndFees() {
+		String xpath1="//a[@data-test-id=\"flight-details-link\"]";
 		
 		if (elementIsPresent(xpath+xpath1)) {
-			//priceTag=driver.findElement(By.xpath(xpath+xpath1));
+			detailsAndFees=driver.findElement(By.xpath(xpath+xpath1));
 			return true;
-		}
-		if (elementIsPresent(xpath+xpath2)) {
-			//priceTag=driver.findElement(By.xpath(xpath+xpath2));
-			return true;
-		}
+		}		
 		return false;
 	}
+	
+	public WebElement getDetailsAndFees() {
+		if (hasDetailsAndFees()) {
+			return detailsAndFees;
+		}
+		return null;
+	}
+	
+	public void clickDetailsAndFees() {
+		if (hasDetailsAndFees()) {			
+			detailsAndFees.click();
+		}
+	}
+	
+	
 
 	public boolean hasFlightDuration() {
 

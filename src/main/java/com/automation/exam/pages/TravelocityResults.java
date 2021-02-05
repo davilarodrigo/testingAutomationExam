@@ -59,8 +59,7 @@ public class TravelocityResults extends BasePage {
 				return null;
 
 			int numberOfResults = listOfResults.size();
-			// System.out.println(numberOfResults + " results found");
-
+			
 			SearchResultItemsList = new ArrayList<>();
 
 			for (int i = 1; i <= numberOfResults; i++) {
@@ -68,7 +67,7 @@ public class TravelocityResults extends BasePage {
 				SearchResultItemsList.add(resultItem);
 			}
 
-			// System.out.println(SearchResultItemsList.size());
+			printDetail(SearchResultItemsList.size()+"flights found");
 		}
 		return SearchResultItemsList;
 	}
@@ -106,12 +105,18 @@ public class TravelocityResults extends BasePage {
 
 		for (SearchResultItem item : SearchResultItemsList) {
 
-			if (!item.hasPrice()) {
-				printDetail("missing price label in result number " + item.getIndex());
+			if (!item.hasDetailsAndFees()) {
+				printDetail("details and fees missing in result number " + item.getIndex());
+				
+				/*getWait().until(ExpectedConditions.elementToBeClickable(item.detailsAndFees));
+				item.detailsAndFees.click();*/
+				
 				return false;
 			}
+			
+			item.clickDetailsAndFees();
 		}
-		printDetail("all price tags present");
+		printDetail("all details and fees present in every result");
 		return true;
 	}
 	
