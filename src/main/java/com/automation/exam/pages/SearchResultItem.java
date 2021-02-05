@@ -11,7 +11,7 @@ public class SearchResultItem{
 	
 	public SearchResultItem (String xpath,WebDriver driver) {
 		item = driver.findElement(By.xpath(xpath));		
-		selectButton=driver.findElement(By.xpath(xpath+"//button[@data-test-id=\"select-button\"]"));
+		//selectButton=driver.findElement(By.xpath(xpath+"//button[@data-test-id=\"select-button\"]"));
 		
 	}
 	

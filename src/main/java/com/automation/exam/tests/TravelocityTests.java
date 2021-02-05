@@ -43,12 +43,14 @@ public class TravelocityTests extends BaseTests{
 		
 		SoftAssert softAssert = new SoftAssert();
 		
+		
 		boolean sortBoxpresent=results.verifySortingBox();
 		if (sortBoxpresent) {System.out.println("sorting box present");}
 		else {System.out.println("sorting box not present");}
 		softAssert.assertEquals(sortBoxpresent, true);
 		
-		results.verifyResults();
+		results.getResultsList();
+	//	results.verifyResults();
 	//	softAssert.assertEquals(results.verifyVisibleFlightDuration(),true);
 	
 	}
