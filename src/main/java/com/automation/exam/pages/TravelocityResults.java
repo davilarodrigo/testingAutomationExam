@@ -12,6 +12,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class TravelocityResults extends BasePage {
 
+	private List<SearchResultItem> SearchResultItemsList;
+
+	@FindBy(xpath = "(//select[@id=\"listings-sort\"]) |(//select[@id=\"sortDropdown\"])")
+	private WebElement sortDropdown;
+
+	@FindBy(xpath = "((//div[@class=\"grid-container standard-padding \"])[1]) | ((//li[@data-test-id=\"offer-listing\"])[1])")
+	private WebElement firstResult;
+
 	public TravelocityResults(WebDriver driver) {
 		super(driver);
 		// driver.get("https://www.travelocity.com/");
@@ -22,33 +30,6 @@ public class TravelocityResults extends BasePage {
 		driver.get(resultsUrl);
 	}
 
-	public boolean verifyVisibleFlightDuration() {
-
-		/*
-		 * System.out.println(listOfResults.size());
-		 * 
-		 * for (WebElement webElement : listOfResults) {
-		 * 
-		 * }
-		 * 
-		 * for (int i = 0; i < listOfResults.size(); i++) {
-		 * 
-		 * }
-		 */
-		return true;
-	}
-
-	List<SearchResultItem> SearchResultItemsList;
-
-	@FindBy(xpath = "(//select[@id=\"listings-sort\"]) |(//select[@id=\"sortDropdown\"])")
-	private WebElement sortDropdown;
-
-	// @FindBy(xpath="(//div[@class=\"grid-container standard-padding \"])[1]")
-
-	@FindBy(xpath = "((//div[@class=\"grid-container standard-padding \"])[1]) | ((//li[@data-test-id=\"offer-listing\"])[1])")
-	private WebElement firstResult;
-
-	// esta funcion deberia ser privada
 	private List<SearchResultItem> getSearchResultItems() {
 
 		if (SearchResultItemsList == null) {
@@ -63,13 +44,13 @@ public class TravelocityResults extends BasePage {
 			if (elementIsPresent(xpathA)) {
 				// caso de la pagina A (los que tienen boton select)
 				listOfResults = driver.findElements(By.xpath(xpathA));
-				System.out.println("maqueta A");
+				printDetail("maqueta A");
 				xpath = xpathA;
 			} else {
 				if (elementIsPresent(xpathB)) {
 					// caso de la pagina B (no tienen boton select)
 					listOfResults = driver.findElements(By.xpath(xpathB));
-					System.out.println("maqueta B");
+					printDetail("maqueta B");
 					xpath = xpathB;
 				}
 			}
@@ -98,7 +79,7 @@ public class TravelocityResults extends BasePage {
 		for (SearchResultItem item : SearchResultItemsList) {
 			String button = item.getSelectButtonXpath();
 			if (!elementIsPresent(button)) {
-				printDetail("missing select button in result number "+item.getIndex());
+				printDetail("missing select button in result number " + item.getIndex());
 				return false;
 			}
 		}
@@ -106,41 +87,34 @@ public class TravelocityResults extends BasePage {
 		return true;
 	}
 
-	public boolean verifyResults() {
-		List<WebElement> listOfResults;
-		getWait().until(ExpectedConditions.visibilityOf(firstResult));
+	public boolean verifyFlightDuration() {
+		List<SearchResultItem> SearchResultItemsList = getSearchResultItems();
 
-		String xpath = "(//div[@class=\"grid-container standard-padding \"])";
-		listOfResults = driver.findElements(By.xpath(xpath));
+		for (SearchResultItem item : SearchResultItemsList) {
 
-		int numberOfResults = listOfResults.size();
-		System.out.println(numberOfResults + " results found");
-
-		boolean selectButtonAlwaysPresent = true;
-		boolean flightDurationAlwaysPresent = true;
-
-		for (int i = 1; i <= numberOfResults; i++) {
-			SearchResultItem resultItem = new SearchResultItem(xpath, i, driver);
-			// SearchResultItem resultItem = new SearchResultItem(xpath + "[" + i + "]",
-			// driver);
-
-			if (elementIsPresent(resultItem.selectButton)) {
-				printDetail("select button is present in result N° " + i);
-			} else {
-				printDetail("select button is missing in result N° " + i);
-				selectButtonAlwaysPresent = false;
+			if (!item.hasFlightDuration()) {
+				printDetail("missing flight duration label in result number " + item.getIndex());
+				return false;
 			}
-
 		}
-
-		if (flightDurationAlwaysPresent)
-			System.out.println("flight duration is shown in every result");
-		if (selectButtonAlwaysPresent)
-			System.out.println("select button is present in every result");
-
-		return (selectButtonAlwaysPresent && flightDurationAlwaysPresent);
+		printDetail("all flight duration labels present");
+		return true;
 	}
 
+	public boolean verifyPriceTag() {
+		List<SearchResultItem> SearchResultItemsList = getSearchResultItems();
+
+		for (SearchResultItem item : SearchResultItemsList) {
+
+			if (!item.hasPrice()) {
+				printDetail("missing price label in result number " + item.getIndex());
+				return false;
+			}
+		}
+		printDetail("all price tags present");
+		return true;
+	}
+	
 	public boolean verifySortingBox() {
 		// getWait().until(ExpectedConditions.visibilityOf(sortDropdown));
 		getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));

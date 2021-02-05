@@ -51,7 +51,8 @@ public class TravelocityTests extends BaseTests{
 	
 	
 		boolean allSelectButtonsPresent=results.verifySelectButtons();
-	//	results.verifyResults();
+		boolean allFlightDurationsPresent=results.verifyFlightDuration();
+		boolean allPriceTagsPresent=results.verifyPriceTag();
 	//	softAssert.assertEquals(results.verifyVisibleFlightDuration(),true);
 	
 	}
