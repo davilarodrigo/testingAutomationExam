@@ -18,6 +18,11 @@ public class TravelocityResults extends BasePage  {
 		//driver.get("https://www.travelocity.com/");
 	}
 	
+	public TravelocityResults(WebDriver driver,String resultsUrl) {
+		super(driver);
+		driver.get(resultsUrl);
+	}
+	
 	public boolean verifyVisibleFlightDuration() {
 	
 		System.out.println(listOfResults.size());
@@ -33,12 +38,25 @@ public class TravelocityResults extends BasePage  {
 		return true;
 	}
 	
-	List<WebElement> listOfResults = driver.findElements(By.xpath("//button[@class=\"uitk-card-link\"]"));
+
+	//List<WebElement> listOfResults = driver.findElements(By.xpath("//button[@class=\"uitk-card-link\"]"));
+	List<WebElement> listOfResults; 
 	
-	
-	//@FindBy(id="") //a veces aparece asi...
+		
 	@FindBy(xpath= "(//select[@id=\"listings-sort\"]) |(//select[@id=\"sortDropdown\"])")
 	private WebElement sortDropdown;
+	
+	public boolean verifyResults() {
+		
+		listOfResults= driver.findElements(By.xpath("//div[@class=\"grid-container standard-padding \"]"));
+		
+		System.out.println(listOfResults);
+		
+		
+		int numberOfResults=listOfResults.size();
+		System.out.println(numberOfResults);
+		return false;
+	}
 	
 	public boolean verifySortingBox() {
 		//getWait().until(ExpectedConditions.visibilityOf(sortDropdown));

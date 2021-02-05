@@ -8,6 +8,7 @@ import org.testng.annotations.Parameters;
 
 import com.automation.exam.MyDriver;
 import com.automation.exam.pages.TravelocityHome;
+import com.automation.exam.pages.TravelocityResults;
 
 public class BaseTests {
 
@@ -35,4 +36,12 @@ public class BaseTests {
 	public TravelocityHome getTravelocityHome() {
 		return travelocityHome;		
 	}
+	
+	public TravelocityResults getTravelocityResults(String resultsUrl) {
+		
+		return new TravelocityResults(myDriver.getDriver(),resultsUrl);
+	}
+
+	
+
 }

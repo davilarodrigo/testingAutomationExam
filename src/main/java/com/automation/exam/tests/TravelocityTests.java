@@ -1,5 +1,6 @@
 package com.automation.exam.tests;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -9,10 +10,17 @@ import com.automation.exam.tests.BaseTests;
 
 public class TravelocityTests extends BaseTests{
 	
-	@Test
+	@Test(groups={"results"})
+	@Parameters({ "resultsUrl" })
+	public void testResults(String resultsUrl) {
+		//el url de parametro tira error en la suite.xml
+		TravelocityResults results= getTravelocityResults(resultsUrl);
+		testResults(results);
+	}
+	
+	@Test(groups={"search"})
 	public void testFlightBooking() {
-		
-		SoftAssert softAssert = new SoftAssert();
+	
 		TravelocityHome home = getTravelocityHome();
 		
 		home.goToFlightsTab();
@@ -28,11 +36,21 @@ public class TravelocityTests extends BaseTests{
 		results=home.searchFlight();
 		System.out.println("showing flight results");
 		
+		testResults(results);
+	 }
+	
+	private void testResults(TravelocityResults results) {
+		
+		SoftAssert softAssert = new SoftAssert();
+		
 		boolean sortBoxpresent=results.verifySortingBox();
 		if (sortBoxpresent) {System.out.println("sorting box present");}
 		else {System.out.println("sorting box not present");}
 		softAssert.assertEquals(sortBoxpresent, true);
+		
+		results.verifyResults();
 	//	softAssert.assertEquals(results.verifyVisibleFlightDuration(),true);
 	
-	 }
+	}
+	
 }
