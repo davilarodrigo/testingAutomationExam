@@ -29,6 +29,26 @@ public class TravelocityResults extends BasePage {
 		super(driver);
 		driver.get(resultsUrl);
 	}
+	
+	public void selectResult(int index) {
+		if (elementIsPresent(searchResultItemsList.get(index-1).getSelectButtonXpath())) {
+			WebElement button=searchResultItemsList.get(index-1).getSelectButton();
+			getWait().until(ExpectedConditions.elementToBeClickable(button));
+			button.click();
+			
+			String xpath=searchResultItemsList.get(index-1).getXpath()+"//button[@data-test-id=\"select-button-1\"]";
+			WebElement continueButton=driver.findElement(By.xpath(xpath));
+			getWait().until(ExpectedConditions.elementToBeClickable(continueButton));
+			continueButton.click();			
+		}else {
+			printDetail("Select button is missing in the selected flight");
+			searchResultItemsList.get(index-1).webElement.click();
+			WebElement continueButton=driver.findElement(By.xpath("//button[@data-test-id=\"select-button\"]"));
+			getWait().until(ExpectedConditions.elementToBeClickable(continueButton));
+			continueButton.click();
+		}
+		
+	}
 
 	private List<SearchResultItem> getSearchResultItems() {
 

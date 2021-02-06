@@ -6,10 +6,10 @@ import org.openqa.selenium.WebElement;
 
 public class SearchResultItem extends WebComponent {
 
-	public WebElement item;
-	public WebElement selectButton;
-	public WebElement flightDuration;
-	public WebElement detailsAndFees;
+	public WebElement webElement;
+	private WebElement selectButton;
+	private  WebElement flightDuration;
+	private  WebElement detailsAndFees;
 	private int durationInMinutes = 0;
 
 	private String xpath;
@@ -18,7 +18,7 @@ public class SearchResultItem extends WebComponent {
 	public SearchResultItem(String xpath, int index, WebDriver driver) {
 
 		xpath += "[" + index + "]";
-		this.item = driver.findElement(By.xpath(xpath));
+		this.webElement = driver.findElement(By.xpath(xpath));
 		this.index = index;
 		this.xpath = xpath;
 		this.driver = driver;
@@ -35,7 +35,7 @@ public class SearchResultItem extends WebComponent {
 	}
 
 	public WebElement getAsWebElement() {
-		return item;
+		return webElement;
 	}
 
 	public String getSelectButtonXpath() {
