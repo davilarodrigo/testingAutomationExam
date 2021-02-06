@@ -36,8 +36,6 @@ public class TravelocityHome extends BasePage {
 	
 	//*[@id="location-field-leg1-origin-menu"]/div[2]/ul
 	//uitk-button uitk-button-small uitk-button-fullWidth uitk-button-typeahead uitk-type-left 
-	@FindBy(xpath = "//ul[@class=\"uitk-typeahead-results no-bullet\"]/li[1]/button")
-	private WebElement listItem;
 	
 	@FindBy(id = "d1-btn")
 	private WebElement datePickerDeparting;
@@ -92,19 +90,24 @@ public class TravelocityHome extends BasePage {
 
 	public void selectOriginCity(String city) {
 		selectCity(buttonLeavingFrom,inputLeavingFrom,city);
+		WebElement listItem = driver.findElement(By.xpath("//ul[@class=\"uitk-typeahead-results no-bullet\"]/li[1]/button"));
+		getWait().until(ExpectedConditions.elementToBeClickable(listItem));
+		listItem.click();
 	}
 	
 	public void selectDestinationCity(String city) {
 		selectCity(buttonGoingTo,inputGoingTo,city);
+		WebElement listItem = driver.findElement(By.xpath("(//ul[@class=\"uitk-typeahead-results no-bullet\"]/li[1]/button)[2]"));
+		getWait().until(ExpectedConditions.elementToBeClickable(listItem));
+		listItem.click();
 	}
 	
 	private void selectCity(WebElement button, WebElement input, String city) {
+				
 		getWait().until(ExpectedConditions.visibilityOf(button));
-		button.click();
+		button.click();		
 		getWait().until(ExpectedConditions.visibilityOf(input));
 		input.sendKeys(city);
-		getWait().until(ExpectedConditions.elementToBeClickable(listItem));
-		listItem.click();
 	}
 
 	public void goToFlightsTab() {

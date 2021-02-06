@@ -25,8 +25,8 @@ public class TravelocityTests extends BaseTests {
 		TravelocityHome home = getTravelocityHome();
 
 		home.goToFlightsTab();
-		home.selectDestinationCity("LAX");
 		home.selectOriginCity("LAS");
+		home.selectDestinationCity("LAX");
 		System.out.println("cities selected");
 
 		home.selectDepartingDate(1, 9, 2021);
