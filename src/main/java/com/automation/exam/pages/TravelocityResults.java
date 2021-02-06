@@ -116,27 +116,32 @@ public class TravelocityResults extends BasePage {
 				return false;
 			}
 
-			item.clickDetailsAndFees();
+			// item.clickDetailsAndFees();
 		}
 		printDetail("all details and fees present in every result");
 		return true;
 	}
 
 	public void clickSortBoxOption(String valueA, String valueB) {
-		getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));		
+		getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
 		sortDropdown.click();
+
+		String xpathA = "//option[@data-opt-id=\"" + valueA + "\"]";
+		String xpathB = "//option[@data-opt-id=\"" + valueB + "\"]";
+		WebElement option;
 		
-		WebElement option = driver.findElement(By.xpath("//option[@data-opt-id=\""+valueA+"\"]"));
-		if(!elementIsPresent(option)) {
-			option = driver.findElement(By.xpath("//option[@data-opt-id=\""+valueB+"\"]"));	
+		if (elementIsPresent(xpathA)) {
+			option = driver.findElement(By.xpath(xpathA));
+		} else {
+			option = driver.findElement(By.xpath(xpathB));
 		}
-		
+
 		getWait().until(ExpectedConditions.elementToBeClickable(option));
 		option.click();
 	}
 
 	public void sortByShorterDuration() {
-		clickSortBoxOption("DURATION_DECREASING","sort-DURATION_DECREASING");
+		clickSortBoxOption("DURATION_INCREASING", "sort-DURATION_INCREASING");
 	}
 
 	public boolean verifySortingBoxClickable() {
