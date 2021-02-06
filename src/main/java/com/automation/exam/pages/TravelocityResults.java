@@ -31,23 +31,27 @@ public class TravelocityResults extends BasePage {
 	}
 	
 	public void selectResult(int index) {
-		if (elementIsPresent(searchResultItemsList.get(index-1).getSelectButtonXpath())) {
-			WebElement button=searchResultItemsList.get(index-1).getSelectButton();
-			getWait().until(ExpectedConditions.elementToBeClickable(button));
-			button.click();
-			
-			String xpath=searchResultItemsList.get(index-1).getXpath()+"//button[@data-test-id=\"select-button-1\"]";
-			WebElement continueButton=driver.findElement(By.xpath(xpath));
-			getWait().until(ExpectedConditions.elementToBeClickable(continueButton));
-			continueButton.click();			
-		}else {
-			printDetail("Select button is missing in the selected flight");
-			searchResultItemsList.get(index-1).webElement.click();
-			WebElement continueButton=driver.findElement(By.xpath("//button[@data-test-id=\"select-button\"]"));
-			getWait().until(ExpectedConditions.elementToBeClickable(continueButton));
-			continueButton.click();
-		}
 		
+		searchResultItemsList=getSearchResultItems();
+		SearchResultItem selectedFlight =searchResultItemsList.get(index-1);
+		WebElement continueButton;
+				
+		if (selectedFlight.hasSelectButton()) {
+			WebElement button = selectedFlight.getSelectButton();
+			waitAndClick(button);			
+			
+			int itemIndex=selectedFlight.getIndex();			
+			String xpathContinueButton="(//li[@data-test-id=\"offer-listing\"])["+itemIndex+"]//button[@data-test-id=\"select-button-1\"]";			
+			continueButton=findAndClick(xpathContinueButton);
+			printDetail("xpath continue button: "+xpathContinueButton);
+		}else {
+			printDetail("Select button is missing in the selected flight, clicking the flight result instead");
+			selectedFlight.webElement.click();			
+			continueButton=findAndClick("//button[@data-test-id=\"select-button\"]");
+								
+		}
+		printDetail("se encontro el continue button");
+				
 	}
 
 	private List<SearchResultItem> getSearchResultItems() {
@@ -99,11 +103,10 @@ public class TravelocityResults extends BasePage {
 
 		for (SearchResultItem item : SearchResultItemsList) {
 
-			String button = item.getSelectButtonXpath();
-			if (!elementIsPresent(button)) {
+			if (!item.hasSelectButton()) {
 				printDetail("missing select button in result number " + item.getIndex());
-				return false;
-			}
+				return false;				
+			}	
 		}
 		printDetail("all select buttons present");
 		return true;
@@ -130,12 +133,6 @@ public class TravelocityResults extends BasePage {
 
 			if (!item.hasDetailsAndFees()) {
 				printDetail("details and fees missing in result number " + item.getIndex());
-
-				/*
-				 * getWait().until(ExpectedConditions.elementToBeClickable(item.detailsAndFees))
-				 * ; item.detailsAndFees.click();
-				 */
-
 				return false;
 			}
 
@@ -145,7 +142,7 @@ public class TravelocityResults extends BasePage {
 		return true;
 	}
 
-	public void clickSortBoxOption(String valueA, String valueB) {
+	private void clickSortBoxOption(String valueA, String valueB) {
 		searchResultItemsList = null;
 
 		getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));

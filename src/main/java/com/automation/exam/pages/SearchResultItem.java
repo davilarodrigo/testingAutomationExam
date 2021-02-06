@@ -8,8 +8,8 @@ public class SearchResultItem extends WebComponent {
 
 	public WebElement webElement;
 	private WebElement selectButton;
-	private  WebElement flightDuration;
-	private  WebElement detailsAndFees;
+	private WebElement flightDuration;
+	private WebElement detailsAndFees;
 	private int durationInMinutes = 0;
 
 	private String xpath;
@@ -43,8 +43,20 @@ public class SearchResultItem extends WebComponent {
 	}
 
 	public WebElement getSelectButton() {
+		if(selectButton==null) {
 		selectButton = driver.findElement(By.xpath(xpath + "//button[@data-test-id=\"select-button\"]"));
+		}
 		return selectButton;
+	}
+	
+	public boolean hasSelectButton() {
+		String xpath1="//button[@data-test-id=\"select-button\"]";
+		
+		if (elementIsPresent(xpath + xpath1)) {
+			selectButton = driver.findElement(By.xpath(xpath + xpath1));
+			return true;
+		}
+		return false;	
 	}
 
 	public boolean hasDetailsAndFees() {
@@ -71,15 +83,15 @@ public class SearchResultItem extends WebComponent {
 	}
 
 	private int convertToInt(char a) {
-		return Character.getNumericValue(a);  
+		return Character.getNumericValue(a);
 	}
 
 	private int convertToInt(char a, char b) {
-		return convertToInt(a)*10+convertToInt(b);
+		return convertToInt(a) * 10 + convertToInt(b);
 	}
 
 	private void calculateFlightDuration(String value) {
-		value+="     ";
+		value += "     ";
 		char[] chars = value.toCharArray();
 
 		int hours = 0;
@@ -89,7 +101,7 @@ public class SearchResultItem extends WebComponent {
 			minutes = convertToInt(chars[0]);
 		}
 		if (chars[2] == 'm') {
-			minutes = convertToInt(chars[0],chars[1]);
+			minutes = convertToInt(chars[0], chars[1]);
 		}
 
 		if (chars[1] == 'h') {
@@ -98,20 +110,20 @@ public class SearchResultItem extends WebComponent {
 				minutes = convertToInt(chars[3]);
 			}
 			if (chars[5] == 'm') {
-				minutes = convertToInt(chars[3] ,chars[4]);
+				minutes = convertToInt(chars[3], chars[4]);
 			}
 		}
 		if (chars[2] == 'h') {
-			hours = convertToInt(chars[0],chars[1]);
+			hours = convertToInt(chars[0], chars[1]);
 			if (chars[5] == 'm') {
 				minutes = convertToInt(chars[4]);
 			}
 			if (chars[6] == 'm') {
-				minutes = convertToInt(chars[4] ,chars[5]);
+				minutes = convertToInt(chars[4], chars[5]);
 			}
 		}
 
-		durationInMinutes=hours*60+minutes;
+		durationInMinutes = hours * 60 + minutes;
 	}
 
 	public int getFlightDurationInMinutes() {
@@ -125,16 +137,16 @@ public class SearchResultItem extends WebComponent {
 
 		if (elementIsPresent(xpath + xpath1)) {
 			flightDuration = driver.findElement(By.xpath(xpath + xpath1));
-			//System.out.println(flightDuration.getText());
+			// System.out.println(flightDuration.getText());
 			calculateFlightDuration(flightDuration.getText());
-			//System.out.println(durationInMinutes);
+			// System.out.println(durationInMinutes);
 			return true;
 		}
 		if (elementIsPresent(xpath + xpath2)) {
-			flightDuration = driver.findElement(By.xpath(xpath + xpath2));			
-			//System.out.println(flightDuration.getText());
+			flightDuration = driver.findElement(By.xpath(xpath + xpath2));
+			// System.out.println(flightDuration.getText());
 			calculateFlightDuration(flightDuration.getText());
-			//System.out.println(durationInMinutes);
+			// System.out.println(durationInMinutes);
 			return true;
 		}
 		return false;
