@@ -22,6 +22,7 @@ public class SearchResultItem extends WebComponent {
 		this.index = index;
 		this.xpath = xpath;
 		this.driver = driver;
+		hasFlightDuration();
 
 	}
 

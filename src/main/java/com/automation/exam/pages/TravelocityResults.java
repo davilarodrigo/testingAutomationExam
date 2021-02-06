@@ -119,15 +119,15 @@ public class TravelocityResults extends BasePage {
 				return false;
 			}
 
-			//item.clickDetailsAndFees();
+			// item.clickDetailsAndFees();
 		}
 		printDetail("all details and fees present in every result");
 		return true;
 	}
 
 	public void clickSortBoxOption(String valueA, String valueB) {
-		SearchResultItemsList=null;
-		
+		SearchResultItemsList = null;
+
 		getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
 		sortDropdown.click();
 
@@ -155,12 +155,21 @@ public class TravelocityResults extends BasePage {
 		clickSortBoxOption("DURATION_INCREASING", "sort-DURATION_INCREASING");
 	}
 	
+	public void sortByLongerDuration() {
+		clickSortBoxOption("DURATION_DECREASING", "sort-DURATION_DECREASING");
+	}
+
 	public boolean verifySortingByShorterDuration() {
-		List<SearchResultItem> SearchResultItemsList = getSearchResultItems();
-		
-		for (SearchResultItem item : SearchResultItemsList) {
-			//item.flightDuration.
+		List<SearchResultItem> list = getSearchResultItems();
+
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).getFlightDurationInMinutes());
+			if (list.get(i).getFlightDurationInMinutes() < list.get(i - 1).getFlightDurationInMinutes()) {
+				printDetail("list is not sorted");
+				return false;
+			}
 		}
+		printDetail("list is sorted");
 		return true;
 	}
 
