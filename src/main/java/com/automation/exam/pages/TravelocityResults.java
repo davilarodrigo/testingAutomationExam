@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class TravelocityResults extends BasePage {
 
-	private List<SearchResultItem> SearchResultItemsList;
+	private List<SearchResultItem> searchResultItemsList;
 
 	@FindBy(xpath = "(//select[@id=\"listings-sort\"]) |(//select[@id=\"sortDropdown\"])")
 	private WebElement sortDropdown;
@@ -32,7 +32,8 @@ public class TravelocityResults extends BasePage {
 
 	private List<SearchResultItem> getSearchResultItems() {
 
-		if (SearchResultItemsList == null) {
+		//List<SearchResultItem> searchResultItemsList;		
+		if (searchResultItemsList == null) {
 
 			getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
 
@@ -61,17 +62,16 @@ public class TravelocityResults extends BasePage {
 				return null;
 
 			int numberOfResults = listOfResults.size();
-
-			SearchResultItemsList = new ArrayList<>();
+			searchResultItemsList = new ArrayList<>();
 
 			for (int i = 1; i <= numberOfResults; i++) {
 				SearchResultItem resultItem = new SearchResultItem(xpath, i, driver);
-				SearchResultItemsList.add(resultItem);
+				searchResultItemsList.add(resultItem);
 			}
 
-			printDetail(SearchResultItemsList.size() + " flights found");
+			printDetail(searchResultItemsList.size() + " flights found");
 		}
-		return SearchResultItemsList;
+		return searchResultItemsList;
 	}
 
 	public boolean verifySelectButtons() {
@@ -126,7 +126,7 @@ public class TravelocityResults extends BasePage {
 	}
 
 	public void clickSortBoxOption(String valueA, String valueB) {
-		SearchResultItemsList = null;
+		searchResultItemsList = null;
 
 		getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
 		sortDropdown.click();
@@ -162,14 +162,11 @@ public class TravelocityResults extends BasePage {
 	public boolean verifySortingByShorterDuration() {
 		List<SearchResultItem> list = getSearchResultItems();
 
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i).getFlightDurationInMinutes());
+		for (int i = 1; i < list.size(); i++) {
 			if (list.get(i).getFlightDurationInMinutes() < list.get(i - 1).getFlightDurationInMinutes()) {
-				printDetail("list is not sorted");
 				return false;
 			}
 		}
-		printDetail("list is sorted");
 		return true;
 	}
 

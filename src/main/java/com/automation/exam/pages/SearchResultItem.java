@@ -132,8 +132,8 @@ public class SearchResultItem extends WebComponent {
 		if (elementIsPresent(xpath + xpath2)) {
 			flightDuration = driver.findElement(By.xpath(xpath + xpath2));
 			calculateFlightDuration(flightDuration.getText());
-			//System.out.println(flightDuration.getText());
-			//System.out.println(durationInMinutes);
+			System.out.println(flightDuration.getText());
+			System.out.println(durationInMinutes);
 			return true;
 		}
 		return false;
