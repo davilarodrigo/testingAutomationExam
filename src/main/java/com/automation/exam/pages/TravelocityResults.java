@@ -29,36 +29,37 @@ public class TravelocityResults extends BasePage {
 		super(driver);
 		driver.get(resultsUrl);
 	}
-	
+
 	public TravelocityResults selectResult(int index) {
-		
-		searchResultItemsList=getSearchResultItems();
-		SearchResultItem selectedFlight =searchResultItemsList.get(index-1);
+
+		searchResultItemsList = getSearchResultItems();
+		SearchResultItem selectedFlight = searchResultItemsList.get(index - 1);
 		WebElement continueButton;
-				
+
 		if (selectedFlight.hasSelectButton()) {
 			WebElement button = selectedFlight.getSelectButton();
-			waitAndClick(button);			
-			
-			int itemIndex=selectedFlight.getIndex();			
-			String xpathContinueButton="(//li[@data-test-id=\"offer-listing\"])["+itemIndex+"]//button[@data-test-id=\"select-button-1\"]";			
-			continueButton=findAndClick(xpathContinueButton);
-			printDetail("xpath continue button: "+xpathContinueButton);
-		}else {
+			waitAndClick(button);
+
+			int itemIndex = selectedFlight.getIndex();
+			String xpathContinueButton = "(//li[@data-test-id=\"offer-listing\"])[" + itemIndex
+					+ "]//button[@data-test-id=\"select-button-1\"]";
+			continueButton = findAndClick(xpathContinueButton);
+			printDetail("xpath continue button: " + xpathContinueButton);
+		} else {
 			printDetail("Select button is missing in the selected flight, clicking the flight result instead");
-			selectedFlight.webElement.click();			
-			continueButton=findAndClick("//button[@data-test-id=\"select-button\"]");
-								
+			selectedFlight.webElement.click();
+			continueButton = findAndClick("//button[@data-test-id=\"select-button\"]");
+
 		}
 		printDetail("se encontro el continue button");
-		
+
 		return new TravelocityResults(getDriver());
-				
+
 	}
 
 	private List<SearchResultItem> getSearchResultItems() {
 
-		//List<SearchResultItem> searchResultItemsList;		
+		// List<SearchResultItem> searchResultItemsList;
 		if (searchResultItemsList == null) {
 
 			getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
@@ -107,8 +108,8 @@ public class TravelocityResults extends BasePage {
 
 			if (!item.hasSelectButton()) {
 				printDetail("missing select button in result number " + item.getIndex());
-				return false;				
-			}	
+				return false;
+			}
 		}
 		printDetail("all select buttons present");
 		return true;
@@ -173,7 +174,7 @@ public class TravelocityResults extends BasePage {
 	public void sortByShorterDuration() {
 		clickSortBoxOption("DURATION_INCREASING", "sort-DURATION_INCREASING");
 	}
-	
+
 	public void sortByLongerDuration() {
 		clickSortBoxOption("DURATION_DECREASING", "sort-DURATION_DECREASING");
 	}
@@ -196,6 +197,18 @@ public class TravelocityResults extends BasePage {
 			return true;
 		}
 		return false;
+	}
+
+	public TravelocityFlightInformation dissmissAlert() {
+		// driver.switchTo().alert();//no es un alert
+
+		if (elementIsPresent("//a[@data-test-id=\"forcedChoiceNoThanks\"]")) {
+			findAndClick("//a[@data-test-id=\"forcedChoiceNoThanks\"]");
+		}
+		// driver.switchTo().defaultContent();
+		printDetail("alert dismissed");
+
+		return new TravelocityFlightInformation(getDriver());
 	}
 
 }

@@ -32,6 +32,14 @@ public class BasePage extends WebComponent{
 
 		return driver;
 	}
+
+	protected WebElement findById(String id) {
+		return driver.findElement(By.xpath("*//[@id=\""+id+"\"]"));
+	}
+	
+	protected WebElement findByXpath(String xpath) {
+		return driver.findElement(By.xpath(xpath));
+	}
 	
 	protected WebElement findAndClick(String xpath) {
 		WebElement webElement=driver.findElement(By.xpath(xpath));

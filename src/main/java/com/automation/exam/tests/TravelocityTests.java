@@ -5,6 +5,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import com.automation.exam.pages.TravelocityFlightInformation;
 import com.automation.exam.pages.TravelocityHome;
 import com.automation.exam.pages.TravelocityResults;
 import com.automation.exam.tests.BaseTests;
@@ -68,6 +69,15 @@ public class TravelocityTests extends BaseTests {
 		
 		secondResultsPage.selectResult(3);
 		System.out.println("second flight selected");
+		
+		TravelocityFlightInformation flightInfoPage= secondResultsPage.dissmissAlert();
+		
+		testFlightInfoPage(flightInfoPage);
+	}
+	
+	private void testFlightInfoPage(TravelocityFlightInformation flightInfoPage) {
+		boolean totalPricePresent= flightInfoPage.verifyTotalPrice();
+		System.out.println("total price pPresent: "+totalPricePresent);
 	}
 
 }
