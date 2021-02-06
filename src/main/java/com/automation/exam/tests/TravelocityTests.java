@@ -45,16 +45,12 @@ public class TravelocityTests extends BaseTests {
 		SoftAssert softAssert = new SoftAssert();
 		results.printDetails = true;
 
-		// boolean sortBoxClickable=results.verifySortingBoxClickable();
+		boolean sortBoxClickable=results.verifySortingBoxClickable();
+		softAssert.assertEquals(sortBoxClickable, true);
 
-		results.sortByShorterDuration();
-
-		/*if (sortBoxClickable) {
-			System.out.println("sorting box present and clickable");
-		} else {
-			System.out.println("sorting box not present");
-		}
-		softAssert.assertEquals(sortBoxClickable, true);*/
+		if (sortBoxClickable) {
+			results.sortByShorterDuration();
+		}		
 
 		boolean allSelectButtonsPresent = results.verifySelectButtons();
 		boolean allFlightDurationsPresent = results.verifyFlightDuration();
@@ -62,7 +58,7 @@ public class TravelocityTests extends BaseTests {
 		softAssert.assertEquals(allSelectButtonsPresent, true);
 		softAssert.assertEquals(allFlightDurationsPresent, true);
 		softAssert.assertEquals(allDetailsAndFeesPresent, true);
-
+		
 	}
 
 }

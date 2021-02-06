@@ -34,6 +34,8 @@ public class TravelocityResults extends BasePage {
 
 		if (SearchResultItemsList == null) {
 
+			getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
+
 			List<WebElement> listOfResults = new ArrayList<>();
 
 			String xpathA = "(//div[@class=\"grid-container standard-padding \"])";
@@ -76,6 +78,7 @@ public class TravelocityResults extends BasePage {
 		List<SearchResultItem> SearchResultItemsList = getSearchResultItems();
 
 		for (SearchResultItem item : SearchResultItemsList) {
+
 			String button = item.getSelectButtonXpath();
 			if (!elementIsPresent(button)) {
 				printDetail("missing select button in result number " + item.getIndex());
@@ -116,7 +119,7 @@ public class TravelocityResults extends BasePage {
 				return false;
 			}
 
-			// item.clickDetailsAndFees();
+			//item.clickDetailsAndFees();
 		}
 		printDetail("all details and fees present in every result");
 		return true;
@@ -129,15 +132,21 @@ public class TravelocityResults extends BasePage {
 		String xpathA = "//option[@data-opt-id=\"" + valueA + "\"]";
 		String xpathB = "//option[@data-opt-id=\"" + valueB + "\"]";
 		WebElement option;
-		
+
 		if (elementIsPresent(xpathA)) {
 			option = driver.findElement(By.xpath(xpathA));
 		} else {
-			option = driver.findElement(By.xpath(xpathB));
+			if (elementIsPresent(xpathB)) {
+				option = driver.findElement(By.xpath(xpathB));
+			} else {
+				printDetail("results not sorted");
+				return;
+			}
 		}
 
 		getWait().until(ExpectedConditions.elementToBeClickable(option));
 		option.click();
+		printDetail("results sorted");
 	}
 
 	public void sortByShorterDuration() {
@@ -145,11 +154,12 @@ public class TravelocityResults extends BasePage {
 	}
 
 	public boolean verifySortingBoxClickable() {
-		// getWait().until(ExpectedConditions.visibilityOf(sortDropdown));
-		getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
-		sortDropdown.click();
-		sortDropdown.click();
-		return elementIsPresent(sortDropdown);
+		if (elementIsPresent(sortDropdown)) {
+			getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
+			printDetail("sorting box present and clickable");
+			return true;
+		}
+		return false;
 	}
 
 }
