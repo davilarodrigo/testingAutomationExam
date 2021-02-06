@@ -126,6 +126,8 @@ public class TravelocityResults extends BasePage {
 	}
 
 	public void clickSortBoxOption(String valueA, String valueB) {
+		SearchResultItemsList=null;
+		
 		getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
 		sortDropdown.click();
 
@@ -151,6 +153,15 @@ public class TravelocityResults extends BasePage {
 
 	public void sortByShorterDuration() {
 		clickSortBoxOption("DURATION_INCREASING", "sort-DURATION_INCREASING");
+	}
+	
+	public boolean verifySortingByShorterDuration() {
+		List<SearchResultItem> SearchResultItemsList = getSearchResultItems();
+		
+		for (SearchResultItem item : SearchResultItemsList) {
+			//item.flightDuration.
+		}
+		return true;
 	}
 
 	public boolean verifySortingBoxClickable() {
