@@ -45,11 +45,11 @@ public class TravelocityTests extends BaseTests {
 		SoftAssert softAssert = new SoftAssert();
 		results.printDetails = true;
 
+		//reactivar estas lineas despues, lo que pasa es que sortear la lista cada vez vuelve todo muy lento
+		/* System.out.println("sorting list");
 		boolean sortBoxClickable = results.verifySortingBoxClickable();
 		softAssert.assertEquals(sortBoxClickable, true);
 
-		//reactivar estas lineas despues, lo que pasa es que sortear la lista cada vez vuelve todo muy lento
-		/*System.out.println("sorting list");
 		results.sortByShorterDuration();
 		boolean listCorrectlySorted=results.verifySortingByShorterDuration();
 		System.out.println("list correctly sorted: "+listCorrectlySorted);
@@ -63,8 +63,11 @@ public class TravelocityTests extends BaseTests {
 		softAssert.assertEquals(allDetailsAndFeesPresent, true);
 		 */
 		
-		results.selectResult(1);
-
+		TravelocityResults secondResultsPage = results.selectResult(1);
+		System.out.println("first flight selected");
+		
+		secondResultsPage.selectResult(3);
+		System.out.println("second flight selected");
 	}
 
 }

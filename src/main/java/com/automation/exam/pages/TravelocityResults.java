@@ -30,7 +30,7 @@ public class TravelocityResults extends BasePage {
 		driver.get(resultsUrl);
 	}
 	
-	public void selectResult(int index) {
+	public TravelocityResults selectResult(int index) {
 		
 		searchResultItemsList=getSearchResultItems();
 		SearchResultItem selectedFlight =searchResultItemsList.get(index-1);
@@ -51,6 +51,8 @@ public class TravelocityResults extends BasePage {
 								
 		}
 		printDetail("se encontro el continue button");
+		
+		return new TravelocityResults(getDriver());
 				
 	}
 
