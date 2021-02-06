@@ -48,11 +48,11 @@ public class TravelocityTests extends BaseTests {
 		boolean sortBoxClickable = results.verifySortingBoxClickable();
 		softAssert.assertEquals(sortBoxClickable, true);
 
-/*		System.out.println(results.verifySortingByShorterDuration());
+		System.out.println(results.verifySortingByShorterDuration());
 
 		results.sortByShorterDuration();
 		System.out.println(results.verifySortingByShorterDuration());
-*/
+
 		boolean allSelectButtonsPresent = results.verifySelectButtons();
 		boolean allFlightDurationsPresent = results.verifyFlightDuration();
 		boolean allDetailsAndFeesPresent = results.verifyPriceTag();

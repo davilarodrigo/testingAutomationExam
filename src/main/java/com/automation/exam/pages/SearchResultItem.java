@@ -125,19 +125,16 @@ public class SearchResultItem extends WebComponent {
 
 		if (elementIsPresent(xpath + xpath1)) {
 			flightDuration = driver.findElement(By.xpath(xpath + xpath1));
-			System.out.println(flightDuration.getText());
+			//System.out.println(flightDuration.getText());
 			calculateFlightDuration(flightDuration.getText());
 			//System.out.println(durationInMinutes);
 			return true;
 		}
 		if (elementIsPresent(xpath + xpath2)) {
-			flightDuration = driver.findElement(By.xpath(xpath + xpath2));
-			
-			//en la siguiente linea esta el problema, hay que ver que es lo que devuelve el get text
-			System.out.println("getText()");
-			System.out.println(flightDuration.getText());
+			flightDuration = driver.findElement(By.xpath(xpath + xpath2));			
+			//System.out.println(flightDuration.getText());
 			calculateFlightDuration(flightDuration.getText());
-			System.out.println(durationInMinutes);
+			//System.out.println(durationInMinutes);
 			return true;
 		}
 		return false;
