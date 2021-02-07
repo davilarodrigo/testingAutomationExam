@@ -44,8 +44,7 @@ public class TravelocityTests extends BaseTests {
 	private void testResults(TravelocityResults results) {
 
 		SoftAssert softAssert = new SoftAssert();
-		results.printDetails = true;
-
+//		results.printDetails = true;
 		//reactivar estas lineas despues, lo que pasa es que sortear la lista cada vez vuelve todo muy lento
 		/* System.out.println("sorting list");
 		boolean sortBoxClickable = results.verifySortingBoxClickable();
@@ -67,7 +66,7 @@ public class TravelocityTests extends BaseTests {
 		TravelocityResults secondResultsPage =  results.selectFirstFlight(1);
 		System.out.println("first flight selected");
 		
-		secondResultsPage.printDetails=true;
+//		secondResultsPage.printDetails=true;
 		TravelocityFlightInformation flightInfoPage= secondResultsPage.selectSecondFlight(3);
 		System.out.println("second flight selected");
 			

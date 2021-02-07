@@ -26,8 +26,8 @@ public class TravelocityFlightInformation extends BasePage {
 	
 	private void waitForPageToLoad() {
 		
-		//printDetail("current tab title: "+driver.getTitle());
-		//printDetail(buttonCheckOutXpah);
+		printDetail("current tab title: "+driver.getTitle());
+		printDetail(buttonCheckOutXpah);
 		getWait().until(ExpectedConditions.visibilityOf(buttonCheckOut));
 
 	}
