@@ -39,62 +39,64 @@ public class TravelocityResults extends BasePage {
 		selectFlight(index);
 		dissmissAlert();
 
-		printCurrentTab();
-		
-		ArrayList<String> tabs2 ;
+		//printCurrentTab();
+
+		ArrayList<String> tabs2;
 		do {
-			tabs2 = new ArrayList<String>(driver.getWindowHandles());				
-		} while (tabs2.size()==1);
-		
-				
+			tabs2 = new ArrayList<String>(driver.getWindowHandles());
+		} while (tabs2.size() == 1);
+
 		driver.switchTo().window(tabs2.get(1));
-		
-		printCurrentTab();
-		
+
+		//printCurrentTab();
+
 		return new TravelocityFlightInformation(getDriver());
 	}
 
 	private void selectFlight(int index) {
 
 		searchResultItemsList = getSearchResultItems();
-		SearchResultItem selectedFlight = searchResultItemsList.get(index-1);
-		
-		
+		SearchResultItem selectedFlight = searchResultItemsList.get(index - 1);
+
 		WebElement continueButton;
 
+		
 		if (selectedFlight.hasSelectButton()) {
 			String selectButton = selectedFlight.getSelectButtonXpath();
-			//printDetail("selectButton: " + selectButton);
+			// printDetail("selectButton: " + selectButton);
 
 			WebElement button = driver.findElement(By.xpath(selectButton));
 			button.click();
 
 			// if continue button appears
-			String xpathContinueButton="(//li[@data-test-id=\"offer-listing\"])[" + index+ "]//button[@data-test-id=\"select-button-1\"]";
-			//printDetail(xpathContinueButton);
-			
+			String xpathContinueButton = "(//li[@data-test-id=\"offer-listing\"])[" + index
+					+ "]//button[@data-test-id=\"select-button-1\"]";
+			// printDetail(xpathContinueButton);
+
 			tryToClick(xpathContinueButton);
-			
 
 		} else {
 			printDetail("Select button is missing in the selected flight, clicking the flight result instead");
 			selectedFlight.webElement.click();
 			continueButton = findAndClick("//button[@data-test-id=\"select-button\"]");
 
-			while(elementIsPresent(continueButton)) {
-				//con esto se hace una espera hasta que la pagina recargue
-				if(dissmissAlert()) {
+			while (elementIsPresent(continueButton)) {
+				// con esto se hace una espera hasta que la pagina recargue
+
+				ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
+				if (tabs2.size() == 2) {
+					break;
+				}
+
+				if (dissmissAlert()) {
 					break;
 				}
 				getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
 			}
 		}
 
-		
 	}
 
-	
-	
 	private List<SearchResultItem> getSearchResultItems() {
 
 		// List<SearchResultItem> searchResultItemsList;

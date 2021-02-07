@@ -28,7 +28,7 @@ public class TravelocityFlightInformation extends BasePage {
 		
 		//printDetail("current tab title: "+driver.getTitle());
 		//printDetail(buttonCheckOutXpah);
-		getWait().until(ExpectedConditions.visibilityOf(buttonCheckOut));
+		getWait().until(ExpectedConditions.elementToBeClickable(buttonCheckOut));
 
 	}
 
@@ -37,6 +37,9 @@ public class TravelocityFlightInformation extends BasePage {
 		String xpathA = "(//span[@class=\"packagePriceTotal\"])[2]";
 		String xpathB = "(//span[@class=\"uitk-type-500 uitk-type-bold uitk-text-primary-theme\"])[2]";
 
+		printDetail(xpathB);
+		printDetail(xpathA);
+		
 		return (elementIsPresent(xpathA) || elementIsPresent(xpathB));
 	}
 

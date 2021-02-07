@@ -30,8 +30,8 @@ public class TravelocityTests extends BaseTests {
 		home.selectDestinationCity("LAX");
 		System.out.println("cities selected");
 
-		//home.selectDepartingDate(13, 9, 2021);
-		//home.selectReturningDate(20, 12, 2021);
+		home.selectDepartingDate(13, 9, 2021);
+		home.selectReturningDate(20, 12, 2021);
 		System.out.println("dates selected");
 
 		TravelocityResults results;
@@ -44,40 +44,38 @@ public class TravelocityTests extends BaseTests {
 	private void testResults(TravelocityResults results) {
 
 		SoftAssert softAssert = new SoftAssert();
-//		results.printDetails = true;
-		//reactivar estas lineas despues, lo que pasa es que sortear la lista cada vez vuelve todo muy lento
-		/* System.out.println("sorting list");
+		
+		results.printDetails = true;
+		
 		boolean sortBoxClickable = results.verifySortingBoxClickable();
 		softAssert.assertEquals(sortBoxClickable, true);
-
-		results.sortByShorterDuration();
-		boolean listCorrectlySorted=results.verifySortingByShorterDuration();
-		System.out.println("list correctly sorted: "+listCorrectlySorted);
-		softAssert.assertEquals(listCorrectlySorted, true);
 		
+		System.out.println("sorting list");		
+		results.sortByShorterDuration();		
+		boolean listCorrectlySorted = results.verifySortingByShorterDuration();
+		System.out.println("list correctly sorted: " + listCorrectlySorted);
+		softAssert.assertEquals(listCorrectlySorted, true);
+
 		boolean allSelectButtonsPresent = results.verifySelectButtons();
 		boolean allFlightDurationsPresent = results.verifyFlightDuration();
 		boolean allDetailsAndFeesPresent = results.verifyPriceTag();
 		softAssert.assertEquals(allSelectButtonsPresent, true);
 		softAssert.assertEquals(allFlightDurationsPresent, true);
 		softAssert.assertEquals(allDetailsAndFeesPresent, true);
-		 */
-		
-		TravelocityResults secondResultsPage =  results.selectFirstFlight(1);
-		System.out.println("first flight selected");
-		
-		secondResultsPage.printDetails=true;
-		TravelocityFlightInformation flightInfoPage= secondResultsPage.selectSecondFlight(3);
-		System.out.println("second flight selected");
-					
-		flightInfoPage.printDetails=true;
-		
-		boolean totalPricePresent= flightInfoPage.verifyTotalPrice();
-		System.out.println("total price present: "+totalPricePresent);
-		boolean departureAndArrivalTimesPresent =flightInfoPage.verifyDepartureAndReturn();
-		System.out.println("departure and arrival times present: "+departureAndArrivalTimesPresent);
 
-	
+		TravelocityResults secondResultsPage = results.selectFirstFlight(1);
+		System.out.println("first flight selected");
+
+		// secondResultsPage.printDetails=true;
+		TravelocityFlightInformation flightInfoPage = secondResultsPage.selectSecondFlight(3);
+		System.out.println("second flight selected");
+
+		// flightInfoPage.printDetails=true;
+		boolean totalPricePresent = flightInfoPage.verifyTotalPrice();
+		System.out.println("total price present: " + totalPricePresent);
+		boolean departureAndArrivalTimesPresent = flightInfoPage.verifyDepartureAndReturn();
+		System.out.println("departure and arrival times present: " + departureAndArrivalTimesPresent);
+
 	}
-	
+
 }
