@@ -66,11 +66,10 @@ public class TravelocityTests extends BaseTests {
 		TravelocityResults secondResultsPage =  results.selectFirstFlight(1);
 		System.out.println("first flight selected");
 		
-//		secondResultsPage.printDetails=true;
+		secondResultsPage.printDetails=true;
 		TravelocityFlightInformation flightInfoPage= secondResultsPage.selectSecondFlight(3);
 		System.out.println("second flight selected");
-			
-		
+					
 		flightInfoPage.printDetails=true;
 		
 		boolean totalPricePresent= flightInfoPage.verifyTotalPrice();

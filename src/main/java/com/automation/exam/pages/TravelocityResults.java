@@ -39,8 +39,8 @@ public class TravelocityResults extends BasePage {
 		selectFlight(index);
 		dissmissAlert();
 
-	//	printCurrentTab();
-
+		printCurrentTab();
+		
 		ArrayList<String> tabs2 ;
 		do {
 			tabs2 = new ArrayList<String>(driver.getWindowHandles());				
@@ -48,7 +48,8 @@ public class TravelocityResults extends BasePage {
 		
 				
 		driver.switchTo().window(tabs2.get(1));
-		//printCurrentTab();
+		
+		printCurrentTab();
 		
 		return new TravelocityFlightInformation(getDriver());
 	}
@@ -82,7 +83,9 @@ public class TravelocityResults extends BasePage {
 
 			while(elementIsPresent(continueButton)) {
 				//con esto se hace una espera hasta que la pagina recargue
-				dissmissAlert();
+				if(dissmissAlert()) {
+					break;
+				}
 				getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
 			}
 		}
@@ -234,12 +237,14 @@ public class TravelocityResults extends BasePage {
 		return false;
 	}
 
-	public void dissmissAlert() {
+	public boolean dissmissAlert() {
 
 		if (elementIsPresent("//a[@data-test-id=\"forcedChoiceNoThanks\"]")) {
 			findAndClick("//a[@data-test-id=\"forcedChoiceNoThanks\"]");
 			System.out.println("alert dismissed");
+			return true;
 		}
+		return false;
 	}
 
 }

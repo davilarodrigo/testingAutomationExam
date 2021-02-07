@@ -26,8 +26,8 @@ public class TravelocityFlightInformation extends BasePage {
 	
 	private void waitForPageToLoad() {
 		
-		printDetail("current tab title: "+driver.getTitle());
-		printDetail(buttonCheckOutXpah);
+		//printDetail("current tab title: "+driver.getTitle());
+		//printDetail(buttonCheckOutXpah);
 		getWait().until(ExpectedConditions.visibilityOf(buttonCheckOut));
 
 	}
@@ -55,7 +55,7 @@ public class TravelocityFlightInformation extends BasePage {
 			//habria que leer el title de la pagina para determinar si esta en la pestaña correcta
 			//porque tal vez por eso no encuentra los elementos
 			
-			printDetail("departure and return details present (layout B)");
+			//printDetail("departure and return details present (layout B)");
 			return true;
 		}
 
