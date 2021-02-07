@@ -38,40 +38,46 @@ public class TravelocityResults extends BasePage {
 	public TravelocityFlightInformation selectSecondFlight(int index) {
 		selectFlight(index);
 		dissmissAlert();
-		
-		//verificar que dissmiss alert no genere problemas
-		
-		
-		//cuando se imprime el titulo de la tab, este sigue siendo el de LAS to LAX flights
-		//es decir, NO SE CAMBIA A LA NUEVA PESTAÑA
-		//el cambio a la nueva pestaña se deberia hacer en este punto de la aplicacion
-		//antes de devolver la nueva pagina con el driver
 
+		// verificar que dissmiss alert no genere problemas
+
+		// cuando se imprime el titulo de la tab, este sigue siendo el de LAS to LAX
+		// flights
+		// es decir, NO SE CAMBIA A LA NUEVA PESTAÑA
+		// el cambio a la nueva pestaña se deberia hacer en este punto de la aplicacion
+		// antes de devolver la nueva pagina con el driver
+
+		printCurrentTab();
+
+		ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(tabs2.get(1));
+		// driver.close();
+		// driver.switchTo().window(tabs2.get(0));
+		printCurrentTab();
 		return new TravelocityFlightInformation(getDriver());
 	}
 
 	private void selectFlight(int index) {
 
-		index--;
-
 		searchResultItemsList = getSearchResultItems();
-		SearchResultItem selectedFlight = searchResultItemsList.get(index);
+		SearchResultItem selectedFlight = searchResultItemsList.get(index-1);
+		
+		
 		WebElement continueButton;
 
 		if (selectedFlight.hasSelectButton()) {
 			String selectButton = selectedFlight.getSelectButtonXpath();
-			printDetail("selectButton: " + selectButton);
+			//printDetail("selectButton: " + selectButton);
 
 			WebElement button = driver.findElement(By.xpath(selectButton));
 			button.click();
 
 			// if continue button appears
-			if (elementIsPresent("(//li[@data-test-id=\"offer-listing\"])[" + index
-					+ "]//button[@data-test-id=\"select-button-1\"]")) {
-				findAndClick("(//li[@data-test-id=\"offer-listing\"])[" + index
-						+ "]//button[@data-test-id=\"select-button-1\"]");
-				printDetail("continue button found and clicked!");
-			}
+			String xpathContinueButton="(//li[@data-test-id=\"offer-listing\"])[" + index+ "]//button[@data-test-id=\"select-button-1\"]";
+			printDetail(xpathContinueButton);
+			
+			tryToClick(xpathContinueButton, "continue button found and clicked!");
+			
 
 		} else {
 			printDetail("Select button is missing in the selected flight, clicking the flight result instead");

@@ -30,8 +30,8 @@ public class TravelocityTests extends BaseTests {
 		home.selectDestinationCity("LAX");
 		System.out.println("cities selected");
 
-		home.selectDepartingDate(13, 9, 2021);
-		home.selectReturningDate(20, 12, 2021);
+		//home.selectDepartingDate(13, 9, 2021);
+		//home.selectReturningDate(20, 12, 2021);
 		System.out.println("dates selected");
 
 		TravelocityResults results;
@@ -66,25 +66,20 @@ public class TravelocityTests extends BaseTests {
 		
 		TravelocityResults secondResultsPage =  results.selectFirstFlight(1);
 		System.out.println("first flight selected");
-				
+		
+		secondResultsPage.printDetails=true;
 		TravelocityFlightInformation flightInfoPage= secondResultsPage.selectSecondFlight(3);
 		System.out.println("second flight selected");
 			
+		
 		flightInfoPage.printDetails=true;
 		
 		boolean totalPricePresent= flightInfoPage.verifyTotalPrice();
 		System.out.println("total price present: "+totalPricePresent);
 		boolean departureAndArrivalTimesPresent =flightInfoPage.verifyDepartureAndReturn();
 		System.out.println("departure and arrival times present: "+departureAndArrivalTimesPresent);
+
+	
 	}
 	
-	private void testFlightInfoPage(TravelocityFlightInformation flightInfoPage) {
-		flightInfoPage.printDetails=true;
-		
-		boolean totalPricePresent= flightInfoPage.verifyTotalPrice();
-		boolean departureAndArrivalTimesPresent =flightInfoPage.verifyDepartureAndReturn();
-		System.out.println("total price present: "+totalPricePresent);
-		System.out.println("departure and arrival times present: "+departureAndArrivalTimesPresent);
-	}
-
 }

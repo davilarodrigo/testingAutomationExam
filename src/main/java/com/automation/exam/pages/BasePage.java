@@ -7,11 +7,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class BasePage extends WebComponent{
+public class BasePage extends WebComponent {
 
 	private WebDriverWait wait;
-	public boolean printDetails=false;
-	
+	public boolean printDetails = false;
+
 	protected void printDetail(String string) {
 		if (printDetails) {
 			System.out.println(string);
@@ -34,24 +34,45 @@ public class BasePage extends WebComponent{
 	}
 
 	protected WebElement findById(String id) {
-		return driver.findElement(By.xpath("*//[@id=\""+id+"\"]"));
+		return driver.findElement(By.xpath("*//[@id=\"" + id + "\"]"));
 	}
-	
+
 	protected WebElement findByXpath(String xpath) {
 		return driver.findElement(By.xpath(xpath));
 	}
-	
+
 	protected WebElement findAndClick(String xpath) {
-		WebElement webElement=driver.findElement(By.xpath(xpath));
-		getWait().until(ExpectedConditions.visibilityOf(webElement));		
+		WebElement webElement = driver.findElement(By.xpath(xpath));
+		getWait().until(ExpectedConditions.visibilityOf(webElement));
 		getWait().until(ExpectedConditions.elementToBeClickable(webElement));
 		webElement.click();
 		return webElement;
 	}
+
+	protected void tryToClick(String xpath) {
+		try {
+			findAndClick(xpath);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 	
-	protected void waitAndClick(WebElement element) {		
+	protected void tryToClick(String xpath, String msg) {
+		try {
+			findAndClick(xpath);
+			printDetail(msg);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	protected void waitAndClick(WebElement element) {
 		getWait().until(ExpectedConditions.elementToBeClickable(element));
-		element.click();		
+		element.click();
+	}
+
+	protected void printCurrentTab() {
+		System.out.println("current tab title: " + driver.getTitle());
 	}
 
 	public void dispose() {

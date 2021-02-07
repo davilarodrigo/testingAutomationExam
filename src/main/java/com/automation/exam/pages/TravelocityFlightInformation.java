@@ -19,23 +19,19 @@ public class TravelocityFlightInformation extends BasePage {
 	// c. Price guarantee text is present
 
 	// 7. Press Continue Booking button.
+	
 	@FindBy(xpath= "//button[@data-test-id=\"goto-checkout-button\"] | //button[@id=\"bookButton\"]")
 	private WebElement buttonCheckOut;
-	//a la linea anterior tal vez le faltaba el private
 	
 	private void waitForPageToLoad() {
-		//no esta funcionando esta funcion, hace que se produzca un error
-		//puede ser que el driver no este encontrando la pestaña, 
-		//habria que leer el title de la pagina para determinar si esta en la pestaña correcta
-		//porque tal vez por eso no encuentra los elementos
 		
 		printDetail("current tab title: "+driver.getTitle());		
-		//getWait().until(ExpectedConditions.visibilityOf(buttonCheckOut));
+		getWait().until(ExpectedConditions.visibilityOf(buttonCheckOut));
 
 	}
 
 	public boolean verifyTotalPrice() {
-		waitForPageToLoad();//no esta funcionando esta funcion, hace que se produzca un error
+		waitForPageToLoad();
 		String xpathA = "(//span[@class=\"packagePriceTotal\"])[2]";
 		String xpathB = "(//span[@class=\"uitk-type-500 uitk-type-bold uitk-text-primary-theme\"])[2]";
 
@@ -43,7 +39,7 @@ public class TravelocityFlightInformation extends BasePage {
 	}
 
 	public boolean verifyDepartureAndReturn() {
-		//waitForPageToLoad();//no esta funcionando esta funcion, hace que se produzca un error
+		waitForPageToLoad();
 		String departureAndReturnFlight1 = "//div[@class=\"uitk-type-300 uitk-type-bold uitk-flex-item uitk-text-primary-theme\"][1]";
 		String departureAndReturnFlight2 = "//div[@class=\"uitk-type-300 uitk-type-bold uitk-flex-item uitk-text-primary-theme\"][2]";
 
