@@ -43,9 +43,9 @@ public class SearchResultItem extends WebComponent {
 	}
 
 	public WebElement getSelectButton() {
-		if(selectButton==null) {
+	
 		selectButton = driver.findElement(By.xpath(xpath + "//button[@data-test-id=\"select-button\"]"));
-		}
+		
 		return selectButton;
 	}
 	

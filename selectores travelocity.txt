@@ -10,6 +10,8 @@ button going to
 
 elemento 1 de la lista de resultados (boton)
 //ul[@class="uitk-typeahead-results no-bullet"]/li[1]/button
+para lista destino:
+(//ul[@class="uitk-typeahead-results no-bullet"]/li[1]/button)[2]
 
 fecha alguna
 //button[@aria-label="Mar 4, 2021." and @class="uitk-date-picker-day uitk-new-date-picker-day"]
@@ -29,8 +31,11 @@ Results
 item de resultado
 //button[@class="uitk-card-link"]
 
-item de resultado (no el de chrome)
+item de resultado (maqueta A)
 (//div[@class="grid-container standard-padding "])[1]
+
+boton cancelar alert 
+//a[@data-test-id="forcedChoiceNoThanks"]
 
 ----------------------------------------------------------------------------------
 

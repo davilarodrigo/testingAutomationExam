@@ -1,0 +1,1 @@
+[0206/180627.225:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\Familia\AppData\Local\Temp\scoped_dir23176_836878223\Crashpad\reports\7c8c7a19-756c-4090-ba4c-f6d54b978c00.dmp: El proceso no tiene acceso al archivo porque está siendo utilizado por otro proceso. (0x20)

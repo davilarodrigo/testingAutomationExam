@@ -42,6 +42,9 @@ public class TravelocityResults extends BasePage {
 		return new TravelocityFlightInformation(getDriver());
 	}
 
+	@FindBy(xpath="(//li[@data-test-id=\"offer-listing\"])//button[@data-test-id=\"select-button-1\"]")
+	WebElement continueButtonA;
+	
 	private void selectFlight(int index) {
 
 		searchResultItemsList = getSearchResultItems();
@@ -50,12 +53,20 @@ public class TravelocityResults extends BasePage {
 
 		if (selectedFlight.hasSelectButton()) {
 			WebElement button = selectedFlight.getSelectButton();
-			waitAndClick(button);
-
+			
+			//la anterior funcion wait and click podria haber estado generando problemas
+			button.click();
+			
 			int itemIndex = selectedFlight.getIndex();
 			String xpathContinueButton = "(//li[@data-test-id=\"offer-listing\"])[" + itemIndex
 					+ "]//button[@data-test-id=\"select-button-1\"]";
-			printDetail("xpath continue button: " + xpathContinueButton);			
+			//printDetail("xpath continue button: " + xpathContinueButton);		
+			
+			printDetail("antes del wait: "+elementIsPresent(xpathContinueButton));
+			//probar despues esta linea
+			getWait().until(ExpectedConditions.visibilityOf(continueButtonA));
+			printDetail("despues del wait: "+elementIsPresent(xpathContinueButton));
+						
 			continueButton = findAndClick(xpathContinueButton);
 			printDetail("button clicked!");
 			
