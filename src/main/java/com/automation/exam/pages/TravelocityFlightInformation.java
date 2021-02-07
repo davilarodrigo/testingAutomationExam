@@ -22,10 +22,12 @@ public class TravelocityFlightInformation extends BasePage {
 	
 	@FindBy(xpath= "//button[@data-test-id=\"goto-checkout-button\"] | //button[@id=\"bookButton\"]")
 	private WebElement buttonCheckOut;
+	private String buttonCheckOutXpah="//button[@data-test-id=\"goto-checkout-button\"] | //button[@id=\"bookButton\"]";
 	
 	private void waitForPageToLoad() {
 		
-		printDetail("current tab title: "+driver.getTitle());		
+		//printDetail("current tab title: "+driver.getTitle());
+		//printDetail(buttonCheckOutXpah);
 		getWait().until(ExpectedConditions.visibilityOf(buttonCheckOut));
 
 	}
@@ -40,8 +42,8 @@ public class TravelocityFlightInformation extends BasePage {
 
 	public boolean verifyDepartureAndReturn() {
 		waitForPageToLoad();
-		String departureAndReturnFlight1 = "//div[@class=\"uitk-type-300 uitk-type-bold uitk-flex-item uitk-text-primary-theme\"][1]";
-		String departureAndReturnFlight2 = "//div[@class=\"uitk-type-300 uitk-type-bold uitk-flex-item uitk-text-primary-theme\"][2]";
+		String departureAndReturnFlight1 = "(//div[@class=\"uitk-type-300 uitk-type-bold uitk-flex-item uitk-text-primary-theme\"])[1]";
+		String departureAndReturnFlight2 = "(//div[@class=\"uitk-type-300 uitk-type-bold uitk-flex-item uitk-text-primary-theme\"])[2]";
 
 		if (elementIsPresent(departureAndReturnFlight1) && elementIsPresent(departureAndReturnFlight2)) {
 			//añadir una linea para verificar si el boton es visible
@@ -57,14 +59,14 @@ public class TravelocityFlightInformation extends BasePage {
 			return true;
 		}
 
-		String departureFlight1 = "//div[@class=\"departure\"]//span[@class=\"time type-500\"][1]";
-		String departureFlight2 = "//div[@class=\"departure\"]//span[@class=\"time type-500\"][3]";
-		String arrivalFlight1 = "//div[@class=\"arrival\"]//span[@class=\"time type-500\"][1]";
-		String arrivalFlight2 = "//div[@class=\"arrival\"]//span[@class=\"time type-500\"][3]";
+		String departureFlight1 = "(//div[@class=\"departure\"]//span[@class=\"time type-500\"])[1]";
+		String departureFlight2 = "(//div[@class=\"departure\"]//span[@class=\"time type-500\"])[3]";
+		String arrivalFlight1 = "(//div[@class=\"arrival\"]//span[@class=\"time type-500\"])[1]";
+		String arrivalFlight2 = "(//div[@class=\"arrival\"]//span[@class=\"time type-500\"])[3]";
 
 		if (elementIsPresent(departureFlight1) && elementIsPresent(departureFlight2) && elementIsPresent(arrivalFlight1)
 				&& elementIsPresent(arrivalFlight2)) {
-			printDetail("departure and return details present (layout A)");
+			//printDetail("departure and return details present (layout A)");
 			return true;
 		}
 		return false;

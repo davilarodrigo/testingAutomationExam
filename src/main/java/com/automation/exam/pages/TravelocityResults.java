@@ -39,15 +39,7 @@ public class TravelocityResults extends BasePage {
 		selectFlight(index);
 		dissmissAlert();
 
-		// verificar que dissmiss alert no genere problemas
-
-		// cuando se imprime el titulo de la tab, este sigue siendo el de LAS to LAX
-		// flights
-		// es decir, NO SE CAMBIA A LA NUEVA PESTAÑA
-		// el cambio a la nueva pestaña se deberia hacer en este punto de la aplicacion
-		// antes de devolver la nueva pagina con el driver
-
-		printCurrentTab();
+	//	printCurrentTab();
 
 		ArrayList<String> tabs2 ;
 		do {
@@ -56,7 +48,7 @@ public class TravelocityResults extends BasePage {
 		
 				
 		driver.switchTo().window(tabs2.get(1));
-		printCurrentTab();
+		//printCurrentTab();
 		
 		return new TravelocityFlightInformation(getDriver());
 	}
@@ -78,9 +70,9 @@ public class TravelocityResults extends BasePage {
 
 			// if continue button appears
 			String xpathContinueButton="(//li[@data-test-id=\"offer-listing\"])[" + index+ "]//button[@data-test-id=\"select-button-1\"]";
-			printDetail(xpathContinueButton);
+			//printDetail(xpathContinueButton);
 			
-			tryToClick(xpathContinueButton, "continue button found and clicked!");
+			tryToClick(xpathContinueButton);
 			
 
 		} else {
