@@ -49,11 +49,15 @@ public class TravelocityResults extends BasePage {
 
 		printCurrentTab();
 
-		ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
+		ArrayList<String> tabs2 ;
+		do {
+			tabs2 = new ArrayList<String>(driver.getWindowHandles());				
+		} while (tabs2.size()==1);
+		
+				
 		driver.switchTo().window(tabs2.get(1));
-		// driver.close();
-		// driver.switchTo().window(tabs2.get(0));
 		printCurrentTab();
+		
 		return new TravelocityFlightInformation(getDriver());
 	}
 
@@ -84,10 +88,18 @@ public class TravelocityResults extends BasePage {
 			selectedFlight.webElement.click();
 			continueButton = findAndClick("//button[@data-test-id=\"select-button\"]");
 
+			while(elementIsPresent(continueButton)) {
+				//con esto se hace una espera hasta que la pagina recargue
+				dissmissAlert();
+				getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
+			}
 		}
 
+		
 	}
 
+	
+	
 	private List<SearchResultItem> getSearchResultItems() {
 
 		// List<SearchResultItem> searchResultItemsList;
