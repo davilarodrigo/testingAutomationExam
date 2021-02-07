@@ -32,9 +32,10 @@ public class TravelocityFlightInformation extends BasePage {
 
 	}
 	
-	public void clickCheckOutButton() {
+	public TravelocityWhosTraveling clickCheckOutButton() {
 		getWait().until(ExpectedConditions.elementToBeClickable(buttonCheckOut));
 		buttonCheckOut.click();
+		return new TravelocityWhosTraveling(getDriver());
 	}
 
 	public boolean verifyGuaranteeText() {
