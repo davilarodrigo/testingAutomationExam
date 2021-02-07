@@ -43,6 +43,7 @@ public class BasePage extends WebComponent{
 	
 	protected WebElement findAndClick(String xpath) {
 		WebElement webElement=driver.findElement(By.xpath(xpath));
+		getWait().until(ExpectedConditions.visibilityOf(webElement));		
 		getWait().until(ExpectedConditions.elementToBeClickable(webElement));
 		webElement.click();
 		return webElement;

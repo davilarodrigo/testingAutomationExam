@@ -29,8 +29,20 @@ public class TravelocityResults extends BasePage {
 		super(driver);
 		driver.get(resultsUrl);
 	}
+	
+	public TravelocityResults selectFirstFlight(int index) {
+		selectFlight(index);	
+		return new TravelocityResults(getDriver());
+	}
+	
+	public TravelocityFlightInformation selectSecondFlight(int index) {
+		selectFlight(index);
+//		dissmissAlert();	
+						
+		return new TravelocityFlightInformation(getDriver());
+	}
 
-	public TravelocityResults selectResult(int index) {
+	private void selectFlight(int index) {
 
 		searchResultItemsList = getSearchResultItems();
 		SearchResultItem selectedFlight = searchResultItemsList.get(index - 1);
@@ -43,17 +55,18 @@ public class TravelocityResults extends BasePage {
 			int itemIndex = selectedFlight.getIndex();
 			String xpathContinueButton = "(//li[@data-test-id=\"offer-listing\"])[" + itemIndex
 					+ "]//button[@data-test-id=\"select-button-1\"]";
+			printDetail("xpath continue button: " + xpathContinueButton);			
 			continueButton = findAndClick(xpathContinueButton);
-			printDetail("xpath continue button: " + xpathContinueButton);
+			printDetail("button clicked!");
+			
 		} else {
 			printDetail("Select button is missing in the selected flight, clicking the flight result instead");
 			selectedFlight.webElement.click();
 			continueButton = findAndClick("//button[@data-test-id=\"select-button\"]");
 
 		}
+		
 		printDetail("se encontro el continue button");
-
-		return new TravelocityResults(getDriver());
 
 	}
 
@@ -199,16 +212,17 @@ public class TravelocityResults extends BasePage {
 		return false;
 	}
 
-	public TravelocityFlightInformation dissmissAlert() {
-		// driver.switchTo().alert();//no es un alert
+	@FindBy(xpath="//a[@data-test-id=\"forcedChoiceNoThanks\"]")
+	WebElement buttonCancelAlert;
+	
+	public void dissmissAlert() {
 
+		getWait().until(ExpectedConditions.elementToBeClickable(buttonCancelAlert));
+		
 		if (elementIsPresent("//a[@data-test-id=\"forcedChoiceNoThanks\"]")) {
 			findAndClick("//a[@data-test-id=\"forcedChoiceNoThanks\"]");
+			System.out.println("alert dismissed");
 		}
-		// driver.switchTo().defaultContent();
-		printDetail("alert dismissed");
-
-		return new TravelocityFlightInformation(getDriver());
 	}
 
 }

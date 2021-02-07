@@ -30,8 +30,8 @@ public class TravelocityTests extends BaseTests {
 		home.selectDestinationCity("LAX");
 		System.out.println("cities selected");
 
-		home.selectDepartingDate(1, 9, 2021);
-		home.selectReturningDate(12, 12, 2021);
+		home.selectDepartingDate(13, 9, 2021);
+		home.selectReturningDate(20, 12, 2021);
 		System.out.println("dates selected");
 
 		TravelocityResults results;
@@ -64,20 +64,29 @@ public class TravelocityTests extends BaseTests {
 		softAssert.assertEquals(allDetailsAndFeesPresent, true);
 		 */
 		
-		TravelocityResults secondResultsPage = results.selectResult(1);
+		TravelocityResults secondResultsPage =  results.selectFirstFlight(1);
 		System.out.println("first flight selected");
-		
-		secondResultsPage.selectResult(3);
+				
+		TravelocityFlightInformation flightInfoPage= secondResultsPage.selectSecondFlight(3);
 		System.out.println("second flight selected");
+				
+		//puede ser que el driver no este encontrando la pestaña, 
+		//habria que leer el title de la pagina para determinar si esta en la pestaña correcta
+		//porque tal vez por eso no encuentra los elementos
 		
-		TravelocityFlightInformation flightInfoPage= secondResultsPage.dissmissAlert();
-		
-		testFlightInfoPage(flightInfoPage);
+		boolean totalPricePresent= flightInfoPage.verifyTotalPrice();
+		System.out.println("total price present: "+totalPricePresent);
+		boolean departureAndArrivalTimesPresent =flightInfoPage.verifyDepartureAndReturn();
+		System.out.println("departure and arrival times present: "+departureAndArrivalTimesPresent);
 	}
 	
 	private void testFlightInfoPage(TravelocityFlightInformation flightInfoPage) {
+		flightInfoPage.printDetails=true;
+		
 		boolean totalPricePresent= flightInfoPage.verifyTotalPrice();
-		System.out.println("total price pPresent: "+totalPricePresent);
+		boolean departureAndArrivalTimesPresent =flightInfoPage.verifyDepartureAndReturn();
+		System.out.println("total price present: "+totalPricePresent);
+		System.out.println("departure and arrival times present: "+departureAndArrivalTimesPresent);
 	}
 
 }
