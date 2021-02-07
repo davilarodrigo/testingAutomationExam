@@ -28,7 +28,9 @@ public class TravelocityFlightInformation extends BasePage {
 		//puede ser que el driver no este encontrando la pestaña, 
 		//habria que leer el title de la pagina para determinar si esta en la pestaña correcta
 		//porque tal vez por eso no encuentra los elementos
-		getWait().until(ExpectedConditions.visibilityOf(buttonCheckOut));
+		
+		printDetail("current tab title: "+driver.getTitle());		
+		//getWait().until(ExpectedConditions.visibilityOf(buttonCheckOut));
 
 	}
 

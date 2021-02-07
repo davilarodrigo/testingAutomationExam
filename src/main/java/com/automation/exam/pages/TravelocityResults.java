@@ -29,40 +29,49 @@ public class TravelocityResults extends BasePage {
 		super(driver);
 		driver.get(resultsUrl);
 	}
-	
+
 	public TravelocityResults selectFirstFlight(int index) {
-		selectFlight(index);	
+		selectFlight(index);
 		return new TravelocityResults(getDriver());
 	}
-	
+
 	public TravelocityFlightInformation selectSecondFlight(int index) {
 		selectFlight(index);
-//		dissmissAlert();	
-						
+		dissmissAlert();
+		
+		//verificar que dissmiss alert no genere problemas
+		
+		
+		//cuando se imprime el titulo de la tab, este sigue siendo el de LAS to LAX flights
+		//es decir, NO SE CAMBIA A LA NUEVA PESTAÑA
+		//el cambio a la nueva pestaña se deberia hacer en este punto de la aplicacion
+		//antes de devolver la nueva pagina con el driver
+
 		return new TravelocityFlightInformation(getDriver());
 	}
-	
+
 	private void selectFlight(int index) {
 
 		index--;
-		
+
 		searchResultItemsList = getSearchResultItems();
 		SearchResultItem selectedFlight = searchResultItemsList.get(index);
 		WebElement continueButton;
 
 		if (selectedFlight.hasSelectButton()) {
 			String selectButton = selectedFlight.getSelectButtonXpath();
-			printDetail("selectButton: "+selectButton );
-			//la anterior funcion wait and click podria haber estado generando problemas
-			
-			WebElement button=driver.findElement(By.xpath(selectButton));
-			button.click();			
-			
-			if (elementIsPresent("(//li[@data-test-id=\"offer-listing\"])[" + index + "]//button[@data-test-id=\"select-button-1\"]")) {
-				findAndClick("(//li[@data-test-id=\"offer-listing\"])[" + index + "]//button[@data-test-id=\"select-button-1\"]");
+			printDetail("selectButton: " + selectButton);
+
+			WebElement button = driver.findElement(By.xpath(selectButton));
+			button.click();
+
+			// if continue button appears
+			if (elementIsPresent("(//li[@data-test-id=\"offer-listing\"])[" + index
+					+ "]//button[@data-test-id=\"select-button-1\"]")) {
+				findAndClick("(//li[@data-test-id=\"offer-listing\"])[" + index
+						+ "]//button[@data-test-id=\"select-button-1\"]");
 				printDetail("continue button found and clicked!");
 			}
-		 			
 
 		} else {
 			printDetail("Select button is missing in the selected flight, clicking the flight result instead");
@@ -70,8 +79,6 @@ public class TravelocityResults extends BasePage {
 			continueButton = findAndClick("//button[@data-test-id=\"select-button\"]");
 
 		}
-		
-		printDetail("se encontro el continue button");
 
 	}
 
@@ -217,13 +224,8 @@ public class TravelocityResults extends BasePage {
 		return false;
 	}
 
-	@FindBy(xpath="//a[@data-test-id=\"forcedChoiceNoThanks\"]")
-	WebElement buttonCancelAlert;
-	
 	public void dissmissAlert() {
 
-		getWait().until(ExpectedConditions.elementToBeClickable(buttonCancelAlert));
-		
 		if (elementIsPresent("//a[@data-test-id=\"forcedChoiceNoThanks\"]")) {
 			findAndClick("//a[@data-test-id=\"forcedChoiceNoThanks\"]");
 			System.out.println("alert dismissed");

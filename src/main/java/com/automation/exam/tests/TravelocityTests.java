@@ -69,10 +69,8 @@ public class TravelocityTests extends BaseTests {
 				
 		TravelocityFlightInformation flightInfoPage= secondResultsPage.selectSecondFlight(3);
 		System.out.println("second flight selected");
-				
-		//puede ser que el driver no este encontrando la pestaña, 
-		//habria que leer el title de la pagina para determinar si esta en la pestaña correcta
-		//porque tal vez por eso no encuentra los elementos
+			
+		flightInfoPage.printDetails=true;
 		
 		boolean totalPricePresent= flightInfoPage.verifyTotalPrice();
 		System.out.println("total price present: "+totalPricePresent);
