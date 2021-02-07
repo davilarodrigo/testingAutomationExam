@@ -19,17 +19,27 @@ public class TravelocityFlightInformation extends BasePage {
 	// c. Price guarantee text is present
 
 	// 7. Press Continue Booking button.
-	
-	@FindBy(xpath= "//button[@data-test-id=\"goto-checkout-button\"] | //button[@id=\"bookButton\"]")
+
+	@FindBy(xpath = "//button[@data-test-id=\"goto-checkout-button\"] | //button[@id=\"bookButton\"]")
 	private WebElement buttonCheckOut;
-	private String buttonCheckOutXpah="//button[@data-test-id=\"goto-checkout-button\"] | //button[@id=\"bookButton\"]";
-	
+	private String buttonCheckOutXpah = "//button[@data-test-id=\"goto-checkout-button\"] | //button[@id=\"bookButton\"]";
+
 	private void waitForPageToLoad() {
-		
-		//printDetail("current tab title: "+driver.getTitle());
-		//printDetail(buttonCheckOutXpah);
+
+		// printDetail("current tab title: "+driver.getTitle());
+		// printDetail(buttonCheckOutXpah);
 		getWait().until(ExpectedConditions.elementToBeClickable(buttonCheckOut));
 
+	}
+	
+	public void clickCheckOutButton() {
+		getWait().until(ExpectedConditions.elementToBeClickable(buttonCheckOut));
+		buttonCheckOut.click();
+	}
+
+	public boolean verifyGuaranteeText() {
+		String xpath = "(//div[@id=\"change-filters-message-box\"]) | (//div[@data-test-id=\"messaging-card-0\"])";
+		return (elementIsPresent(xpath));
 	}
 
 	public boolean verifyTotalPrice() {
@@ -39,7 +49,7 @@ public class TravelocityFlightInformation extends BasePage {
 
 		printDetail(xpathB);
 		printDetail(xpathA);
-		
+
 		return (elementIsPresent(xpathA) || elementIsPresent(xpathB));
 	}
 
@@ -49,16 +59,19 @@ public class TravelocityFlightInformation extends BasePage {
 		String departureAndReturnFlight2 = "(//div[@class=\"uitk-type-300 uitk-type-bold uitk-flex-item uitk-text-primary-theme\"])[2]";
 
 		if (elementIsPresent(departureAndReturnFlight1) && elementIsPresent(departureAndReturnFlight2)) {
-			//añadir una linea para verificar si el boton es visible
-			//se puede hacer con 	element.isDisplayed(); (esto es lo que hace la funcion "is present" 
+			// añadir una linea para verificar si el boton es visible
+			// se puede hacer con element.isDisplayed(); (esto es lo que hace la funcion "is
+			// present"
 			// cuando se le manda un web element en vez de un xpath)
-			//tambien probar poner los xpath en una anotacion @FindBym y unirlos con pipelines
-			
-			//puede ser que el driver no este encontrando la pestaña, 
-			//habria que leer el title de la pagina para determinar si esta en la pestaña correcta
-			//porque tal vez por eso no encuentra los elementos
-			
-			//printDetail("departure and return details present (layout B)");
+			// tambien probar poner los xpath en una anotacion @FindBym y unirlos con
+			// pipelines
+
+			// puede ser que el driver no este encontrando la pestaña,
+			// habria que leer el title de la pagina para determinar si esta en la pestaña
+			// correcta
+			// porque tal vez por eso no encuentra los elementos
+
+			// printDetail("departure and return details present (layout B)");
 			return true;
 		}
 
@@ -69,7 +82,7 @@ public class TravelocityFlightInformation extends BasePage {
 
 		if (elementIsPresent(departureFlight1) && elementIsPresent(departureFlight2) && elementIsPresent(arrivalFlight1)
 				&& elementIsPresent(arrivalFlight2)) {
-			//printDetail("departure and return details present (layout A)");
+			// printDetail("departure and return details present (layout A)");
 			return true;
 		}
 		return false;

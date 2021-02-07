@@ -75,7 +75,14 @@ public class TravelocityTests extends BaseTests {
 		System.out.println("total price present: " + totalPricePresent);
 		boolean departureAndArrivalTimesPresent = flightInfoPage.verifyDepartureAndReturn();
 		System.out.println("departure and arrival times present: " + departureAndArrivalTimesPresent);
+		boolean guaranteeTextPresent = flightInfoPage.verifyGuaranteeText();
+		System.out.println("guarantee text present: " + guaranteeTextPresent);
 
+		flightInfoPage.clickCheckOutButton();
+		System.out.println("Check out button clicked!");
+
+		
+		
 	}
 
 }
