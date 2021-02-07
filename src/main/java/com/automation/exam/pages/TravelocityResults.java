@@ -56,18 +56,14 @@ public class TravelocityResults extends BasePage {
 			//la anterior funcion wait and click podria haber estado generando problemas
 			
 			WebElement button=driver.findElement(By.xpath(selectButton));
-			button.click();					
-		
-		/*	List<WebElement> continueButtons = driver.findElements(By.xpath("(//li[@data-test-id=\"offer-listing\"])//button[@data-test-id=\"select-button-1\"]"));			
-			continueButton=continueButtons.get(index);			
-			printDetail("antes del wait");
-			getWait().until(ExpectedConditions.elementToBeClickable(continueButton));
-			continueButton.click();
-			printDetail("button clicked!");
-		 */
-		//	String xpathContinueButton = "(//li[@data-test-id=\"offer-listing\"])[" + index + "]//button[@data-test-id=\"select-button-1\"]";
-			//printDetail("xpath continue button: " + xpathContinueButton);			
-			//probar despues esta linea
+			button.click();			
+			
+			if (elementIsPresent("(//li[@data-test-id=\"offer-listing\"])[" + index + "]//button[@data-test-id=\"select-button-1\"]")) {
+				findAndClick("(//li[@data-test-id=\"offer-listing\"])[" + index + "]//button[@data-test-id=\"select-button-1\"]");
+				printDetail("continue button found and clicked!");
+			}
+		 			
+
 		} else {
 			printDetail("Select button is missing in the selected flight, clicking the flight result instead");
 			selectedFlight.webElement.click();
