@@ -20,7 +20,8 @@ public class TravelocityFlightInformation extends BasePage {
 
 	// 7. Press Continue Booking button.
 	@FindBy(xpath= "//button[@data-test-id=\"goto-checkout-button\"] | //button[@id=\"bookButton\"]")
-	WebElement buttonCheckOut;
+	private WebElement buttonCheckOut;
+	//a la linea anterior tal vez le faltaba el private
 	
 	private void waitForPageToLoad() {
 		//no esta funcionando esta funcion, hace que se produzca un error
@@ -32,7 +33,7 @@ public class TravelocityFlightInformation extends BasePage {
 	}
 
 	public boolean verifyTotalPrice() {
-		//waitForPageToLoad();//no esta funcionando esta funcion, hace que se produzca un error
+		waitForPageToLoad();//no esta funcionando esta funcion, hace que se produzca un error
 		String xpathA = "(//span[@class=\"packagePriceTotal\"])[2]";
 		String xpathB = "(//span[@class=\"uitk-type-500 uitk-type-bold uitk-text-primary-theme\"])[2]";
 

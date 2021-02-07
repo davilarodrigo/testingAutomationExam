@@ -41,35 +41,33 @@ public class TravelocityResults extends BasePage {
 						
 		return new TravelocityFlightInformation(getDriver());
 	}
-
-	@FindBy(xpath="(//li[@data-test-id=\"offer-listing\"])//button[@data-test-id=\"select-button-1\"]")
-	WebElement continueButtonA;
 	
 	private void selectFlight(int index) {
 
+		index--;
+		
 		searchResultItemsList = getSearchResultItems();
-		SearchResultItem selectedFlight = searchResultItemsList.get(index - 1);
+		SearchResultItem selectedFlight = searchResultItemsList.get(index);
 		WebElement continueButton;
 
 		if (selectedFlight.hasSelectButton()) {
-			WebElement button = selectedFlight.getSelectButton();
-			
+			String selectButton = selectedFlight.getSelectButtonXpath();
+			printDetail("selectButton: "+selectButton );
 			//la anterior funcion wait and click podria haber estado generando problemas
-			button.click();
 			
-			int itemIndex = selectedFlight.getIndex();
-			String xpathContinueButton = "(//li[@data-test-id=\"offer-listing\"])[" + itemIndex
-					+ "]//button[@data-test-id=\"select-button-1\"]";
-			//printDetail("xpath continue button: " + xpathContinueButton);		
-			
-			printDetail("antes del wait: "+elementIsPresent(xpathContinueButton));
-			//probar despues esta linea
-			getWait().until(ExpectedConditions.visibilityOf(continueButtonA));
-			printDetail("despues del wait: "+elementIsPresent(xpathContinueButton));
-						
-			continueButton = findAndClick(xpathContinueButton);
+			WebElement button=driver.findElement(By.xpath(selectButton));
+			button.click();					
+		
+		/*	List<WebElement> continueButtons = driver.findElements(By.xpath("(//li[@data-test-id=\"offer-listing\"])//button[@data-test-id=\"select-button-1\"]"));			
+			continueButton=continueButtons.get(index);			
+			printDetail("antes del wait");
+			getWait().until(ExpectedConditions.elementToBeClickable(continueButton));
+			continueButton.click();
 			printDetail("button clicked!");
-			
+		 */
+		//	String xpathContinueButton = "(//li[@data-test-id=\"offer-listing\"])[" + index + "]//button[@data-test-id=\"select-button-1\"]";
+			//printDetail("xpath continue button: " + xpathContinueButton);			
+			//probar despues esta linea
 		} else {
 			printDetail("Select button is missing in the selected flight, clicking the flight result instead");
 			selectedFlight.webElement.click();
