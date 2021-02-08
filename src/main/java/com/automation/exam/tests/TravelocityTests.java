@@ -42,15 +42,15 @@ public class TravelocityTests extends BaseTests {
 		System.out.println("showing flight results");
 	
 		//results.printDetails = true;		
-		softAssert.assertEquals(results.verifySortingBoxClickable(), true);
+		Assert.assertTrue(results.verifySortingBoxClickable(), "sort box not clickable");
 		
 		//System.out.println("sorting list");		
 		results.sortByShorterDuration();
 		
-		softAssert.assertEquals(results.verifySortingByShorterDuration(), true);
-		softAssert.assertEquals(results.verifySelectButtons(), true);
-		softAssert.assertEquals(results.verifyPriceTag(), true);
-		softAssert.assertEquals(results.verifyFlightDuration(), true);
+		Assert.assertTrue(results.verifySortingByShorterDuration(), "list not sorted");
+		Assert.assertEquals(results.verifySelectButtons(), true);
+		Assert.assertEquals(results.verifyPriceTag(), true);
+		Assert.assertEquals(results.verifyFlightDuration(), true);
 		
 		TravelocityResults secondResultsPage = results.selectFirstFlight(1);
 		System.out.println("first flight selected");
@@ -66,13 +66,13 @@ public class TravelocityTests extends BaseTests {
 		TravelocityWhosTraveling whosTravelingPage= flightInfoPage.clickCheckOutButton();
 		System.out.println("Check out button clicked!");
 		
-		softAssert.assertEquals(whosTravelingPage.verifyFirstNameInput(), true);
-		softAssert.assertEquals(whosTravelingPage.verifyLastname(), true);
-		softAssert.assertEquals(whosTravelingPage.verifyMiddleNameInput(), true);
-		softAssert.assertEquals(whosTravelingPage.verifyPhoneInput(), true);
-		softAssert.assertEquals(whosTravelingPage.verifyPhoneCodeSelect(), true);
+		Assert.assertEquals(whosTravelingPage.verifyFirstNameInput(), true);
+		Assert.assertEquals(whosTravelingPage.verifyLastname(), true);
+		Assert.assertEquals(whosTravelingPage.verifyMiddleNameInput(), true);
+		Assert.assertEquals(whosTravelingPage.verifyPhoneInput(), true);
+		Assert.assertEquals(whosTravelingPage.verifyPhoneCodeSelect(), true);
 				
-		softAssert.assertAll();
+		
 	}
 
 }
