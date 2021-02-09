@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class BasePage extends WebComponent {
 
 	private WebDriverWait wait;
-	public boolean printDetails = false;
+	public boolean printDetails = true;
 
 	protected void printDetail(String string) {
 		if (printDetails) {

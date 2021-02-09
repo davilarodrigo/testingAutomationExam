@@ -59,14 +59,14 @@ public class TravelocityResults extends BasePage {
 		SearchResultItem selectedFlight = searchResultItemsList.get(index - 1);
 
 		WebElement continueButton;
-
 		
 		if (selectedFlight.hasSelectButton()) {
 			String selectButton = selectedFlight.getSelectButtonXpath();
 			// printDetail("selectButton: " + selectButton);
 
-			WebElement button = driver.findElement(By.xpath(selectButton));
-			button.click();
+			findAndClick(selectButton);			
+			//WebElement button = driver.findElement(By.xpath(selectButton));
+			//button.click();
 
 			// if continue button appears
 			String xpathContinueButton = "(//li[@data-test-id=\"offer-listing\"])[" + index
@@ -99,10 +99,10 @@ public class TravelocityResults extends BasePage {
 
 	private List<SearchResultItem> getSearchResultItems() {
 
+		getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
 		// List<SearchResultItem> searchResultItemsList;
 		if (searchResultItemsList == null) {
 
-			getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
 
 			List<WebElement> listOfResults = new ArrayList<>();
 
@@ -220,6 +220,7 @@ public class TravelocityResults extends BasePage {
 	}
 
 	public boolean verifySortingByShorterDuration() {
+		getWait().until(ExpectedConditions.visibilityOf(firstResult));
 		List<SearchResultItem> list = getSearchResultItems();
 
 		for (int i = 1; i < list.size(); i++) {
@@ -231,8 +232,8 @@ public class TravelocityResults extends BasePage {
 	}
 
 	public boolean verifySortingBoxClickable() {
+		getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
 		if (elementIsPresent(sortDropdown)) {
-			getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
 			printDetail("sorting box present and clickable");
 			return true;
 		}

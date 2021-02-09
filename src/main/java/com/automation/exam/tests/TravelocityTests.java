@@ -22,7 +22,7 @@ public class TravelocityTests extends BaseTests {
 		testResults(results);
 	}*/
 
-	@Test(groups = { "search" })
+	@Test(groups = { "Exercise1" })
 	public void testFlightBooking() {
 		SoftAssert softAssert = new SoftAssert();
 			
@@ -40,39 +40,37 @@ public class TravelocityTests extends BaseTests {
 		TravelocityResults results;
 		results = home.searchFlight();
 		System.out.println("showing flight results");
-	
-		//results.printDetails = true;		
+			
 		Assert.assertTrue(results.verifySortingBoxClickable(), "sort box not clickable");
 		
 		//System.out.println("sorting list");		
 		results.sortByShorterDuration();
 		
-		Assert.assertTrue(results.verifySortingByShorterDuration(), "list not sorted");
-		Assert.assertEquals(results.verifySelectButtons(), true);
-		Assert.assertEquals(results.verifyPriceTag(), true);
-		Assert.assertEquals(results.verifyFlightDuration(), true);
+		softAssert.assertTrue(results.verifySortingByShorterDuration(), "list was not correctly sorted");
+		softAssert.assertTrue(results.verifySelectButtons(), "select buttons missing in search results");
+		softAssert.assertTrue(results.verifyPriceTag(), "details and fees missing in search results");
+		softAssert.assertTrue(results.verifyFlightDuration(), "flight duration missing in search results");
 		
 		TravelocityResults secondResultsPage = results.selectFirstFlight(1);
-		System.out.println("first flight selected");
+		//System.out.println("first flight selected");
 
-		// secondResultsPage.printDetails=true;
 		TravelocityFlightInformation flightInfoPage = secondResultsPage.selectSecondFlight(3);
-		System.out.println("second flight selected");
+		//System.out.println("second flight selected");
 
 		// flightInfoPage.printDetails=true;
-		softAssert.assertEquals(flightInfoPage.verifyTotalPrice(), true);		
-		softAssert.assertEquals(flightInfoPage.verifyDepartureAndReturn(), true);				
-		softAssert.assertEquals(flightInfoPage.verifyGuaranteeText(), true);		
+		Assert.assertTrue(flightInfoPage.verifyTotalPrice(), "total price missing in flight info page");		
+		Assert.assertTrue(flightInfoPage.verifyDepartureAndReturn(), "Departure and return text missing in flight info page");				
+		Assert.assertTrue(flightInfoPage.verifyGuaranteeText(), "Guarantee text missing in flight info page");		
 		TravelocityWhosTraveling whosTravelingPage= flightInfoPage.clickCheckOutButton();
-		System.out.println("Check out button clicked!");
 		
-		Assert.assertEquals(whosTravelingPage.verifyFirstNameInput(), true);
-		Assert.assertEquals(whosTravelingPage.verifyLastname(), true);
-		Assert.assertEquals(whosTravelingPage.verifyMiddleNameInput(), true);
-		Assert.assertEquals(whosTravelingPage.verifyPhoneInput(), true);
-		Assert.assertEquals(whosTravelingPage.verifyPhoneCodeSelect(), true);
-				
+		Assert.assertTrue(whosTravelingPage.verifyFirstNameInput(), "first name input missing in whos traveling page");
+		Assert.assertTrue(whosTravelingPage.verifyMiddleNameInput(), "middle name input missing in whos traveling page");
+		Assert.assertTrue(whosTravelingPage.verifyLastname(), "last name input missing in whos traveling page");
+		Assert.assertTrue(whosTravelingPage.verifyPhoneInput(), "verify phone input missing in whos traveling page");
+		Assert.assertTrue(whosTravelingPage.verifyPhoneCodeSelect(), "Phone code select missing in whos traveling page");
 		
+		System.out.println("End of Exercise 1");
+		softAssert.assertAll();
 	}
 
 }
