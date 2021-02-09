@@ -131,11 +131,23 @@ public class TravelocityHome extends BasePage {
 		return new TravelocityResults(getDriver());
 	}
 	
+	//seguir por aca, en vez de buscar vuelos, se buscan paquetes	
+	public TravelocityPackagesResults searchPackages() {
+		buttonSearch.click();
+		return new TravelocityPackagesResults(getDriver());
+	}
+	
 	public boolean clickCarPill() {
 		if (elementIsPresent("(//*[@class=\"uitk-pill-text\"])[3]")) {
 			findAndClick("(//*[@class=\"uitk-pill-text\"])[3]");
 			return true;
 		}
 		return false;
+	}
+	
+	public void selectPassengers() {
+		findAndClick("//a[@data-testid=\"travelers-field\"]");
+		findAndClick("//div[@class=\"uitk-flex uitk-flex-item uitk-step-input-controls\"]//button[1]");
+		findAndClick("//button[@data-testid=\"guests-done-button\"]");
 	}
 }

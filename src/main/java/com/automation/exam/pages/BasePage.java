@@ -48,6 +48,20 @@ public class BasePage extends WebComponent {
 		webElement.click();
 		return webElement;
 	}
+	
+	protected boolean checkIfClickable(String xpath) {
+		if (elementIsPresent(xpath)) {
+			try {
+				WebElement elem=findByXpath(xpath);
+				getWait().until(ExpectedConditions.elementToBeClickable(elem));
+				return true;
+			} catch (Exception e) {
+				
+			}
+		}
+		return false;
+		
+	}
 
 	protected void tryToClick(String xpath) {
 		try {
