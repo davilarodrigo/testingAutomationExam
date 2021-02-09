@@ -79,13 +79,17 @@ public class TravelocityTests extends BaseTests {
 		TravelocityHome home = getTravelocityHome();
 		home.goToPackagesTab();
 		
+		
 		home.selectOriginCity("LAS");
 		home.selectDestinationCity("LAX");
 		System.out.println("cities selected");
+		
+		softAssert.assertTrue(home.clickCarPill(), "car item pill is missing");
 
 		home.selectDepartingDate(31, 7, 2021);
 		home.selectReturningDate(13, 8, 2021);
 		System.out.println("dates selected");
+		
 		
 		System.out.println("End of Exercise 2");
 		softAssert.assertAll();

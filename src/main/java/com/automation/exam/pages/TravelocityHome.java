@@ -130,4 +130,12 @@ public class TravelocityHome extends BasePage {
 		buttonSearch.click();
 		return new TravelocityResults(getDriver());
 	}
+	
+	public boolean clickCarPill() {
+		if (elementIsPresent("(//*[@class=\"uitk-pill-text\"])[3]")) {
+			findAndClick("(//*[@class=\"uitk-pill-text\"])[3]");
+			return true;
+		}
+		return false;
+	}
 }
