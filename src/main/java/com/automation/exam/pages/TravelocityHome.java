@@ -17,26 +17,28 @@ public class TravelocityHome extends BasePage {
 		super(driver);
 		driver.get("https://www.travelocity.com/");
 	}
+	
+	enum Tabs {
+		  Flights,
+		  Packages,
+		  Hotels
+		}
+	
+	private Tabs currentTab = Tabs.Hotels;
 
 	// origin and destination buttons
-	@FindBy(xpath = "(//button[@data-stid=\"location-field-leg1-origin-dialog-trigger\"]) | (//button[@data-stid=\"location-field-leg1-origin-menu-trigger\"])")
+	@FindBy(xpath = "(//button[@data-stid=\"location-field-origin-menu-trigger\"]) | (//button[@data-stid=\"location-field-leg1-origin-menu-trigger\"])")
 	private WebElement buttonLeavingFrom;
-	@FindBy(xpath = "(//button[@data-stid=\"location-field-leg1-destination-dialog-trigger\"]) | (//button[@data-stid=\"location-field-leg1-destination-menu-trigger\"])")
+	@FindBy(xpath = "(//button[@data-stid=\"location-field-destination-menu-trigger\"]) | (//button[@data-stid=\"location-field-leg1-destination-menu-trigger\"])")
 	private WebElement buttonGoingTo;
-
-	// origin and destination inputs (mejorar estos 2 xpaths para que funcionen en
-	// cualquier tamaño de pantalla)
-	@FindBy(id = "location-field-leg1-origin")
-	private WebElement inputLeavingFrom;
-	@FindBy(id = "location-field-leg1-destination")
-	private WebElement inputGoingTo;
 
 	@FindBy(xpath = "(//*[@id=\"uitk-tabs-button-container\"]/li[2]/a) | ((//ul[@class=\"uitk-flex lobNavigation no-bullet uitk-scroll-horizontal\"]/li)[2])") // @FindBy(xpath ="(//a[@class='uitk-tab-anchor'])[2] ")
 	private WebElement buttonFlight;
 	
-	//*[@id="location-field-leg1-origin-menu"]/div[2]/ul
-	//uitk-button uitk-button-small uitk-button-fullWidth uitk-button-typeahead uitk-type-left 
+	@FindBy(xpath = "(//input[@id=\"wizard-package-pwa\"]//parent::div) | (//a[@href=\"?pwaLob=wizard-package-pwa\"]//parent::li)")
+	private WebElement buttonPackages;
 	
+
 	@FindBy(id = "d1-btn")
 	private WebElement datePickerDeparting;
 	@FindBy(id = "d2-btn")
@@ -48,6 +50,9 @@ public class TravelocityHome extends BasePage {
 
 	@FindBy(xpath="//button[@data-testid=\"submit-button\"]")
 	private WebElement buttonSearch;
+	
+	@FindBy(xpath="//div[@class=\"uitk-menu-container uitk-menu-open uitk-menu-pos-left uitk-menu-container-text-nowrap\"]")
+	private WebElement searchMenuResults;
 	
 	private String findDayButton(Integer day, int month, Integer year) {
 
@@ -89,29 +94,36 @@ public class TravelocityHome extends BasePage {
 	}
 
 	public void selectOriginCity(String city) {
-		selectCity(buttonLeavingFrom,inputLeavingFrom,city);
+		selectCity(buttonLeavingFrom,city);
 		WebElement listItem = driver.findElement(By.xpath("//ul[@class=\"uitk-typeahead-results no-bullet\"]/li[1]/button"));
 		getWait().until(ExpectedConditions.elementToBeClickable(listItem));
 		listItem.click();
 	}
 	
 	public void selectDestinationCity(String city) {
-		selectCity(buttonGoingTo,inputGoingTo,city);
+		selectCity(buttonGoingTo,city);
 		WebElement listItem = driver.findElement(By.xpath("(//ul[@class=\"uitk-typeahead-results no-bullet\"]/li[1]/button)[2]"));
 		getWait().until(ExpectedConditions.elementToBeClickable(listItem));
 		listItem.click();
 	}
 	
-	private void selectCity(WebElement button, WebElement input, String city) {
+	private void selectCity(WebElement button, String city) {
 				
 		getWait().until(ExpectedConditions.visibilityOf(button));
 		button.click();		
-		getWait().until(ExpectedConditions.visibilityOf(input));
-		input.sendKeys(city);
+		getWait().until(ExpectedConditions.visibilityOf(searchMenuResults));
+		driver.switchTo().activeElement().sendKeys(city);
 	}
 
 	public void goToFlightsTab() {
+		
 		buttonFlight.click();
+		currentTab=Tabs.Flights;
+	}
+	
+	public void goToPackagesTab() {
+		buttonPackages.click();
+		currentTab=Tabs.Packages;
 	}
 	
 	public TravelocityResults searchFlight() {

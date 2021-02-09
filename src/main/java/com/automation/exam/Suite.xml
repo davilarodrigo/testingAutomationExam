@@ -9,8 +9,10 @@
 	 -->
 	<test name="test 1">
 		<groups>
-			<run>
-				<include name="Exercise1" />
+			<run>				
+				<include name="Exercise1" />				
+				<!-- 
+				 -->
 				<include name="Exercise2" />
 				<include name="Exercise3" />
 				<include name="Exercise4" />

@@ -73,4 +73,21 @@ public class TravelocityTests extends BaseTests {
 		softAssert.assertAll();
 	}
 
+	@Test(groups = { "Exercise2" })
+	public void testBookingFlightHotelCar() {
+		SoftAssert softAssert = new SoftAssert();
+		TravelocityHome home = getTravelocityHome();
+		home.goToPackagesTab();
+		
+		home.selectOriginCity("LAS");
+		home.selectDestinationCity("LAX");
+		System.out.println("cities selected");
+
+		home.selectDepartingDate(31, 7, 2021);
+		home.selectReturningDate(13, 8, 2021);
+		System.out.println("dates selected");
+		
+		System.out.println("End of Exercise 2");
+		softAssert.assertAll();
+	}
 }
