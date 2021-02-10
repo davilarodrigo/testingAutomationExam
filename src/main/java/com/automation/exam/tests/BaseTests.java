@@ -15,7 +15,7 @@ public class BaseTests {
 	protected MyDriver myDriver;
 	private TravelocityHome travelocityHome;
 
-	@BeforeSuite(alwaysRun = true)
+	@BeforeMethod(alwaysRun = true)
 	@Parameters({ "browser" })
 	public void beforeSuite(String browser) {
 		myDriver = new MyDriver(browser);

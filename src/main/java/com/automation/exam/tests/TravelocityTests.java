@@ -80,7 +80,7 @@ public class TravelocityTests extends BaseTests {
 		softAssert.assertAll();
 	}
 
-	//@Test(groups = { "Exercises" })
+	@Test(groups = { "Exercises" })
 	public void testBookingFlightHotelCar() {
 		System.out.println("Start of Exercise 2");
 		SoftAssert softAssert = new SoftAssert();
