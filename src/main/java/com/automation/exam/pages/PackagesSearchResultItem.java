@@ -24,6 +24,16 @@ public class PackagesSearchResultItem extends WebComponent {
 		// System.out.println(getPrice());
 	}
 		
+	public String getName() {
+		String str = driver.findElement(By.xpath(xpath+"//*[@data-stid=\"content-hotel-title\"]")).getText();
+		return str;
+	}
+	
+	public String getLocation() {
+		String str = driver.findElement(By.xpath(xpath+"//*[@data-test-id=\"content-hotel-neighborhood\"]")).getText();
+		return str;
+	}	
+	
 	
 	public float getStarRating() {
 		String str = driver.findElement(By.xpath(xpath+"//span[@data-stid=\"content-hotel-reviews-rating\"]")).getText();
@@ -35,11 +45,9 @@ public class PackagesSearchResultItem extends WebComponent {
 		stars=stars/10;		
 		stars+=convertToInt(chars[0]);
 				
-		System.out.println(stars);
+	//	System.out.println(stars);
 		return stars;
 	}	
-
-
 	
 	private int convertToInt(char a) {
 		return Character.getNumericValue(a);
