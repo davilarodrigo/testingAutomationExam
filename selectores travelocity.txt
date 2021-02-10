@@ -1,3 +1,9 @@
+Resultado busqueda paquetes
+
+//*[@data-stid="section-results"]//ol//li[2]//span[@data-stid="content-hotel-reviews-rating"]
+
+----
+
 Home
 
 selector del boton de paquetes

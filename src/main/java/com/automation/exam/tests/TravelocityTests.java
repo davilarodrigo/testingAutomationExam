@@ -7,6 +7,7 @@ import org.testng.asserts.SoftAssert;
 
 import com.automation.exam.pages.TravelocityFlightInformation;
 import com.automation.exam.pages.TravelocityHome;
+import com.automation.exam.pages.TravelocityHotelInfo;
 import com.automation.exam.pages.TravelocityPackagesResults;
 import com.automation.exam.pages.TravelocityResults;
 import com.automation.exam.pages.TravelocityWhosTraveling;
@@ -95,20 +96,26 @@ public class TravelocityTests extends BaseTests {
 
 		TravelocityPackagesResults results=home.searchPackages();
 
+		/* despues borrar esta linea
 		// 5 verifications
 		softAssert.assertTrue(results.verifyDatePickers(), "date time pickers missing in results page");
 		softAssert.assertTrue(results.verifyDirectFlightsOnlyCheckbox(), "direct flights only checkbox missing");
 		softAssert.assertTrue(results.verifyPreferedClassSelector(), "class selector missing");
 		softAssert.assertTrue(results.verifyTravelRestrictionsAlert(), "travel restrictions alert missing");
 		softAssert.assertTrue(results.verifySortingBox(), "sorting box failed");
-		System.out.println("verifications done");
-		
+		//System.out.println("verifications done");
+				
 		results.sortByPrice();
 		softAssert.assertTrue(results.verifyResultsSortedByPrice(), "results were not correctly sorted");
-		System.out.println("list sorted");
+		//System.out.println("list sorted");
+		/**/
 		
-		results.selectResultWithRating(3);
-		System.out.println("result selected");
+		TravelocityHotelInfo hotelInfoPage=results.selectResultWithRating(3);
+		System.out.println("hotel selected");
+		
+		// verifications in hotel page		
+		softAssert.assertTrue(hotelInfoPage.verifyHotelNameMatches(), "hotel name does not match previus result");
+		softAssert.assertTrue(hotelInfoPage.verifyRatingMatches(), "hotel rating does not match previus result");
 		
 		System.out.println("End of Exercise 2");
 		softAssert.assertAll();

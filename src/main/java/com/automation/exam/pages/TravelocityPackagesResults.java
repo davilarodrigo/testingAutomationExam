@@ -69,7 +69,7 @@ public class TravelocityPackagesResults extends BasePage {
 		clickSortBoxOption("PRICE_LOW_TO_HIGH");
 	}
 
-	public Hotel selectResultWithRating(float minimumDesiredRating) {
+	public TravelocityHotelInfo selectResultWithRating(float minimumDesiredRating) {
 		resultsList = getSearchResultItems();
 
 		for (int i = 0; i < resultsList.size(); i++) {			
@@ -81,13 +81,25 @@ public class TravelocityPackagesResults extends BasePage {
 				hotel.name=resultsList.get(i).getName();
 				hotel.location=resultsList.get(i).getLocation();
 				
-				System.out.println(hotel.location);
-				System.out.println(hotel.name);
-				System.out.println(hotel.price);
-				System.out.println(hotel.starRating);
+				// System.out.println(hotel.location);
+				// System.out.println(hotel.name);
+				// System.out.println(hotel.price);
+				//System.out.println(hotel.starRating);
 				
 				resultsList.get(i).getAsWebElement().click();
-				return hotel;
+				
+				//printCurrentTab();
+
+				ArrayList<String> tabs2;
+				do {
+					tabs2 = new ArrayList<String>(driver.getWindowHandles());
+				} while (tabs2.size() == 1);
+
+				driver.switchTo().window(tabs2.get(1));
+
+				//printCurrentTab();
+				
+				return new TravelocityHotelInfo(getDriver(),hotel);
 			}
 
 		}
