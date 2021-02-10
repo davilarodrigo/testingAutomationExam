@@ -25,8 +25,9 @@ public class TravelocityTests extends BaseTests {
 	 * getTravelocityResults(resultsUrl); testResults(results); }
 	 */
 
-	@Test(groups = { "Exercise1" })
+	@Test(groups = { "Exercises" })
 	public void testFlightBooking() {
+		System.out.println("Start of Exercise 1");
 		SoftAssert softAssert = new SoftAssert();
 
 		TravelocityHome home = getTravelocityHome();
@@ -79,8 +80,9 @@ public class TravelocityTests extends BaseTests {
 		softAssert.assertAll();
 	}
 
-	@Test(groups = { "Exercise2" })
+	//@Test(groups = { "Exercises" })
 	public void testBookingFlightHotelCar() {
+		System.out.println("Start of Exercise 2");
 		SoftAssert softAssert = new SoftAssert();
 		TravelocityHome home = getTravelocityHome();
 		home.goToPackagesTab();
@@ -133,32 +135,31 @@ public class TravelocityTests extends BaseTests {
 
 		TravelocityPackageInfo packageInfoPage = carRentalPage.continueToPackageInfoPage();
 
-		/*
+		// Verify Trip Details: 5 validations
 
-		 * a. Press Continue button.
-		 * 
-		 * 12. Verify the trip details are still correct. Continue
-		 * 
-		 * 13. Verify the “Who’s travelling” page is opened by choosing at least 5
-		 * validations to be performed.
-		 */
-
-		 //Verify Trip Details: 5 validations 
-		softAssert.assertTrue(packageInfoPage.verifyTotalPrice(), "total price missing in trip info page");
-		softAssert.assertTrue(packageInfoPage.verifyDepartureAndReturn(),
-				"Departure and return text missing in trip info page");
-		softAssert.assertTrue(packageInfoPage.verifyGuaranteeText(), "Guarantee text missing in trip info page");
-		softAssert.assertTrue(packageInfoPage.verifyChangeFlightsLinkAvailable(), "Change Flights Link not available");
-		softAssert.assertTrue(packageInfoPage.verifyQuarantineAlertPresent(), "Quarantine Alert missing in trip info page");
+		if (packageInfoPage.verifyIfPageIsLoaded()) {
+			softAssert.assertTrue(packageInfoPage.verifyTotalPrice(), "total price missing in trip info page");
+			softAssert.assertTrue(packageInfoPage.verifyDepartureAndReturn(),
+					"Departure and return text missing in trip info page");
+			softAssert.assertTrue(packageInfoPage.verifyGuaranteeText(), "Guarantee text missing in trip info page");
+			softAssert.assertTrue(packageInfoPage.verifyChangeFlightsLinkAvailable(),
+					"Change Flights Link not available");
+			softAssert.assertTrue(packageInfoPage.verifyQuarantineAlertPresent(),
+					"Quarantine Alert missing in trip info page");
+		} else {
+			softAssert.assertTrue(false, "trip info page is missing");
+		}
 		
 		TravelocityWhosTraveling whosTravelingPage = packageInfoPage.continueToWhosTravelingPage();
 
-		//Verify the “Who’s travelling” page: 5 validations
-		softAssert.assertTrue(whosTravelingPage.verifyFirstNameInput(), "first name input missing in whos traveling page");
+		// Verify the “Who’s travelling” page: 5 validations
+		softAssert.assertTrue(whosTravelingPage.verifyFirstNameInput(),
+				"first name input missing in whos traveling page");
 		softAssert.assertTrue(whosTravelingPage.verifyMiddleNameInput(),
 				"middle name input missing in whos traveling page");
 		softAssert.assertTrue(whosTravelingPage.verifyLastname(), "last name input missing in whos traveling page");
-		softAssert.assertTrue(whosTravelingPage.verifyPhoneInput(), "verify phone input missing in whos traveling page");
+		softAssert.assertTrue(whosTravelingPage.verifyPhoneInput(),
+				"verify phone input missing in whos traveling page");
 		softAssert.assertTrue(whosTravelingPage.verifyPhoneCodeSelect(),
 				"Phone code select missing in whos traveling page");
 

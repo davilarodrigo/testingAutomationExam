@@ -19,7 +19,7 @@ public class BasePage extends WebComponent {
 	}
 
 	public BasePage(WebDriver pDriver) {
-		wait = new WebDriverWait(pDriver, 15);
+		wait = new WebDriverWait(pDriver, 30);
 		driver = pDriver;
 		PageFactory.initElements(pDriver, this);
 	}

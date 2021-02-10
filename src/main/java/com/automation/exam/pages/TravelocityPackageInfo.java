@@ -24,6 +24,10 @@ public class TravelocityPackageInfo extends TravelocityFlightInformation {
 	//page being not correctly loaded means that the browser skips it and loads the "whos traveling page" instead (it happens in one of the layouts)	
 	private boolean pageLoadCorrectly;
 
+	public boolean verifyIfPageIsLoaded() {
+		return pageLoadCorrectly;
+	}
+	
 	@Override
 	public boolean verifyTotalPrice() {
 

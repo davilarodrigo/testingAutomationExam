@@ -4,19 +4,12 @@
 	<!-- <listeners> <listener class-name="com.automation.exam.MyListener" /> 
 		</listeners> -->
 	<parameter name="browser" value="chrome" />
-	<!-- tira error el url 
-	<parameter name="resultsUrl" value ='https://www.travelocity.com/Flights-Search?flight-type=on&mode=search&trip=roundtrip&leg1=from%3ALas+Vegas+%28LAS+-+All+Airports%29%2Cto%3ALos+Angeles+%28LAX+-+Los+Angeles+Intl.%29%2Cdeparture%3A2%2F18%2F2021TANYT&options=cabinclass%3Aeconomy&leg2=from%3ALos+Angeles+%28LAX+-+Los+Angeles+Intl.%29%2Cto%3ALas+Vegas+%28LAS+-+All+Airports%29%2Cdeparture%3A3%2F17%2F2021TANYT&passengers=children%3A0%2Cadults%3A1%2Cseniors%3A0%2Cinfantinlap%3AY&fromDate=2%2F18%2F2021&toDate=3%2F17%2F2021&d1=2021-02-18&d2=2021-03-17'/>
-	 -->
 	<test name="test 1">
 		<groups>
-			<run>				
-				<!-- 
-					<include name="Exercise1" />				
-				 -->
-				<include name="Exercise2" />
-				<include name="Exercise3" />
-				<include name="Exercise4" />
-				<include name="Exercise5" />
+			<run>
+				<!-- -->
+				<include name="Exercises" />
+				
 			</run>
 		</groups>
 		<classes>

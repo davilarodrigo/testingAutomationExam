@@ -5,17 +5,14 @@
   <test parallel="none" name="test 1(failed)">
     <groups>
       <run>
-        <include name="Exercise2"/>
-        <include name="Exercise3"/>
-        <include name="Exercise4"/>
-        <include name="Exercise5"/>
+        <include name="Exercises"/>
       </run>
     </groups>
     <classes>
       <class name="com.automation.exam.tests.TravelocityTests">
         <methods>
+          <include name="testFlightBooking"/>
           <include name="afterSuite"/>
-          <include name="testBookingFlightHotelCar"/>
           <include name="beforeSuite"/>
         </methods>
       </class> <!-- com.automation.exam.tests.TravelocityTests -->
