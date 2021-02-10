@@ -5,9 +5,11 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import com.automation.exam.pages.TravelocityCarRental;
 import com.automation.exam.pages.TravelocityFlightInformation;
 import com.automation.exam.pages.TravelocityHome;
 import com.automation.exam.pages.TravelocityHotelInfo;
+import com.automation.exam.pages.TravelocityPackageInfo;
 import com.automation.exam.pages.TravelocityPackagesResults;
 import com.automation.exam.pages.TravelocityResults;
 import com.automation.exam.pages.TravelocityWhosTraveling;
@@ -52,10 +54,10 @@ public class TravelocityTests extends BaseTests {
 		softAssert.assertTrue(results.verifyPriceTag(), "details and fees missing in search results");
 		softAssert.assertTrue(results.verifyFlightDuration(), "flight duration missing in search results");
 
-		TravelocityResults secondResultsPage = results.selectFirstFlight(1);
+		TravelocityResults secondResultsPage = results.selectDepartureFlight(1);
 		// System.out.println("first flight selected");
 
-		TravelocityFlightInformation flightInfoPage = secondResultsPage.selectSecondFlight(3);
+		TravelocityFlightInformation flightInfoPage = secondResultsPage.selectReturnFlight(3);
 		// System.out.println("second flight selected");
 
 		// flightInfoPage.printDetails=true;
@@ -117,6 +119,16 @@ public class TravelocityTests extends BaseTests {
 		softAssert.assertTrue(hotelInfoPage.verifyHotelNameMatches(), "hotel name does not match previous result");
 		softAssert.assertTrue(hotelInfoPage.verifyRatingMatches(), "hotel rating does not match previous result");
 		softAssert.assertTrue(hotelInfoPage.verifyHotelPriceMatches(), "hotel price does not match previous result");
+		
+		TravelocityResults fightResults=hotelInfoPage.selectRoomOption(1);
+		
+		fightResults.selectDepartureFlight(1);
+		TravelocityCarRental carRentalPage=fightResults.selectReturnFlightAndCar(3);
+		
+		softAssert.assertTrue(carRentalPage.tryToRentCar(1),"could not rent a car");
+				
+		TravelocityPackageInfo packageInfoPage=carRentalPage.continueToPackageInfoPage();
+		softAssert.assertTrue(packageInfoPage.verifyTripDetails(),"trip details wrong");
 		
 		System.out.println("End of Exercise 2");
 		softAssert.assertAll();

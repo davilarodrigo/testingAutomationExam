@@ -15,13 +15,21 @@ public class TravelocityHotelInfo extends BasePage{
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	public TravelocityResults selectRoomOption(int option) {
+		findAndClick("(//button[@data-stid=\"submit-hotel-reserve\"])["+option+"]");
+		return new TravelocityResults(getDriver());
+	}
+	
+	//-------------------------------------------
+	
 	public boolean verifyHotelPriceMatches() {
 		String price=findByXpath("//span[@class=\"uitk-lockup-price\"]").getText();
 		
 		price = price.replace(",", "");
 		
-		System.out.println("$"+hotelInfo.price);
-		System.out.println(price);
+		//System.out.println("$"+hotelInfo.price);
+		//System.out.println(price);
 		
 		return price.equals("$"+hotelInfo.price);
 	}

@@ -30,12 +30,18 @@ public class TravelocityResults extends BasePage {
 		driver.get(resultsUrl);
 	}
 
-	public TravelocityResults selectFirstFlight(int index) {
+	public TravelocityResults selectDepartureFlight(int index) {
 		selectFlight(index);
 		return new TravelocityResults(getDriver());
 	}
+	
+	public TravelocityCarRental selectReturnFlightAndCar(int index) {
+		selectFlight(index);
+		dissmissAlert();
+		return new TravelocityCarRental(getDriver());
+	}
 
-	public TravelocityFlightInformation selectSecondFlight(int index) {
+	public TravelocityFlightInformation selectReturnFlight(int index) {
 		selectFlight(index);
 		dissmissAlert();
 
