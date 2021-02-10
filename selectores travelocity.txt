@@ -1,6 +1,13 @@
 Home
 
-button leaving from
+selector del boton de paquetes
+(//input[@id="wizard-package-pwa"]//parent::div) | (//a[@href="?pwaLob=wizard-package-pwa"]//parent::li)
+
+inputs de ciudad origen y destino (funcan en tab de vuelos y de paquetes)
+(//button[@data-stid="location-field-origin-menu-trigger"]) | (//button[@data-stid="location-field-leg1-origin-menu-trigger"])
+(//button[@data-stid="location-field-destination-menu-trigger"]) | (//button[@data-stid="location-field-leg1-destination-menu-trigger"])")
+
+button leaving from (este funciona en 2 tamaños de pantalla)
 (//button[@data-stid="location-field-leg1-origin-dialog-trigger"]) | (//button[@data-stid="location-field-leg1-origin-menu-trigger"])
 //*[@id="location-field-leg1-origin-menu"]/div[1]/button
 

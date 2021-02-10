@@ -101,9 +101,14 @@ public class TravelocityTests extends BaseTests {
 		softAssert.assertTrue(results.verifyPreferedClassSelector(), "class selector missing");
 		softAssert.assertTrue(results.verifyTravelRestrictionsAlert(), "travel restrictions alert missing");
 		softAssert.assertTrue(results.verifySortingBox(), "sorting box failed");
-			
+		System.out.println("verifications done");
+		
 		results.sortByPrice();
 		softAssert.assertTrue(results.verifyResultsSortedByPrice(), "results were not correctly sorted");
+		System.out.println("list sorted");
+		
+		results.selectResultWithRating(3);
+		System.out.println("result selected");
 		
 		System.out.println("End of Exercise 2");
 		softAssert.assertAll();

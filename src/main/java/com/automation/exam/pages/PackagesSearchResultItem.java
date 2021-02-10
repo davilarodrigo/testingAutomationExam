@@ -5,12 +5,14 @@ import java.util.Iterator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class PackagesSearchResultItem extends WebComponent {
 
 	public int index;
 	public String xpath;
 
+	//*[@data-stid="section-results"]//ol//li[4]
 	public PackagesSearchResultItem(String xpath, WebDriver driver) {
 		//this.index = index;		
 		
@@ -21,23 +23,32 @@ public class PackagesSearchResultItem extends WebComponent {
 		// System.out.println(this.index);
 		// System.out.println(getPrice());
 	}
+		
+	
+	public float getStarRating() {
+		String str = driver.findElement(By.xpath(xpath+"//span[@data-stid=\"content-hotel-reviews-rating\"]")).getText();
+		
+		char[] chars = str.toCharArray();
+		float stars = 0;
+		
+		stars=convertToInt(chars[2]);		
+		stars=stars/10;		
+		stars+=convertToInt(chars[0]);
+				
+		System.out.println(stars);
+		return stars;
+	}	
 
+
+	
 	private int convertToInt(char a) {
 		return Character.getNumericValue(a);
 	}
 
-	public WebElement getPriceAsWebElement() {		
-		return driver.findElement(By.xpath(xpath + "//span[@class=\"uitk-cell loyalty-display-price all-cell-shrink\"]"));
-	}
-	
 	public boolean hasPrice() {		
 		return elementIsPresent(xpath + "//span[@class=\"uitk-cell loyalty-display-price all-cell-shrink\"]");
 	}
 	
-	public String getPricexpath() {		
-		return xpath + "//span[@class=\"uitk-cell loyalty-display-price all-cell-shrink\"]";
-	}
-
 	public int getPrice() {
 		String str = driver
 				.findElement(By.xpath(xpath + "//span[@class=\"uitk-cell loyalty-display-price all-cell-shrink\"]"))

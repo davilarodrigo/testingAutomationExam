@@ -69,6 +69,19 @@ public class TravelocityPackagesResults extends BasePage {
 		clickSortBoxOption("PRICE_LOW_TO_HIGH");
 	}
 
+	public void selectResultWithRating(float minimumDesiredRating) {
+		resultsList = getSearchResultItems();
+
+		for (int i = 0; i < resultsList.size(); i++) {
+			float starRating = resultsList.get(i).getStarRating();
+			if (starRating >= minimumDesiredRating) {
+				resultsList.get(i).getAsWebElement().click();
+				break;
+			}
+
+		}
+	}
+
 	// -----------------------------------------------------------------------
 
 	public boolean verifyResultsSortedByPrice() {
