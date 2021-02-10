@@ -15,11 +15,21 @@ public class TravelocityHotelInfo extends BasePage{
 		// TODO Auto-generated constructor stub
 	}
 	
+	public boolean verifyHotelPriceMatches() {
+		String price=findByXpath("//span[@class=\"uitk-lockup-price\"]").getText();
+		
+		price = price.replace(",", "");
+		
+		System.out.println("$"+hotelInfo.price);
+		System.out.println(price);
+		
+		return price.equals("$"+hotelInfo.price);
+	}
+		
 	public boolean verifyHotelNameMatches() {
-		String name=findByXpath("//div[@data-stid=\"content-hotel-title\"]//h1").getText();
-		System.out.println(name);
-		System.out.println(hotelInfo.name);
-		return (name==hotelInfo.name);
+		String name=findByXpath("//div[@data-stid=\"content-hotel-title\"]//h1").getText();		
+		return name.equals(hotelInfo.name);
+
 	}
 
 	public boolean verifyRatingMatches() {
@@ -32,9 +42,6 @@ public class TravelocityHotelInfo extends BasePage{
 		stars=stars/10;		
 		stars+=Character.getNumericValue(chars[0]);
 
-		System.out.println(rating);
-		System.out.println(stars);
-		System.out.println(hotelInfo.starRating);
 		return(stars==hotelInfo.starRating);
 	}
 }

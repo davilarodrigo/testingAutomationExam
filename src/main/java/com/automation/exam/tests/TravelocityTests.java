@@ -114,8 +114,9 @@ public class TravelocityTests extends BaseTests {
 		System.out.println("hotel selected");
 		
 		// verifications in hotel page		
-		softAssert.assertTrue(hotelInfoPage.verifyHotelNameMatches(), "hotel name does not match previus result");
-		softAssert.assertTrue(hotelInfoPage.verifyRatingMatches(), "hotel rating does not match previus result");
+		softAssert.assertTrue(hotelInfoPage.verifyHotelNameMatches(), "hotel name does not match previous result");
+		softAssert.assertTrue(hotelInfoPage.verifyRatingMatches(), "hotel rating does not match previous result");
+		softAssert.assertTrue(hotelInfoPage.verifyHotelPriceMatches(), "hotel price does not match previous result");
 		
 		System.out.println("End of Exercise 2");
 		softAssert.assertAll();
