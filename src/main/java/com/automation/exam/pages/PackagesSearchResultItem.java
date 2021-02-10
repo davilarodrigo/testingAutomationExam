@@ -11,10 +11,9 @@ public class PackagesSearchResultItem extends WebComponent {
 	public int index;
 	public String xpath;
 
-	public PackagesSearchResultItem(String xpath, int index, WebDriver driver) {
-		this.index = index;
-		index++;
-		xpath += "[" + index + "]";
+	public PackagesSearchResultItem(String xpath, WebDriver driver) {
+		//this.index = index;		
+		
 		this.xpath = xpath;
 		this.driver = driver;
 
@@ -29,6 +28,10 @@ public class PackagesSearchResultItem extends WebComponent {
 
 	public WebElement getPriceAsWebElement() {		
 		return driver.findElement(By.xpath(xpath + "//span[@class=\"uitk-cell loyalty-display-price all-cell-shrink\"]"));
+	}
+	
+	public boolean hasPrice() {		
+		return elementIsPresent(xpath + "//span[@class=\"uitk-cell loyalty-display-price all-cell-shrink\"]");
 	}
 	
 	public String getPricexpath() {		

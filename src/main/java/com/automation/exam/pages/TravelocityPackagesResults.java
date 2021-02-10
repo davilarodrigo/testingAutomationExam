@@ -16,8 +16,6 @@ public class TravelocityPackagesResults extends BasePage {
 		// TODO Auto-generated constructor stub
 	}
 
-	@FindBy
-	
 	@FindBy(xpath = "//select[@id=\"sort\"]")
 	WebElement sortDropdown;
 
@@ -28,6 +26,9 @@ public class TravelocityPackagesResults extends BasePage {
 		String option = "//option[@value=\"" + value + "\"]";
 		findAndClick(option);
 
+		getWait().until(
+				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//li[@data-stid=\"messaging-card\"]")));
+		getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@data-stid=\"messaging-card\"]")));
 		resultsList = null;
 
 	}
@@ -46,10 +47,18 @@ public class TravelocityPackagesResults extends BasePage {
 			htmlList = driver.findElements(By.xpath(xpath));
 			getWait().until(ExpectedConditions.elementToBeClickable(htmlList.get(1)));
 
-			for (int i = 1; i < htmlList.size(); i++) {
-				resultsList.add(new PackagesSearchResultItem(xpath, i, driver));
-			}
+			WebElement elem;
 
+			for (int i = 2; i < htmlList.size(); i++) {
+
+				elem = findByXpath(xpath + "[" + i + "]");
+				if (elementIsPresent(elem)) {
+					PackagesSearchResultItem item = new PackagesSearchResultItem(xpath + "[" + i + "]", driver);
+					if (item.hasPrice()) {
+						resultsList.add(item);
+					}
+				}
+			}
 		}
 		return resultsList;
 	}
@@ -67,8 +76,10 @@ public class TravelocityPackagesResults extends BasePage {
 		List<PackagesSearchResultItem> list = getSearchResultItems();
 
 		for (int i = 1; i < list.size(); i++) {
+
 			if (list.get(i).getPrice() < list.get(i - 1).getPrice()) {
 				return false;
+
 			}
 		}
 		return true;
