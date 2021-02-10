@@ -22,7 +22,7 @@ public class TravelocityFlightInformation extends BasePage {
 
 	@FindBy(xpath = "//button[@data-test-id=\"goto-checkout-button\"] | //button[@id=\"bookButton\"]")
 	private WebElement buttonCheckOut;
-	private String buttonCheckOutXpah = "//button[@data-test-id=\"goto-checkout-button\"] | //button[@id=\"bookButton\"]";
+	//private String buttonCheckOutXpah = "//button[@data-test-id=\"goto-checkout-button\"] | //button[@id=\"bookButton\"]";
 
 	private void waitForPageToLoad() {
 
@@ -43,6 +43,17 @@ public class TravelocityFlightInformation extends BasePage {
 		return (elementIsPresent(xpath));
 	}
 
+	public boolean verifyQuarantineAlertPresent() {
+		String xpath="	//div[@id=\"alert11\"]//div[@class=\"alert-message\"]";
+		return (elementIsPresent(xpath));
+	}
+	
+	public boolean verifyChangeFlightsLinkAvailable() {
+		String xpath="//a[@id=\"changeFlights\"]";
+		return(elementIsPresent(xpath));
+	}
+
+	
 	public boolean verifyTotalPrice() {
 		waitForPageToLoad();
 		String xpathA = "(//span[@class=\"packagePriceTotal\"])[2]";

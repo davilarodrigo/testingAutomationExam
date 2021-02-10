@@ -96,40 +96,72 @@ public class TravelocityTests extends BaseTests {
 		home.selectReturningDate(13, 8, 2021);
 		System.out.println("dates selected");
 
-		TravelocityPackagesResults results=home.searchPackages();
+		TravelocityPackagesResults results = home.searchPackages();
 
-		/* despues borrar esta linea
-		// 5 verifications
-		softAssert.assertTrue(results.verifyDatePickers(), "date time pickers missing in results page");
-		softAssert.assertTrue(results.verifyDirectFlightsOnlyCheckbox(), "direct flights only checkbox missing");
-		softAssert.assertTrue(results.verifyPreferedClassSelector(), "class selector missing");
-		softAssert.assertTrue(results.verifyTravelRestrictionsAlert(), "travel restrictions alert missing");
-		softAssert.assertTrue(results.verifySortingBox(), "sorting box failed");
-		//System.out.println("verifications done");
-				
-		results.sortByPrice();
-		softAssert.assertTrue(results.verifyResultsSortedByPrice(), "results were not correctly sorted");
-		//System.out.println("list sorted");
-		/**/
-		
-		TravelocityHotelInfo hotelInfoPage=results.selectResultWithRating(3);
+		/*
+		 * despues borrar esta linea // 5 verifications
+		 * softAssert.assertTrue(results.verifyDatePickers(),
+		 * "date time pickers missing in results page");
+		 * softAssert.assertTrue(results.verifyDirectFlightsOnlyCheckbox(),
+		 * "direct flights only checkbox missing");
+		 * softAssert.assertTrue(results.verifyPreferedClassSelector(),
+		 * "class selector missing");
+		 * softAssert.assertTrue(results.verifyTravelRestrictionsAlert(),
+		 * "travel restrictions alert missing");
+		 * softAssert.assertTrue(results.verifySortingBox(), "sorting box failed");
+		 * //System.out.println("verifications done");
+		 * 
+		 * results.sortByPrice();
+		 * softAssert.assertTrue(results.verifyResultsSortedByPrice(),
+		 * "results were not correctly sorted"); //System.out.println("list sorted"); /
+		 **/
+
+		TravelocityHotelInfo hotelInfoPage = results.selectResultWithRating(3);
 		System.out.println("hotel selected");
-		
-		// verifications in hotel page		
+
+		// verifications in hotel page
 		softAssert.assertTrue(hotelInfoPage.verifyHotelNameMatches(), "hotel name does not match previous result");
 		softAssert.assertTrue(hotelInfoPage.verifyRatingMatches(), "hotel rating does not match previous result");
 		softAssert.assertTrue(hotelInfoPage.verifyHotelPriceMatches(), "hotel price does not match previous result");
-		
-		TravelocityResults fightResults=hotelInfoPage.selectRoomOption(1);
-		
+
+		TravelocityResults fightResults = hotelInfoPage.selectRoomOption(1);
+
 		fightResults.selectDepartureFlight(1);
-		TravelocityCarRental carRentalPage=fightResults.selectReturnFlightAndCar(3);
+		TravelocityCarRental carRentalPage = fightResults.selectReturnFlightAndCar(3);
+
+		softAssert.assertTrue(carRentalPage.tryToRentCar(1), "could not rent a car");
+
+		TravelocityPackageInfo packageInfoPage = carRentalPage.continueToPackageInfoPage();
+
+		/*
+
+		 * a. Press Continue button.
+		 * 
+		 * 12. Verify the trip details are still correct. Continue
+		 * 
+		 * 13. Verify the “Who’s travelling” page is opened by choosing at least 5
+		 * validations to be performed.
+		 */
+
+		 //Verify Trip Details: 5 validations 
+		softAssert.assertTrue(packageInfoPage.verifyTotalPrice(), "total price missing in trip info page");
+		softAssert.assertTrue(packageInfoPage.verifyDepartureAndReturn(),
+				"Departure and return text missing in trip info page");
+		softAssert.assertTrue(packageInfoPage.verifyGuaranteeText(), "Guarantee text missing in trip info page");
+		softAssert.assertTrue(packageInfoPage.verifyChangeFlightsLinkAvailable(), "Change Flights Link not available");
+		softAssert.assertTrue(packageInfoPage.verifyQuarantineAlertPresent(), "Quarantine Alert missing in trip info page");
 		
-		softAssert.assertTrue(carRentalPage.tryToRentCar(1),"could not rent a car");
-				
-		TravelocityPackageInfo packageInfoPage=carRentalPage.continueToPackageInfoPage();
-		softAssert.assertTrue(packageInfoPage.verifyTripDetails(),"trip details wrong");
-		
+		TravelocityWhosTraveling whosTravelingPage = packageInfoPage.continueToWhosTravelingPage();
+
+		//Verify the “Who’s travelling” page: 5 validations
+		softAssert.assertTrue(whosTravelingPage.verifyFirstNameInput(), "first name input missing in whos traveling page");
+		softAssert.assertTrue(whosTravelingPage.verifyMiddleNameInput(),
+				"middle name input missing in whos traveling page");
+		softAssert.assertTrue(whosTravelingPage.verifyLastname(), "last name input missing in whos traveling page");
+		softAssert.assertTrue(whosTravelingPage.verifyPhoneInput(), "verify phone input missing in whos traveling page");
+		softAssert.assertTrue(whosTravelingPage.verifyPhoneCodeSelect(),
+				"Phone code select missing in whos traveling page");
+
 		System.out.println("End of Exercise 2");
 		softAssert.assertAll();
 	}
