@@ -20,7 +20,7 @@ public class TravelocityHome extends BasePage {
 	}
 
 	enum Tabs {
-		Flights, Packages, Hotels
+		Flights, Packages, Hotels, Cruises
 	}
 
 	private Tabs currentTab = Tabs.Hotels;
@@ -98,17 +98,17 @@ public class TravelocityHome extends BasePage {
 	public void selectReturningDate(Integer day, int month, Integer year) {
 		pickDate(datePickerReturning, day, month, year);
 	}
-	
+
 	public void selectCheckInDate(Integer day, int month, Integer year) {
-		WebElement dataPicker=findByXpath("//*[@id=\"d1-partial-btn\"]");
+		WebElement dataPicker = findByXpath("//*[@id=\"d1-partial-btn\"]");
 		pickDate(dataPicker, day, month, year);
 	}
 
 	public void selectCheckOutDate(Integer day, int month, Integer year) {
-		WebElement dataPicker=findByXpath("//*[@id=\"d2-partial-btn\"]");
+		WebElement dataPicker = findByXpath("//*[@id=\"d2-partial-btn\"]");
 		pickDate(dataPicker, day, month, year);
 	}
-	
+
 	public void selectOriginCity(String city) {
 		selectCity(buttonLeavingFrom, city);
 		WebElement listItem = driver
@@ -168,6 +168,34 @@ public class TravelocityHome extends BasePage {
 		currentTab = Tabs.Packages;
 	}
 
+	public boolean tryGoToCruisesTab() {
+		String xpath = "//ul[@id=\"uitk-tabs-button-container\"]/li[6]/a[@href=\"?pwaLob=wizard-cruise-pwa\"]";
+		if (elementIsPresent("//ul[@id=\"uitk-tabs-button-container\"]/li[6]/a[@href=\"?pwaLob=wizard-cruise-pwa\"]")) {
+			findAndClick(xpath);
+			currentTab = Tabs.Cruises;
+			return true;
+		}
+		return false;
+	}
+
+	// -----------------------------------------------------------------------------------------------------------------
+	//cruises tab
+	
+	public void selectEuropeAsDestination() {
+		selectDestination("europe");
+	}
+	
+	private void selectDestination(String destination) {
+		
+		WebElement select=findById("cruise-destination");		
+		waitAndClick(select);
+		getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[@value=\""+destination+"\"]")));
+		findAndClick("//option[@value=\""+destination+"\"]");
+		System.out.println("xpath de la opcion: //option[@value=\""+destination+"\"]");
+	}		
+	
+	// -----------------------------------------------------------------------------------------------------------------
+
 	public TravelocityResults searchFlight() {
 		buttonSearch.click();
 		return new TravelocityResults(getDriver());
@@ -178,11 +206,12 @@ public class TravelocityHome extends BasePage {
 		buttonSearch.click();
 		return new TravelocityPackagesResults(getDriver());
 	}
-	
+
 	public boolean verifyWrongDatesMessage() {
 		buttonSearch.click();
 		try {
-			getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-testid=\"lob-error-summary\"]")));
+			getWait().until(ExpectedConditions
+					.visibilityOfElementLocated(By.xpath("//div[@data-testid=\"lob-error-summary\"]")));
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -202,13 +231,12 @@ public class TravelocityHome extends BasePage {
 		}
 		return false;
 	}
-	
+
 	public void clickPartialStayCheckbox() {
-		
-		driver.findElement(By.id("package-partial-stay")).click();		
-		
-		
-		//input[@id="package-partial-stay"]
+
+		driver.findElement(By.id("package-partial-stay")).click();
+
+		// input[@id="package-partial-stay"]
 	}
 
 	public void selectPassengers() {

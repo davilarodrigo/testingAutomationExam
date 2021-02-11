@@ -5,8 +5,8 @@
     <classes>
       <class name="com.automation.exam.tests.TravelocityTests">
         <methods>
-          <include name="testIncorrecDatesWhenBooking"/>
           <include name="afterSuite"/>
+          <include name="testCruisesDiscount"/>
         </methods>
       </class> <!-- com.automation.exam.tests.TravelocityTests -->
     </classes>

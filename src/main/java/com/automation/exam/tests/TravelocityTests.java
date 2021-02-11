@@ -170,7 +170,7 @@ public class TravelocityTests extends BaseTests {
 		softAssert.assertAll();
 	}
 
-	@Test(groups = { "Exercises" })
+	// @Test(groups = { "Exercises" })
 	public void testIncorrecDatesWhenBooking() {
 		System.out.println("Start of Exercise 4");
 		SoftAssert softAssert = new SoftAssert();
@@ -179,19 +179,62 @@ public class TravelocityTests extends BaseTests {
 		home.goToPackagesTab();
 
 		home.selectOriginCity("Buenos Aires");
-		home.selectDestinationCity("Montevideo");		
+		home.selectDestinationCity("Montevideo");
 		System.out.println("cities selected");
+		
 		home.selectDepartingDate(1, 3, 2021);
 		home.selectReturningDate(4, 4, 2021);
 		System.out.println("dates selected");
+		
 		home.clickPartialStayCheckbox();
 		System.out.println("checkbox clicked");
+		
 		home.selectCheckInDate(2, 5, 2021);
 		home.selectCheckOutDate(6, 6, 2021);
 		System.out.println("hotel dates selected");
+		
 		Assert.assertTrue(home.verifyWrongDatesMessage(), "wrong dates message is missing!!");
 
 		System.out.println("End of Exercise 4");
+		softAssert.assertAll();
+	}
+
+	@Test(groups = { "Exercises" })
+	public void testCruisesDiscount() {
+		System.out.println("Start of Exercise 5");
+		SoftAssert softAssert = new SoftAssert();
+		TravelocityHome home = getTravelocityHome();
+
+		// 1. Go to Cruises page.
+		// 2. In the Going to drop down select “Europe”
+		// 3. In the “Departure month” dropdown select a month. Do the Search
+		// 4. Verify the Filter information selected before appears in the refine
+		// results section below each dropdown.
+		// 5. In the “Cruise Length” filter, select “10-14 nights” (Verify this
+		// information is displayed below the dropdown).
+		// 6. Verify that result page shows cruises with and without discounts
+		// 7. Select the cruise option with more discount, pressing the show dates
+		// button first
+		// 8. Validate that cruise information is displayed for the selected one
+		
+		Assert.assertTrue(home.tryGoToCruisesTab(),"Cruises tab is missing in this layout");
+		System.out.println("cruises tab clicked");
+		
+		home.selectEuropeAsDestination();
+		System.out.println("destination selected (europe)");
+		
+		home.selectDepartingDate(2, 4, 2021);
+		home.selectReturningDate(20, 4, 2021);
+		System.out.println("dates selected");
+		
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("End of Exercise 5");
 		softAssert.assertAll();
 	}
 }

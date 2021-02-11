@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite parallel="none" name="Failed suite [Travelocity]">
-  <parameter name="browser" value="chrome"/>
+  <parameter name="browser" value="opera"/>
   <test parallel="none" name="test 1(failed)">
     <groups>
       <run>
@@ -11,8 +11,8 @@
     <classes>
       <class name="com.automation.exam.tests.TravelocityTests">
         <methods>
-          <include name="testIncorrecDatesWhenBooking"/>
           <include name="afterSuite"/>
+          <include name="testCruisesDiscount"/>
           <include name="beforeSuite"/>
         </methods>
       </class> <!-- com.automation.exam.tests.TravelocityTests -->
