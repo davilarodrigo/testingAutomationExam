@@ -34,7 +34,7 @@ public class BasePage extends WebComponent {
 	}
 
 	protected WebElement findById(String id) {
-		return driver.findElement(By.xpath("*//[@id=\"" + id + "\"]"));
+		return driver.findElement(By.xpath("//*[@id=\"" + id + "\"]"));
 	}
 
 	protected WebElement findByXpath(String xpath) {
@@ -45,7 +45,7 @@ public class BasePage extends WebComponent {
 		WebElement webElement = driver.findElement(By.xpath(xpath));
 		getWait().until(ExpectedConditions.visibilityOf(webElement));
 		getWait().until(ExpectedConditions.elementToBeClickable(webElement));
-		webElement.click();
+		webElement.click(); 
 		return webElement;
 	}
 	
