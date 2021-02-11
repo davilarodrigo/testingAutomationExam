@@ -31,26 +31,20 @@ div.shootout {padding:2em;border:3px #4854A8 solid}
 <body>
 <table cellspacing="0" cellpadding="0" class="result">
 <tr><th>Test</th><th class="numi">Methods<br/>Passed</th><th class="numi">Scenarios<br/>Passed</th><th class="numi"># skipped</th><th class="numi"># failed</th><th class="numi">Total<br/>Time</th><th class="numi">Included<br/>Groups</th><th class="numi">Excluded<br/>Groups</th></tr>
-<tr><td style="text-align:left;padding-right:2em">test 1</td><td class="numi">0</td><td class="numi">0</td><td class="numi">0</td><td class="numi_attn">1</td><td class="numi">37.3 seconds</td><td class="numi">Exercises </td><td class="numi"></td></tr>
+<tr><td style="text-align:left;padding-right:2em">test 1</td><td class="numi">0</td><td class="numi">0</td><td class="numi">0</td><td class="numi_attn">1</td><td class="numi">113.5 seconds</td><td class="numi">Exercises </td><td class="numi"></td></tr>
 </table>
 <table cellspacing="0" cellpadding="0" class="passed" id="summary">
 <tr><th>Class</th><th>Method</th><th># of<br/>Scenarios</th><th>Start</th><th>Time<br/>(ms)</th></tr>
 <tr><th colspan="4">test 1 &#8212; failed</th></tr>
-<tr class="failedodd"><td rowspan="1">com.automation.exam.tests.TravelocityTests</td><td><a href="#m1"><b>testFlightBooking</b> (Exercises) </a></td><td class="numi">1</td><td>1612999265960</td><td class="numi">37327</td></tr>
+<tr class="failedodd"><td rowspan="1">com.automation.exam.tests.TravelocityTests</td><td><a href="#m1"><b>testBookingFlightHotelCar</b> (Exercises) </a></td><td class="numi">1</td><td>1613008981724</td><td class="numi">106189</td></tr>
 </table>
 <h1>test 1</h1>
-<h2 id="m1">com.automation.exam.tests.TravelocityTests:testFlightBooking</h2>
+<h2 id="m1">com.automation.exam.tests.TravelocityTests:testBookingFlightHotelCar</h2>
 <div style="padding-left:3em">
-<p>Cannot invoke &quot;org.openqa.selenium.WebElement.isDisplayed()&quot; because &quot;element&quot; is null</p>
-org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:302)
-<br/>at org.openqa.selenium.support.ui.ExpectedConditions.access$100(ExpectedConditions.java:41)
-<br/>at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:288)
-<br/>at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:285)
-<br/>at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:238)
-<br/>at com.automation.exam.pages.BasePage.findAndClick(BasePage.java:46)
-<br/>at com.automation.exam.pages.TravelocityResults.selectFlight(TravelocityResults.java:87)
-<br/>at com.automation.exam.pages.TravelocityResults.selectReturnFlight(TravelocityResults.java:45)
-<br/>at com.automation.exam.tests.TravelocityTests.testFlightBooking(TravelocityTests.java:61)
+<p>The following asserts failed:
+trip info page is missing</p>
+org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:37)
+<br/>at com.automation.exam.tests.TravelocityTests.testBookingFlightHotelCar(TravelocityTests.java:167)
 <br/>25 lines not shown
 </div>
 <p class="totop"><a href="#summary">back to summary</a></p>

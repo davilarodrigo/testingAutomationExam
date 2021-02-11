@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Wed Feb 10 20:21:05 ART 2021</td>
+<td>Started on:</td><td>Wed Feb 10 23:02:54 ART 2021</td>
 </tr>
-<tr><td>Total time:</td><td>37 seconds (37343 ms)</td>
+<tr><td>Total time:</td><td>113 seconds (113477 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td>Exercises </td>
 </tr><tr>
@@ -75,28 +75,15 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='com.automation.exam.tests.TravelocityTests.testFlightBooking()'><b>testFlightBooking</b><br>Test class: com.automation.exam.tests.TravelocityTests</td>
-<td><div><pre>java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.WebElement.isDisplayed()&quot; because &quot;element&quot; is null
-	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:302)
-	at org.openqa.selenium.support.ui.ExpectedConditions.access$100(ExpectedConditions.java:41)
-	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:288)
-	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:285)
-	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:238)
-	at com.automation.exam.pages.BasePage.findAndClick(BasePage.java:46)
-	at com.automation.exam.pages.TravelocityResults.selectFlight(TravelocityResults.java:87)
-	at com.automation.exam.pages.TravelocityResults.selectReturnFlight(TravelocityResults.java:45)
-	at com.automation.exam.tests.TravelocityTests.testFlightBooking(TravelocityTests.java:61)
-... Removed 24 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace298724898", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace298724898'><pre>java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.WebElement.isDisplayed()&quot; because &quot;element&quot; is null
-	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:302)
-	at org.openqa.selenium.support.ui.ExpectedConditions.access$100(ExpectedConditions.java:41)
-	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:288)
-	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:285)
-	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:238)
-	at com.automation.exam.pages.BasePage.findAndClick(BasePage.java:46)
-	at com.automation.exam.pages.TravelocityResults.selectFlight(TravelocityResults.java:87)
-	at com.automation.exam.pages.TravelocityResults.selectReturnFlight(TravelocityResults.java:45)
-	at com.automation.exam.tests.TravelocityTests.testFlightBooking(TravelocityTests.java:61)
+<td title='com.automation.exam.tests.TravelocityTests.testBookingFlightHotelCar()'><b>testBookingFlightHotelCar</b><br>Test class: com.automation.exam.tests.TravelocityTests</td>
+<td><div><pre>java.lang.AssertionError: The following asserts failed:
+trip info page is missing
+	at com.automation.exam.tests.TravelocityTests.testBookingFlightHotelCar(TravelocityTests.java:167)
+... Removed 25 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace8996952", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace8996952'><pre>java.lang.AssertionError: The following asserts failed:
+trip info page is missing
+	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:37)
+	at com.automation.exam.tests.TravelocityTests.testBookingFlightHotelCar(TravelocityTests.java:167)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -122,7 +109,7 @@ function toggleAllBoxes() {
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 </pre></div></td>
-<td>37</td>
+<td>106</td>
 <td>com.automation.exam.tests.TravelocityTests@135606db</td></tr>
 </table><p>
 </body>

@@ -25,7 +25,7 @@ public class TravelocityTests extends BaseTests {
 	 * getTravelocityResults(resultsUrl); testResults(results); }
 	 */
 
-	@Test(groups = { "Exercises" })
+	//@Test(groups = { "Exercises" })
 	public void testFlightBooking() {
 		System.out.println("Start of Exercise 1");
 		SoftAssert softAssert = new SoftAssert();

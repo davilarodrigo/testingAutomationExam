@@ -2,15 +2,15 @@
 <testng-results total="1" passed="0" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2021-02-10T23:21:05Z" name="Travelocity" finished-at="2021-02-10T23:21:43Z" duration-ms="37343">
+  <suite started-at="2021-02-11T02:02:54Z" name="Travelocity" finished-at="2021-02-11T02:04:47Z" duration-ms="113477">
     <groups>
       <group name="Exercises">
-        <method signature="TravelocityTests.testFlightBooking()[pri:0, instance:com.automation.exam.tests.TravelocityTests@135606db]" name="testFlightBooking" class="com.automation.exam.tests.TravelocityTests"/>
+        <method signature="TravelocityTests.testBookingFlightHotelCar()[pri:0, instance:com.automation.exam.tests.TravelocityTests@135606db]" name="testBookingFlightHotelCar" class="com.automation.exam.tests.TravelocityTests"/>
       </group> <!-- Exercises -->
     </groups>
-    <test started-at="2021-02-10T23:21:05Z" name="test 1" finished-at="2021-02-10T23:21:43Z" duration-ms="37343">
+    <test started-at="2021-02-11T02:02:54Z" name="test 1" finished-at="2021-02-11T02:04:47Z" duration-ms="113477">
       <class name="com.automation.exam.tests.TravelocityTests">
-        <test-method is-config="true" signature="beforeSuite(java.lang.String)[pri:0, instance:com.automation.exam.tests.TravelocityTests@135606db]" started-at="2021-02-10T20:20:58Z" name="beforeSuite" finished-at="2021-02-10T20:21:05Z" duration-ms="7548" status="PASS">
+        <test-method is-config="true" signature="beforeSuite(java.lang.String)[pri:0, instance:com.automation.exam.tests.TravelocityTests@135606db]" started-at="2021-02-10T23:02:54Z" name="beforeSuite" finished-at="2021-02-10T23:03:01Z" duration-ms="7275" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -21,22 +21,17 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeSuite -->
-        <test-method signature="testFlightBooking()[pri:0, instance:com.automation.exam.tests.TravelocityTests@135606db]" started-at="2021-02-10T20:21:05Z" name="testFlightBooking" finished-at="2021-02-10T20:21:43Z" duration-ms="37327" status="FAIL">
-          <exception class="java.lang.NullPointerException">
+        <test-method signature="testBookingFlightHotelCar()[pri:0, instance:com.automation.exam.tests.TravelocityTests@135606db]" started-at="2021-02-10T23:03:01Z" name="testBookingFlightHotelCar" finished-at="2021-02-10T23:04:47Z" duration-ms="106189" status="FAIL">
+          <exception class="java.lang.AssertionError">
             <message>
-              <![CDATA[Cannot invoke "org.openqa.selenium.WebElement.isDisplayed()" because "element" is null]]>
+              <![CDATA[The following asserts failed:
+trip info page is missing]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.WebElement.isDisplayed()" because "element" is null
-	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:302)
-	at org.openqa.selenium.support.ui.ExpectedConditions.access$100(ExpectedConditions.java:41)
-	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:288)
-	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:285)
-	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:238)
-	at com.automation.exam.pages.BasePage.findAndClick(BasePage.java:46)
-	at com.automation.exam.pages.TravelocityResults.selectFlight(TravelocityResults.java:87)
-	at com.automation.exam.pages.TravelocityResults.selectReturnFlight(TravelocityResults.java:45)
-	at com.automation.exam.tests.TravelocityTests.testFlightBooking(TravelocityTests.java:61)
+              <![CDATA[java.lang.AssertionError: The following asserts failed:
+trip info page is missing
+	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:37)
+	at com.automation.exam.tests.TravelocityTests.testBookingFlightHotelCar(TravelocityTests.java:167)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -63,11 +58,11 @@
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
+          </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testFlightBooking -->
-        <test-method is-config="true" signature="afterSuite()[pri:0, instance:com.automation.exam.tests.TravelocityTests@135606db]" started-at="2021-02-10T20:21:43Z" name="afterSuite" finished-at="2021-02-10T20:21:44Z" duration-ms="1592" status="PASS">
+        </test-method> <!-- testBookingFlightHotelCar -->
+        <test-method is-config="true" signature="afterSuite()[pri:0, instance:com.automation.exam.tests.TravelocityTests@135606db]" started-at="2021-02-10T23:04:47Z" name="afterSuite" finished-at="2021-02-10T23:04:49Z" duration-ms="1088" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterSuite -->
