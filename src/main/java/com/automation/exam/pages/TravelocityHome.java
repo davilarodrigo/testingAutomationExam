@@ -98,7 +98,17 @@ public class TravelocityHome extends BasePage {
 	public void selectReturningDate(Integer day, int month, Integer year) {
 		pickDate(datePickerReturning, day, month, year);
 	}
+	
+	public void selectCheckInDate(Integer day, int month, Integer year) {
+		WebElement dataPicker=findByXpath("//*[@id=\"d1-partial-btn\"]");
+		pickDate(dataPicker, day, month, year);
+	}
 
+	public void selectCheckOutDate(Integer day, int month, Integer year) {
+		WebElement dataPicker=findByXpath("//*[@id=\"d2-partial-btn\"]");
+		pickDate(dataPicker, day, month, year);
+	}
+	
 	public void selectOriginCity(String city) {
 		selectCity(buttonLeavingFrom, city);
 		WebElement listItem = driver
@@ -168,6 +178,17 @@ public class TravelocityHome extends BasePage {
 		buttonSearch.click();
 		return new TravelocityPackagesResults(getDriver());
 	}
+	
+	public boolean verifyWrongDatesMessage() {
+		buttonSearch.click();
+		try {
+			getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-testid=\"lob-error-summary\"]")));
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return false;
+	}
 
 	public TravelocityPackagesResults searchHotels() {
 		findAndClick("//button[@data-testid=\"wizard-submit-button\"] | //button[@data-testid=\"submit-button\"]");
@@ -180,6 +201,14 @@ public class TravelocityHome extends BasePage {
 			return true;
 		}
 		return false;
+	}
+	
+	public void clickPartialStayCheckbox() {
+		
+		driver.findElement(By.id("package-partial-stay")).click();		
+		
+		
+		//input[@id="package-partial-stay"]
 	}
 
 	public void selectPassengers() {

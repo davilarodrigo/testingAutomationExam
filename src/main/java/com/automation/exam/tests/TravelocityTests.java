@@ -17,7 +17,6 @@ import com.automation.exam.tests.BaseTests;
 
 public class TravelocityTests extends BaseTests {
 
-
 	// @Test(groups = { "Exercises" })
 	public void testFlightBooking() {
 		System.out.println("Start of Exercise 1");
@@ -73,7 +72,7 @@ public class TravelocityTests extends BaseTests {
 		softAssert.assertAll();
 	}
 
-	//@Test(groups = { "Exercises" })
+	// @Test(groups = { "Exercises" })
 	public void testBookingFlightHotelCar() {
 		System.out.println("Start of Exercise 2");
 		SoftAssert softAssert = new SoftAssert();
@@ -153,22 +152,46 @@ public class TravelocityTests extends BaseTests {
 		System.out.println("End of Exercise 2");
 		softAssert.assertAll();
 	}
-	
 
-	@Test(groups = { "Exercises" })
+	// @Test(groups = { "Exercises" })
 	public void testSponsoredHotels() {
 		System.out.println("Start of Exercise 3");
 		SoftAssert softAssert = new SoftAssert();
 		TravelocityHome home = getTravelocityHome();
-		
+
 		home.goToHotelsTab();
 		home.selectHotel("Montevideo, Uruguay");
-		TravelocityPackagesResults results=home.searchHotels();
-		
+		TravelocityPackagesResults results = home.searchHotels();
+
 		softAssert.assertTrue(results.verifySponsoredResultsFirst(), "some sponsored results do not appear first");
 		softAssert.assertTrue(results.verifyDiscountWithEmail(), "discount option by entering email is missing");
-		
+
 		System.out.println("End of Exercise 3");
+		softAssert.assertAll();
+	}
+
+	@Test(groups = { "Exercises" })
+	public void testIncorrecDatesWhenBooking() {
+		System.out.println("Start of Exercise 4");
+		SoftAssert softAssert = new SoftAssert();
+		TravelocityHome home = getTravelocityHome();
+
+		home.goToPackagesTab();
+
+		home.selectOriginCity("Buenos Aires");
+		home.selectDestinationCity("Montevideo");		
+		System.out.println("cities selected");
+		home.selectDepartingDate(1, 3, 2021);
+		home.selectReturningDate(4, 4, 2021);
+		System.out.println("dates selected");
+		home.clickPartialStayCheckbox();
+		System.out.println("checkbox clicked");
+		home.selectCheckInDate(2, 5, 2021);
+		home.selectCheckOutDate(6, 6, 2021);
+		System.out.println("hotel dates selected");
+		Assert.assertTrue(home.verifyWrongDatesMessage(), "wrong dates message is missing!!");
+
+		System.out.println("End of Exercise 4");
 		softAssert.assertAll();
 	}
 }
