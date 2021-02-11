@@ -166,8 +166,8 @@ public class TravelocityTests extends BaseTests {
 		TravelocityPackagesResults results=home.searchHotels();
 		
 		softAssert.assertTrue(results.verifySponsoredResultsFirst(), "some sponsored results do not appear first");
+		softAssert.assertTrue(results.verifyDiscountWithEmail(), "discount option by entering email is missing");
 		
-
 		System.out.println("End of Exercise 3");
 		softAssert.assertAll();
 	}
