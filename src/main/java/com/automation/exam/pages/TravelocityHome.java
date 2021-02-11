@@ -4,10 +4,13 @@ import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import com.sun.jna.platform.win32.WinUser.INPUT;
 
 public class TravelocityHome extends BasePage {
 
@@ -30,8 +33,8 @@ public class TravelocityHome extends BasePage {
 
 	@FindBy(xpath = "(//*[@id=\"uitk-tabs-button-container\"]/li[2]/a) | ((//ul[@class=\"uitk-flex lobNavigation no-bullet uitk-scroll-horizontal\"]/li)[2])") // @FindBy(xpath
 	private WebElement buttonFlight;
-																																								// ="(//a[@class='uitk-tab-anchor'])[2]
-	@FindBy(xpath = "(//*[@id=\"uitk-tabs-button-container\"]/li[1]/a) | ((//ul[@class=\"uitk-flex lobNavigation no-bullet uitk-scroll-horizontal\"]/li)[1])") // @FindBy(xpath																																								
+	// ="(//a[@class='uitk-tab-anchor'])[2]
+	@FindBy(xpath = "(//*[@id=\"uitk-tabs-button-container\"]/li[1]/a) | ((//ul[@class=\"uitk-flex lobNavigation no-bullet uitk-scroll-horizontal\"]/li)[1])") // @FindBy(xpath
 	private WebElement buttonHotel;
 
 	@FindBy(xpath = "(//input[@id=\"wizard-package-pwa\"]//parent::div) | (//a[@href=\"?pwaLob=wizard-package-pwa\"]//parent::li)")
@@ -49,9 +52,9 @@ public class TravelocityHome extends BasePage {
 	@FindBy(xpath = "//button[@data-testid=\"submit-button\"]")
 	private WebElement buttonSearch;
 
-	@FindBy(xpath="//button[@data-stid=\"hotel-destination-dialog-trigger\"] | //button[@data-stid=\"location-field-destination-menu-trigger\"]")
+	@FindBy(xpath = "//button[@data-stid=\"hotel-destination-dialog-trigger\"] | //button[@data-stid=\"location-field-destination-menu-trigger\"]")
 	private WebElement hotelInput;
-	
+
 	@FindBy(xpath = "//div[@class=\"uitk-menu-container uitk-menu-open uitk-menu-pos-left uitk-menu-container-text-nowrap\"]")
 	private WebElement searchMenuResults;
 
@@ -103,19 +106,25 @@ public class TravelocityHome extends BasePage {
 		getWait().until(ExpectedConditions.elementToBeClickable(listItem));
 		listItem.click();
 	}
-	
-	
+
 	public void selectHotel(String hotel) {
 		getWait().until(ExpectedConditions.visibilityOf(hotelInput));
 		hotelInput.click();
-		//getWait().until(ExpectedConditions.visibilityOf(searchMenuResults));
+		// getWait().until(ExpectedConditions.visibilityOf(searchMenuResults));
+
+		// WebElement input =
+		// findByXpath("//input[@data-stid=\"hotel-destination-dialog-input\"] |
+		// //input[@data-stid=\"location-field-destination-menu-input\"]");
+		// getWait().until(ExpectedConditions.elementToBeClickable(By.xpath(input)));
+		// input.sendKeys(hotel);
 		driver.switchTo().activeElement().sendKeys(hotel);
-		WebElement listItem = driver
-				.findElement(By.xpath("(//ul[@class=\"uitk-typeahead-results no-bullet\"]/li[1]/button)"));
-		getWait().until(ExpectedConditions.elementToBeClickable(listItem));
-		listItem.click();
+		driver.switchTo().activeElement().sendKeys(" ");
+		// driver.switchTo().activeElement().sendKeys(Keys.ENTER);
+		String xpath = "//li[@data-index=\"0\"]/button[not(@disabled)]";
+		getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+		findAndClick(xpath);
 	}
-	
+
 	public void selectDestinationCity(String city) {
 		selectCity(buttonGoingTo, city);
 		WebElement listItem = driver
@@ -159,7 +168,7 @@ public class TravelocityHome extends BasePage {
 		buttonSearch.click();
 		return new TravelocityPackagesResults(getDriver());
 	}
-	
+
 	public TravelocityPackagesResults searchHotels() {
 		findAndClick("//button[@data-testid=\"wizard-submit-button\"] | //button[@data-testid=\"submit-button\"]");
 		return new TravelocityPackagesResults(getDriver());

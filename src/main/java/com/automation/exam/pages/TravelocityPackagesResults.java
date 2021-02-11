@@ -1,6 +1,7 @@
 package com.automation.exam.pages;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -72,23 +73,23 @@ public class TravelocityPackagesResults extends BasePage {
 	public TravelocityHotelInfo selectResultWithRating(float minimumDesiredRating) {
 		resultsList = getSearchResultItems();
 
-		for (int i = 0; i < resultsList.size(); i++) {			
+		for (int i = 0; i < resultsList.size(); i++) {
 			float starRating = resultsList.get(i).getStarRating();
 			if (starRating >= minimumDesiredRating) {
 				Hotel hotel = new Hotel();
-				hotel.starRating=starRating;
-				hotel.price=resultsList.get(i).getPrice();
-				hotel.name=resultsList.get(i).getName();
-				hotel.location=resultsList.get(i).getLocation();
-				
+				hotel.starRating = starRating;
+				hotel.price = resultsList.get(i).getPrice();
+				hotel.name = resultsList.get(i).getName();
+				hotel.location = resultsList.get(i).getLocation();
+
 				// System.out.println(hotel.location);
 				// System.out.println(hotel.name);
 				// System.out.println(hotel.price);
-				//System.out.println(hotel.starRating);
-				
+				// System.out.println(hotel.starRating);
+
 				resultsList.get(i).getAsWebElement().click();
-				
-				//printCurrentTab();
+
+				// printCurrentTab();
 
 				ArrayList<String> tabs2;
 				do {
@@ -97,17 +98,43 @@ public class TravelocityPackagesResults extends BasePage {
 
 				driver.switchTo().window(tabs2.get(1));
 
-				//printCurrentTab();
-				
-				return new TravelocityHotelInfo(getDriver(),hotel);
+				// printCurrentTab();
+
+				return new TravelocityHotelInfo(getDriver(), hotel);
 			}
 
 		}
-		
+
 		return null;
 	}
 
 	// -----------------------------------------------------------------------
+
+	public boolean verifySponsoredResultsFirst() {
+		getWait().until(ExpectedConditions.elementToBeClickable(sortDropdown));
+		List<PackagesSearchResultItem> list = getSearchResultItems();
+
+		boolean onSponsoredResults = true;
+
+		int x = list.size();
+		if (x > 10)
+			x = 10; // solo se revisa que se cumpla el tema de los sponsors primero en los primeros
+					// 10 resultados, por una cuestion de eficiencia
+
+		for (int i = 0; i < x; i++) {
+			if (onSponsoredResults) {
+				if (list.get(i).isSponsored()) {
+					return false;
+				}
+			}
+
+			if (!list.get(i).isSponsored()) {
+				onSponsoredResults = false;
+			}
+		}
+
+		return true;
+	}
 
 	public boolean verifyResultsSortedByPrice() {
 

@@ -163,7 +163,10 @@ public class TravelocityTests extends BaseTests {
 		
 		home.goToHotelsTab();
 		home.selectHotel("Montevideo, Uruguay");
-		home.searchHotels();
+		TravelocityPackagesResults results=home.searchHotels();
+		
+		softAssert.assertTrue(results.verifySponsoredResultsFirst(), "some sponsored results do not appear first");
+		
 
 		System.out.println("End of Exercise 3");
 		softAssert.assertAll();

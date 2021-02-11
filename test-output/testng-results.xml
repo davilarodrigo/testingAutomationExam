@@ -2,15 +2,15 @@
 <testng-results total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2021-02-11T02:36:43Z" name="Travelocity" finished-at="2021-02-11T02:37:01Z" duration-ms="17724">
+  <suite started-at="2021-02-11T13:22:44Z" name="Travelocity" finished-at="2021-02-11T13:23:07Z" duration-ms="23069">
     <groups>
       <group name="Exercises">
         <method signature="TravelocityTests.testSponsoredHotels()[pri:0, instance:com.automation.exam.tests.TravelocityTests@518caac3]" name="testSponsoredHotels" class="com.automation.exam.tests.TravelocityTests"/>
       </group> <!-- Exercises -->
     </groups>
-    <test started-at="2021-02-11T02:36:43Z" name="test 1" finished-at="2021-02-11T02:37:01Z" duration-ms="17724">
+    <test started-at="2021-02-11T13:22:44Z" name="test 1" finished-at="2021-02-11T13:23:07Z" duration-ms="23069">
       <class name="com.automation.exam.tests.TravelocityTests">
-        <test-method is-config="true" signature="beforeSuite(java.lang.String)[pri:0, instance:com.automation.exam.tests.TravelocityTests@518caac3]" started-at="2021-02-10T23:36:43Z" name="beforeSuite" finished-at="2021-02-10T23:36:54Z" duration-ms="10377" status="PASS">
+        <test-method is-config="true" signature="beforeSuite(java.lang.String)[pri:0, instance:com.automation.exam.tests.TravelocityTests@518caac3]" started-at="2021-02-11T10:22:44Z" name="beforeSuite" finished-at="2021-02-11T10:22:53Z" duration-ms="9480" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -21,11 +21,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeSuite -->
-        <test-method signature="testSponsoredHotels()[pri:0, instance:com.automation.exam.tests.TravelocityTests@518caac3]" started-at="2021-02-10T23:36:54Z" name="testSponsoredHotels" finished-at="2021-02-10T23:37:01Z" duration-ms="7324" status="PASS">
+        <test-method signature="testSponsoredHotels()[pri:0, instance:com.automation.exam.tests.TravelocityTests@518caac3]" started-at="2021-02-11T10:22:53Z" name="testSponsoredHotels" finished-at="2021-02-11T10:23:07Z" duration-ms="13570" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testSponsoredHotels -->
-        <test-method is-config="true" signature="afterSuite()[pri:0, instance:com.automation.exam.tests.TravelocityTests@518caac3]" started-at="2021-02-10T23:37:01Z" name="afterSuite" finished-at="2021-02-10T23:37:04Z" duration-ms="3165" status="PASS">
+        <test-method is-config="true" signature="afterSuite()[pri:0, instance:com.automation.exam.tests.TravelocityTests@518caac3]" started-at="2021-02-11T10:23:07Z" name="afterSuite" finished-at="2021-02-11T10:23:09Z" duration-ms="1587" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterSuite -->

@@ -11,6 +11,10 @@ public class PackagesSearchResultItem extends WebComponent {
 
 	public int index;
 	public String xpath;
+	
+	public boolean isSponsored() {
+		return elementIsPresent(xpath+"//span[@class=\"uitk-badge uitk-badge-small uitk-badge-sponsored uitk-badge-has-text all-t-margin-two\"]");
+	}
 
 	//*[@data-stid="section-results"]//ol//li[4]
 	public PackagesSearchResultItem(String xpath, WebDriver driver) {
