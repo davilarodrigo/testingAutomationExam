@@ -11,8 +11,8 @@
     <classes>
       <class name="com.automation.exam.tests.TravelocityTests">
         <methods>
+          <include name="testSponsoredHotels"/>
           <include name="afterSuite"/>
-          <include name="testBookingFlightHotelCar"/>
           <include name="beforeSuite"/>
         </methods>
       </class> <!-- com.automation.exam.tests.TravelocityTests -->

@@ -17,15 +17,8 @@ import com.automation.exam.tests.BaseTests;
 
 public class TravelocityTests extends BaseTests {
 
-	/*
-	 * @Test(groups = { "results" })
-	 * 
-	 * @Parameters({ "resultsUrl" }) public void testResults(String resultsUrl) { //
-	 * el url de parametro tira error en la suite.xml TravelocityResults results =
-	 * getTravelocityResults(resultsUrl); testResults(results); }
-	 */
 
-	//@Test(groups = { "Exercises" })
+	// @Test(groups = { "Exercises" })
 	public void testFlightBooking() {
 		System.out.println("Start of Exercise 1");
 		SoftAssert softAssert = new SoftAssert();
@@ -80,7 +73,7 @@ public class TravelocityTests extends BaseTests {
 		softAssert.assertAll();
 	}
 
-	@Test(groups = { "Exercises" })
+	//@Test(groups = { "Exercises" })
 	public void testBookingFlightHotelCar() {
 		System.out.println("Start of Exercise 2");
 		SoftAssert softAssert = new SoftAssert();
@@ -100,23 +93,17 @@ public class TravelocityTests extends BaseTests {
 
 		TravelocityPackagesResults results = home.searchPackages();
 
-		/*
-		 * despues borrar esta linea // 5 verifications
-		 * softAssert.assertTrue(results.verifyDatePickers(),
-		 * "date time pickers missing in results page");
-		 * softAssert.assertTrue(results.verifyDirectFlightsOnlyCheckbox(),
-		 * "direct flights only checkbox missing");
-		 * softAssert.assertTrue(results.verifyPreferedClassSelector(),
-		 * "class selector missing");
-		 * softAssert.assertTrue(results.verifyTravelRestrictionsAlert(),
-		 * "travel restrictions alert missing");
-		 * softAssert.assertTrue(results.verifySortingBox(), "sorting box failed");
-		 * //System.out.println("verifications done");
-		 * 
-		 * results.sortByPrice();
-		 * softAssert.assertTrue(results.verifyResultsSortedByPrice(),
-		 * "results were not correctly sorted"); //System.out.println("list sorted"); /
-		 **/
+		// 5 verifications
+		softAssert.assertTrue(results.verifyDatePickers(), "date time pickers missing in results page");
+		softAssert.assertTrue(results.verifyDirectFlightsOnlyCheckbox(), "direct flights only checkbox missing");
+		softAssert.assertTrue(results.verifyPreferedClassSelector(), "class selector missing");
+		softAssert.assertTrue(results.verifyTravelRestrictionsAlert(), "travel restrictions alert missing");
+		softAssert.assertTrue(results.verifySortingBox(), "sorting box failed");
+		// System.out.println("verifications done");
+
+		results.sortByPrice();
+		softAssert.assertTrue(results.verifyResultsSortedByPrice(), "results were not correctly sorted");
+		// System.out.println("list sorted");
 
 		TravelocityHotelInfo hotelInfoPage = results.selectResultWithRating(3);
 		System.out.println("hotel selected");
@@ -149,7 +136,7 @@ public class TravelocityTests extends BaseTests {
 		} else {
 			softAssert.assertTrue(false, "trip info page is missing");
 		}
-		
+
 		TravelocityWhosTraveling whosTravelingPage = packageInfoPage.continueToWhosTravelingPage();
 
 		// Verify the “Who’s travelling” page: 5 validations
@@ -164,6 +151,21 @@ public class TravelocityTests extends BaseTests {
 				"Phone code select missing in whos traveling page");
 
 		System.out.println("End of Exercise 2");
+		softAssert.assertAll();
+	}
+	
+
+	@Test(groups = { "Exercises" })
+	public void testSponsoredHotels() {
+		System.out.println("Start of Exercise 3");
+		SoftAssert softAssert = new SoftAssert();
+		TravelocityHome home = getTravelocityHome();
+		
+		home.goToHotelsTab();
+		home.selectHotel("Montevideo, Uruguay");
+		home.searchHotels();
+
+		System.out.println("End of Exercise 3");
 		softAssert.assertAll();
 	}
 }
