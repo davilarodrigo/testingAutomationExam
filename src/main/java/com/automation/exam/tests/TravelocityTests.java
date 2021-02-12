@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.automation.exam.pages.TravelocityCarRental;
+import com.automation.exam.pages.TravelocityCruiseInfo;
 import com.automation.exam.pages.TravelocityCruisesResults;
 import com.automation.exam.pages.TravelocityFlightInformation;
 import com.automation.exam.pages.TravelocityHome;
@@ -216,16 +217,8 @@ public class TravelocityTests extends BaseTests {
 		System.out.println("dates selected");
 		
 		TravelocityCruisesResults results= home.searchCruises();
-		
-		// 5. In the “Cruise Length” filter, select “10-14 nights” (Verify this
-		// information is displayed below the dropdown).
-	
-		// 6. Verify that result page shows cruises with and without discounts --
-		// 7. Select the cruise option with more discount, pressing the show dates --
-		// button first
-		// 8. Validate that cruise information is displayed for the selected one
-		
-		results.selectCruiseLenght(10);
+				
+		//results.selectCruiseLenght(10);
 		
 		softAssert.assertTrue(results.verifyDatesTogglePresent(), "dates toggle missing in refine results section");
 		softAssert.assertTrue(results.verifyTravelersTogglePresent(), "travellers toggle missing in refine results section");
@@ -233,15 +226,16 @@ public class TravelocityTests extends BaseTests {
 				
 		softAssert.assertTrue(results.verifyCruisesWithDiscount(), "there are no cruises with discount");
 		
-		results.selectCruiseWithBiggestDiscount();
+		TravelocityCruiseInfo cruiseInfoPage=results.selectCruiseWithBiggestDiscount();
 		
-		try {
-			Thread.sleep(20000);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// 8. Validate that cruise information is displayed for the selected one
+		softAssert.assertTrue(cruiseInfoPage.verifyDiscountPrice(), "discount price does not match the one in the results page");		
+		softAssert.assertTrue(cruiseInfoPage.verifyName(), "Cruise name does not match the one in the results page");
 		
+		
+		
+		
+	
 		System.out.println("End of Exercise 5");
 		softAssert.assertAll();
 	}

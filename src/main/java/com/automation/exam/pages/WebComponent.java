@@ -16,6 +16,10 @@ public class WebComponent {
 		return true;
 	}
 	
+	protected int convertToInt(char a) {
+		return Character.getNumericValue(a);
+	}
+	
 	protected boolean elementIsPresentById(String id) {
 		try {
 			driver.findElement(By.id(id));			

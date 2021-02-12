@@ -26,12 +26,6 @@ public class TravelocityCruisesResults extends BasePage {
 	@FindBy(xpath = "//section[@role=\"main\"]")
 	WebElement mainSection;
 
-	/*
-	 * public boolean verifyCruisesWithDiscount() { List<PackagesSearchResultItem>
-	 * list= getSearchResultItems(); for (int i = 0; i < list.size(); i++) {
-	 * System.out.println(list.get(i).getPrice());
-	 * System.out.println(list.get(i).getName()); } return true; }
-	 */
 	private List<CruiseResult> getResultsList() {
 
 		List<CruiseResult> resultsList = new ArrayList<>();
@@ -43,11 +37,11 @@ public class TravelocityCruisesResults extends BasePage {
 
 		WebElement elem;
 
-		for (int i = 2; i < htmlList.size(); i++) {
+		for (int i = 1; i <= htmlList.size(); i++) {
 
 			elem = findByXpath(xpath + "[" + i + "]");
 			if (elementIsPresent(elem)) {
-				CruiseResult item = new CruiseResult(xpath + "[" + i + "]", driver);
+				CruiseResult item = new CruiseResult(xpath + "[" + i + "]", driver, i);
 				// antes aca habia un if que revisaba si el paquete tenia precio, y si no tenia,
 				// no lo agregaba(tal vez para los cruceros no sea necesario)
 				resultsList.add(item);
@@ -57,8 +51,7 @@ public class TravelocityCruisesResults extends BasePage {
 	}
 	// -------------------------------------------------------------------------------------------------------------
 
-	private void clickCruiseLenghtOption(int nights)
-	{
+	private void clickCruiseLenghtOption(int nights) {
 		WebElement radioButton = null;
 		if (nights <= 6) {
 			radioButton = findAndClick("(//input[@name=\"length-6-9\"])[2]");
@@ -74,31 +67,32 @@ public class TravelocityCruisesResults extends BasePage {
 			radioButton = findAndClick("(//input[@name=\"length-15\"])[2]");
 			return;
 		}
-		
+
 	}
+
 	public void selectCruiseLenght(int nights) {
 		clickCruiseLenghtOption(nights);
 
-			getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id=\"destination-select\"]")));
-			//WebElement elem=findById("destination-toggle");			
-	
+		getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id=\"destination-select\"]")));
+		// WebElement elem=findById("destination-toggle");
+
 	}
 
-	public void selectCruiseWithBiggestDiscount() {
+	public TravelocityCruiseInfo selectCruiseWithBiggestDiscount() {
 		List<CruiseResult> list = getResultsList();
 
 		List<CruiseResult> cruisesWithDiscount = new ArrayList<>();
 
 		int biggestDiscount = 0;
 		int absDiscount = 0;
-
+ 
 		CruiseResult selectedCruise = list.get(0);
 
 		for (int i = 0; i < list.size(); i++) {
 
 			if (list.get(i).hasDiscount()) {
 				absDiscount = list.get(i).getAbsoluteDiscount();
-				//System.out.println(absDiscount);
+				// System.out.println(absDiscount);
 				if (absDiscount > biggestDiscount) {
 					biggestDiscount = absDiscount;
 					selectedCruise = list.get(i);
@@ -106,9 +100,28 @@ public class TravelocityCruisesResults extends BasePage {
 			}
 		}
 
-		System.out.println("biggest discount found: " + biggestDiscount);
-	//	selectedCruise.getSelectButton().click();
+		Cruise cruise = new Cruise();
 
+		cruise.price = selectedCruise.getPrice();
+		cruise.priceWithoutDiscount = selectedCruise.getNoDiscountPrice();
+		cruise.name = selectedCruise.getCruiseName();
+		cruise.departingCity = selectedCruise.getDepartingCity();
+		cruise.departingDate = selectedCruise.getDepartingDate();
+		cruise.ReturningDate = selectedCruise.getReturningDate();
+
+		System.out.println("biggest discount found: " + biggestDiscount);
+		String linkXpath = selectedCruise.getContinueButtonXpath();
+		findAndClick(linkXpath);
+
+		// printCurrentTab();
+		ArrayList<String> tabs2;
+		do {
+			tabs2 = new ArrayList<String>(driver.getWindowHandles());
+		} while (tabs2.size() == 1);
+		driver.switchTo().window(tabs2.get(1));
+		// printCurrentTab();
+		
+		return new TravelocityCruiseInfo(getDriver(), cruise);
 	}
 
 	// -------------------------------------------------------------------------------------------------------------

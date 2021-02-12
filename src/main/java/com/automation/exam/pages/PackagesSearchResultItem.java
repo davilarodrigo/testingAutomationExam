@@ -53,9 +53,7 @@ public class PackagesSearchResultItem extends WebComponent {
 		return stars;
 	}	
 	
-	private int convertToInt(char a) {
-		return Character.getNumericValue(a);
-	}
+
 
 	public boolean hasPrice() {		
 		return elementIsPresent(xpath + "//span[@class=\"uitk-cell loyalty-display-price all-cell-shrink\"]");

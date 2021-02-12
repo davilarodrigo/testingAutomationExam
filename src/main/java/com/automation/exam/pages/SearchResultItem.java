@@ -82,10 +82,6 @@ public class SearchResultItem extends WebComponent {
 		}
 	}
 
-	private int convertToInt(char a) {
-		return Character.getNumericValue(a);
-	}
-
 	private int convertToInt(char a, char b) {
 		return convertToInt(a) * 10 + convertToInt(b);
 	}

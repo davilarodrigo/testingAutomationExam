@@ -5,21 +5,39 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class CruiseResult extends WebComponent {
-	public int index;
+
 	public String xpath;
+	private int index;
 	
 	//xpath:      (//section[@role="main"]//div[@class="flex-card"])[n]
-	public CruiseResult(String xpath, WebDriver driver) {	
+	public CruiseResult(String xpath, WebDriver driver, int index) {	
 		this.xpath = xpath;
 		this.driver = driver;
+		this.index=index;
 	}
 		
+	public String getContinueButtonXpath() {
+		return "((//section[@role=\"main\"]//div[@class=\"flex-card\"])["+index+"]//a[@class=\"btn btn-secondary btn-action select-sailing-button\"])";		
+	}
+	
 	//public boolean hasDiscount() {}
 	
-	private int convertToInt(char a) {
-		return Character.getNumericValue(a);
+	public String getCruiseName() {
+		return driver.findElement(By.xpath( "(//div[@class=\"title-on-ship-image\"])["+index+"]")).getText();
 	}
-
+	
+	public String getReturningDate() {
+		return driver.findElement(By.xpath( "(//div[@class=\"card-content-detail sailing-dates\"])["+index+"]/span[@class=\"sailing-returning-on\"]")).getText();
+	}
+	
+	public String getDepartingDate() {
+		return driver.findElement(By.xpath( "(//div[@class=\"card-content-detail sailing-dates\"])["+index+"]/span[@class=\"sailing-departing-on\"]")).getText();
+	}
+	
+	public String getDepartingCity() {
+		return driver.findElement(By.xpath("(//div[@class=\"card-content-detail departure-city\"])["+index+"]")).getText();
+	}
+	
 	public int getPrice() {
 		String str = driver
 				.findElement(By.xpath(xpath + "//span[@class=\"card-price\"]"))
