@@ -19,7 +19,7 @@ import com.automation.exam.tests.BaseTests;
 
 public class TravelocityTests extends BaseTests {
 
-	// @Test(groups = { "Exercises" })
+	 @Test(groups = { "Exercise1" })
 	public void testFlightBooking() {
 		System.out.println("Start of Exercise 1");
 		SoftAssert softAssert = new SoftAssert();
@@ -74,7 +74,7 @@ public class TravelocityTests extends BaseTests {
 		softAssert.assertAll();
 	}
 
-	// @Test(groups = { "Exercises" })
+	 @Test(groups = { "Exercise2" })
 	public void testBookingFlightHotelCar() {
 		System.out.println("Start of Exercise 2");
 		SoftAssert softAssert = new SoftAssert();
@@ -155,7 +155,7 @@ public class TravelocityTests extends BaseTests {
 		softAssert.assertAll();
 	}
 
-	// @Test(groups = { "Exercises" })
+	 @Test(groups = { "Exercise3" })
 	public void testSponsoredHotels() {
 		System.out.println("Start of Exercise 3");
 		SoftAssert softAssert = new SoftAssert();
@@ -172,7 +172,7 @@ public class TravelocityTests extends BaseTests {
 		softAssert.assertAll();
 	}
 
-	// @Test(groups = { "Exercises" })
+	 @Test(groups = { "Exercise4" })
 	public void testIncorrecDatesWhenBooking() {
 		System.out.println("Start of Exercise 4");
 		SoftAssert softAssert = new SoftAssert();
@@ -201,7 +201,7 @@ public class TravelocityTests extends BaseTests {
 		softAssert.assertAll();
 	}
 
-	@Test(groups = { "Exercises" })
+	@Test(groups = { "Exercise5" })
 	public void testCruisesDiscount() {
 		System.out.println("Start of Exercise 5");
 		SoftAssert softAssert = new SoftAssert();

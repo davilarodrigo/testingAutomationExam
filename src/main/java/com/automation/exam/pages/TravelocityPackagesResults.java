@@ -112,8 +112,8 @@ public class TravelocityPackagesResults extends BasePage {
 
 
 	public boolean verifyDiscountWithEmail() {
-		WebElement discountBox = findById("discountInput");
-		return elementIsPresent(discountBox);
+		
+		return elementIsPresent("//input[@id=\"discount-email\"]");
 	}
 
 	public boolean verifySponsoredResultsFirst() {
