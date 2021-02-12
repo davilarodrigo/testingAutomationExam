@@ -168,7 +168,17 @@ public class TravelocityHome extends BasePage {
 		currentTab = Tabs.Packages;
 	}
 
-	public boolean tryGoToCruisesTab() {
+	public boolean goToCruisesPage() {
+		if (tryGoToCruisesTab()) {
+			return true;
+		}
+		findAndClick("//div[@id=\"gc-custom-header-tool-bar-shop-menu\"]/button");
+		findAndClick("//a[@href=\"/Cruises\"][1]");
+		currentTab = Tabs.Cruises;
+		return false;
+	}
+
+	private boolean tryGoToCruisesTab() {
 		String xpath = "//ul[@id=\"uitk-tabs-button-container\"]/li[6]/a[@href=\"?pwaLob=wizard-cruise-pwa\"]";
 		if (elementIsPresent("//ul[@id=\"uitk-tabs-button-container\"]/li[6]/a[@href=\"?pwaLob=wizard-cruise-pwa\"]")) {
 			findAndClick(xpath);
@@ -179,26 +189,32 @@ public class TravelocityHome extends BasePage {
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
-	//cruises tab
-	
+	// cruises tab
+
 	public void selectEuropeAsDestination() {
 		selectDestination("europe");
 	}
-	
+
 	private void selectDestination(String destination) {
-		
-		WebElement select=findById("cruise-destination");		
+
+		WebElement select = findById("cruise-destination");
 		waitAndClick(select);
-		getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[@value=\""+destination+"\"]")));
-		findAndClick("//option[@value=\""+destination+"\"]");
-		System.out.println("xpath de la opcion: //option[@value=\""+destination+"\"]");
-	}		
-	
+		getWait().until(
+				ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[@value=\"" + destination + "\"]")));
+		findAndClick("//option[@value=\"" + destination + "\"]");
+		System.out.println("xpath de la opcion: //option[@value=\"" + destination + "\"]");
+	}
+
 	// -----------------------------------------------------------------------------------------------------------------
 
 	public TravelocityResults searchFlight() {
 		buttonSearch.click();
 		return new TravelocityResults(getDriver());
+	}
+
+	public TravelocityCruisesResults searchCruises() {
+		buttonSearch.click();
+		return new TravelocityCruisesResults(getDriver());
 	}
 
 	// seguir por aca, en vez de buscar vuelos, se buscan paquetes

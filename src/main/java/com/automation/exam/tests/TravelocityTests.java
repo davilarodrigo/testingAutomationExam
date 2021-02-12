@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.automation.exam.pages.TravelocityCarRental;
+import com.automation.exam.pages.TravelocityCruisesResults;
 import com.automation.exam.pages.TravelocityFlightInformation;
 import com.automation.exam.pages.TravelocityHome;
 import com.automation.exam.pages.TravelocityHotelInfo;
@@ -204,32 +205,39 @@ public class TravelocityTests extends BaseTests {
 		System.out.println("Start of Exercise 5");
 		SoftAssert softAssert = new SoftAssert();
 		TravelocityHome home = getTravelocityHome();
-
-		// 1. Go to Cruises page.
-		// 2. In the Going to drop down select “Europe”
-		// 3. In the “Departure month” dropdown select a month. Do the Search
-		// 4. Verify the Filter information selected before appears in the refine
-		// results section below each dropdown.
-		// 5. In the “Cruise Length” filter, select “10-14 nights” (Verify this
-		// information is displayed below the dropdown).
-		// 6. Verify that result page shows cruises with and without discounts
-		// 7. Select the cruise option with more discount, pressing the show dates
-		// button first
-		// 8. Validate that cruise information is displayed for the selected one
 		
-		Assert.assertTrue(home.tryGoToCruisesTab(),"Cruises tab is missing in this layout");
-		System.out.println("cruises tab clicked");
+		softAssert.assertTrue(home.goToCruisesPage(),"Cruises button is missing in home page");
 		
 		home.selectEuropeAsDestination();
 		System.out.println("destination selected (europe)");
 		
-		home.selectDepartingDate(2, 4, 2021);
-		home.selectReturningDate(20, 4, 2021);
+		//home.selectDepartingDate(2, 4, 2021);
+		//home.selectReturningDate(20, 4, 2021);
 		System.out.println("dates selected");
+		
+		TravelocityCruisesResults results= home.searchCruises();
+		
+		// 5. In the “Cruise Length” filter, select “10-14 nights” (Verify this
+		// information is displayed below the dropdown).
+	
+		// 6. Verify that result page shows cruises with and without discounts --
+		// 7. Select the cruise option with more discount, pressing the show dates --
+		// button first
+		// 8. Validate that cruise information is displayed for the selected one
+		
+		results.selectCruiseLenght(10);
+		
+		softAssert.assertTrue(results.verifyDatesTogglePresent(), "dates toggle missing in refine results section");
+		softAssert.assertTrue(results.verifyTravelersTogglePresent(), "travellers toggle missing in refine results section");
+		softAssert.assertTrue(results.verifyDestinationTogglePresent(), "destination toggle missing in refine results section");
+				
+		softAssert.assertTrue(results.verifyCruisesWithDiscount(), "there are no cruises with discount");
+		
+		results.selectCruiseWithBiggestDiscount();
 		
 		try {
 			Thread.sleep(20000);
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

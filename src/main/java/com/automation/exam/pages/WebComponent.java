@@ -15,6 +15,15 @@ public class WebComponent {
 		}
 		return true;
 	}
+	
+	protected boolean elementIsPresentById(String id) {
+		try {
+			driver.findElement(By.id(id));			
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
 
 	protected boolean elementIsPresent(WebElement element) {
 		try {
