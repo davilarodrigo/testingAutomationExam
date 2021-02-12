@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite parallel="none" name="Failed suite [Travelocity]">
-  <parameter name="browser" value="chrome"/>
-  <test parallel="none" name="test 1(failed)">
-    <groups>
-      <run>
-        <include name="Exercises"/>
-      </run>
-    </groups>
+<suite parallel="none" name="Failed suite [Default suite]">
+  <test parallel="none" name="Default test(failed)">
     <classes>
       <class name="com.automation.exam.tests.TravelocityTests">
         <methods>
           <include name="afterSuite"/>
           <include name="testCruisesDiscount"/>
-          <include name="beforeSuite"/>
         </methods>
       </class> <!-- com.automation.exam.tests.TravelocityTests -->
     </classes>
-  </test> <!-- test 1(failed) -->
-</suite> <!-- Failed suite [Travelocity] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

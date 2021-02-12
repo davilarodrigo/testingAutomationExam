@@ -23,7 +23,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+      <span class="top-banner-font-1">1 suite</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -37,7 +37,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-Travelocity" class="navigator-link">
-              <span class="suite-name border-failed">Travelocity</span>
+              <span class="suite-name border-passed">Travelocity</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -90,21 +90,21 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method, 1 failed,   </span>
+                    <span class="method-stats">1 method,   1 passed</span>
                   </li>
                   <li>
-                    <span class="method-list-title failed">Failed methods</span>
-                    <span class="show-or-hide-methods failed">
-                      <a href="#" panel-name="suite-Travelocity" class="hide-methods failed suite-Travelocity"> (hide)</a> <!-- hide-methods failed suite-Travelocity -->
-                      <a href="#" panel-name="suite-Travelocity" class="show-methods failed suite-Travelocity"> (show)</a> <!-- show-methods failed suite-Travelocity -->
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-Travelocity" class="hide-methods passed suite-Travelocity"> (hide)</a> <!-- hide-methods passed suite-Travelocity -->
+                      <a href="#" panel-name="suite-Travelocity" class="show-methods passed suite-Travelocity"> (show)</a> <!-- show-methods passed suite-Travelocity -->
                     </span>
-                    <div class="method-list-content failed suite-Travelocity">
+                    <div class="method-list-content passed suite-Travelocity">
                       <span>
-                        <img src="failed.png" width="3%"/>
+                        <img src="passed.png" width="3%"/>
                         <a href="#" panel-name="suite-Travelocity" title="com.automation.exam.tests.TravelocityTests" class="method navigator-link" hash-for-method="testCruisesDiscount">testCruisesDiscount</a> <!-- method navigator-link -->
                       </span>
                       <br/>
-                    </div> <!-- method-list-content failed suite-Travelocity -->
+                    </div> <!-- method-list-content passed suite-Travelocity -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -116,9 +116,9 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Travelocity" class="panel Travelocity">
-          <div class="suite-Travelocity-class-failed">
+          <div class="suite-Travelocity-class-passed">
             <div class="main-panel-header rounded-window-top">
-              <img src="failed.png"/>
+              <img src="passed.png"/>
               <span class="class-name">com.automation.exam.tests.TravelocityTests</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
@@ -127,43 +127,10 @@
                   <a name="testCruisesDiscount">
                   </a> <!-- testCruisesDiscount -->
                   <span class="method-name">testCruisesDiscount</span>
-                  <div class="stack-trace"><b>"java.lang.AssertionError: The following asserts failed:
-Cruises button is missing in home page
-	at com.automation.exam.tests.TravelocityTests.testCruisesDiscount(TravelocityTests.java:240)
-... Removed 25 stack frames<br/> java.lang.AssertionError: The following asserts failed:
-Cruises button is missing in home page
-	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:37)
-	at com.automation.exam.tests.TravelocityTests.testCruisesDiscount(TravelocityTests.java:240)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
-	at org.testng.internal.Invoker.invokeMethod(Invoker.java:714)
-	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
-	at org.testng.TestRunner.privateRun(TestRunner.java:767)
-	at org.testng.TestRunner.run(TestRunner.java:617)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1198)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1123)
-	at org.testng.TestNG.run(TestNG.java:1031)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-"</b><br>org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:37)<br>com.automation.exam.tests.TravelocityTests.testCruisesDiscount(TravelocityTests.java:240)<br>java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)<br>java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)<br>java.base/java.lang.reflect.Method.invoke(Unknown Source)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br>org.testng.TestRunner.privateRun(TestRunner.java:767)<br>org.testng.TestRunner.run(TestRunner.java:617)<br>org.testng.SuiteRunner.runTest(SuiteRunner.java:334)<br>org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)<br>org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)<br>org.testng.SuiteRunner.run(SuiteRunner.java:240)<br>org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br>org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)<br>org.testng.TestNG.runSuitesSequentially(TestNG.java:1198)<br>org.testng.TestNG.runSuitesLocally(TestNG.java:1123)<br>org.testng.TestNG.run(TestNG.java:1031)<br>org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)<br>org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)<br>org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)<br>
-</div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Travelocity-class-failed -->
+          </div> <!-- suite-Travelocity-class-passed -->
         </div> <!-- panel Travelocity -->
         <div panel-name="test-xml-Travelocity" class="panel">
           <div class="main-panel-header rounded-window-top">
@@ -234,12 +201,12 @@ data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'testCruisesDiscount')
 data.setCell(0, 2, 'com.automation.exam.tests.TravelocityTests')
-data.setCell(0, 3, 20446);
+data.setCell(0, 3, 26980);
 window.suiteTableData['Travelocity']= { tableData: data, tableDiv: 'times-div-Travelocity'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 20 seconds</span>
+              <span class="suite-total-time">Total running time: 26 seconds</span>
               <div id="times-div-Travelocity">
               </div> <!-- times-div-Travelocity -->
             </div> <!-- times-div -->
@@ -271,14 +238,12 @@ return data;
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <img src="failed.png">
-                </img>
                 <span class="method-name">testCruisesDiscount</span>
-                <span class="method-start">6392 ms</span>
+                <span class="method-start">7545 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-suite after">
                 <span class="method-name">afterSuite</span>
-                <span class="method-start">26878 ms</span>
+                <span class="method-start">34557 ms</span>
               </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

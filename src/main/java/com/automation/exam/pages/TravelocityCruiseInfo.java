@@ -17,6 +17,17 @@ public class TravelocityCruiseInfo extends BasePage {
 		// TODO Auto-generated constructor stub		
 	}
 	
+	public boolean verifyVisitingCitiesInfo() {
+		return elementIsPresent("//div[@class=\"card-content-detail visiting-cities-detail\"]");
+	}
+
+	public boolean verifyDepartingCityInfo() {
+		return elementIsPresent("//div[@class=\"card-content-detail departure-city\"]");
+	}
+	public boolean verifySalingDatesInfo() {
+		return (elementIsPresent("//span[@class=\"sailing-returning-on\"]") && elementIsPresent("//span[@class=\"sailing-departing-on\"]"));
+	}
+	
 	public boolean verifyDiscountPrice() {		
 		System.out.println(getPrice());
 		System.out.println(cruise.price);

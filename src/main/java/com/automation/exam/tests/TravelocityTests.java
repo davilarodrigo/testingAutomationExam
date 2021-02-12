@@ -212,30 +212,29 @@ public class TravelocityTests extends BaseTests {
 		home.selectEuropeAsDestination();
 		System.out.println("destination selected (europe)");
 		
-		//home.selectDepartingDate(2, 4, 2021);
-		//home.selectReturningDate(20, 4, 2021);
+		home.selectDepartingDate(2, 4, 2021);
+		
+		home.selectReturningDate(20, 4, 2021);
 		System.out.println("dates selected");
 		
 		TravelocityCruisesResults results= home.searchCruises();
-				
-		//results.selectCruiseLenght(10);
-		
+						
 		softAssert.assertTrue(results.verifyDatesTogglePresent(), "dates toggle missing in refine results section");
 		softAssert.assertTrue(results.verifyTravelersTogglePresent(), "travellers toggle missing in refine results section");
 		softAssert.assertTrue(results.verifyDestinationTogglePresent(), "destination toggle missing in refine results section");
 				
-		softAssert.assertTrue(results.verifyCruisesWithDiscount(), "there are no cruises with discount");
+		results.selectCruiseLenght(10);//select a cruise with 10 - 14 nights of lenght
 		
+		softAssert.assertTrue(results.verifyCruisesWithDiscount(), "there are no cruises with discount");		
 		TravelocityCruiseInfo cruiseInfoPage=results.selectCruiseWithBiggestDiscount();
 		
-		// 8. Validate that cruise information is displayed for the selected one
+		//cruise info page validation
 		softAssert.assertTrue(cruiseInfoPage.verifyDiscountPrice(), "discount price does not match the one in the results page");		
-		softAssert.assertTrue(cruiseInfoPage.verifyName(), "Cruise name does not match the one in the results page");
+		softAssert.assertTrue(cruiseInfoPage.verifyName(), "Cruise name does not match the one in the results page");		
+		softAssert.assertTrue(cruiseInfoPage.verifyDepartingCityInfo(), "departing city info is not shown in the cruise information page");
+		softAssert.assertTrue(cruiseInfoPage.verifyVisitingCitiesInfo(), "visiting cities info is not shown in the cruise information page");
+		softAssert.assertTrue(cruiseInfoPage.verifySalingDatesInfo(), "Saling dates are not shown in the cruise information page");
 		
-		
-		
-		
-	
 		System.out.println("End of Exercise 5");
 		softAssert.assertAll();
 	}
